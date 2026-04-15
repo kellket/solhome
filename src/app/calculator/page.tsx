@@ -79,7 +79,7 @@ export default function CalculatorPage() {
       <section className="relative pt-24 sm:pt-32 pb-16 sm:pb-20 min-h-screen">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/bg3.jpg')" }}
+          style={{ backgroundImage: "url('/bg12.jpg')" }}
         />
         <div className="absolute inset-0 bg-black/40" />
         <div 

@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
 
 const navLinks = [
-  { href: "/about", label: "О нас" },
+  { href: "/#about", label: "О нас" },
   { href: "/calculator", label: "Калькулятор" },
   { href: "/projects", label: "Проекты" },
   { href: "/contacts", label: "Контакты" },
@@ -19,15 +18,14 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/sol_home_logo.svg"
-              alt="Sol Home"
-              width={160}
-              height={56}
-              priority
-              className="h-9 sm:h-12 w-auto brightness-[10] invert"
-            />
+          <Link href="/" className="flex-shrink-0 relative">
+            <span 
+              className="text-white text-2xl sm:text-3xl tracking-[0.2em] uppercase relative z-10"
+              style={{ fontFamily: "var(--font-jost)", fontWeight: 200 }}
+            >
+              Sol Home
+            </span>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/60 rounded-full blur-xl z-0 animate-pulse-glow" />
           </Link>
 
           <nav className="hidden md:flex items-center gap-8">
@@ -51,7 +49,7 @@ export default function Header() {
             </a>
             <Link
               href="/calculator"
-              className="btn-gold px-6 py-2.5 rounded-sm text-[14px] font-normal tracking-wider uppercase"
+              className="px-8 py-3 rounded-full text-[14px] font-normal tracking-wider uppercase text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300"
             >
               Рассчитать
             </Link>

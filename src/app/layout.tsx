@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Onest } from "next/font/google";
+import { Onest, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -8,6 +8,13 @@ const onest = Onest({
   variable: "--font-onest",
   subsets: ["latin", "cyrillic"],
   weight: ["200", "300", "400", "500"],
+  display: "swap",
+});
+
+const jost = Jost({
+  variable: "--font-jost",
+  subsets: ["latin", "cyrillic"],
+  weight: ["200"],
   display: "swap",
 });
 
@@ -23,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className={`${onest.variable} h-full antialiased`}>
+    <html lang="ru" className={`${onest.variable} ${jost.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Header />
         <main className="flex-1">{children}</main>

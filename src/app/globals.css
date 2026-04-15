@@ -77,6 +77,33 @@ body {
   background: linear-gradient(135deg, rgba(30,30,30,0.92) 0%, rgba(42,42,42,0.85) 50%, rgba(59,59,59,0.78) 100%);
 }
 
+.hero-curtain-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.slotslide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-text-line1 {
+  animation: heroFadeIn 1s ease 0.3s both;
+}
+
+.hero-text-line2 {
+  animation: heroFadeIn 1s ease 0.6s both;
+}
+
 .card-hover {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -120,6 +147,21 @@ body {
   animation: fadeInUp 0.6s ease forwards;
 }
 
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(80px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.8s ease forwards;
+}
+
 .gold-divider {
   height: 1.5px;
   background: linear-gradient(90deg, transparent, #a88a78 15%, #bf9b88 35%, #caa99a 65%, #b4927f 85%, transparent);
@@ -153,4 +195,17 @@ input[type="range"]::-moz-range-thumb {
   cursor: pointer;
   border: 3px solid white;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
 }

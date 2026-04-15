@@ -1,4 +1,7 @@
 import Link from "next/link";
+import Calculator from "@/components/Calculator";
+import HeroSlider from "@/components/HeroSlider";
+import AboutSection from "@/components/AboutSection";
 
 const benefits = [
   {
@@ -73,103 +76,11 @@ const services = [
 export default function Home() {
   return (
     <>
-      <section className="relative flex flex-col overflow-hidden">
-        <div className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center pt-16 sm:pt-20 pb-8 sm:pb-48">
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('/bg1.jpg')" }}
-          />
-          <div className="absolute inset-0 bg-black/40" />
-          <div 
-            className="absolute bottom-0 left-0 right-0 h-10 sm:h-16" 
-            style={{ background: "linear-gradient(to top, white 0%, rgba(255,255,255,0.85) 15%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0.35) 55%, rgba(255,255,255,0.15) 75%, rgba(255,255,255,0.05) 90%, rgba(255,255,255,0) 100%)" }}
-          />
+      <HeroSlider />
 
-          <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 text-center">
-            <div className="inline-block px-8 sm:px-16 py-8 sm:py-12 rounded-[80px] bg-black/20 backdrop-blur-[2px]">
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-white tracking-wide leading-tight mb-4 sm:mb-6">
-                Премиальный ремонт
-                <br />
-                <span className="gold-gradient-text font-light">квартир под ключ</span>
-              </h1>
-              <p className="text-white/70 text-base sm:text-xl font-extralight tracking-wide max-w-2xl mx-auto leading-relaxed">
-            Интерьеры, построенные на архитектурной логике
-            <br />
-            и чистоте решений.
-            </p>
-            </div>
-            <div className="mt-8 sm:mt-10">
-              <Link
-                href="/contacts"
-                className="inline-block px-10 sm:px-14 py-3.5 sm:py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-[13px] sm:text-[14px] font-light tracking-[0.15em] uppercase hover:scale-105 transition-transform duration-300"
-              >
-                Обсудить проект
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <Calculator />
 
-      <section className="section-padding bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div>
-              <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6">
-                О компании
-              </p>
-              <h2 className="text-lg sm:text-2xl lg:text-3xl font-extralight text-dark leading-tight mb-6">
-                <span className="tracking-[0.35em] uppercase font-extralight">Sol Home</span>
-                <span className="tracking-wide"> — ваш надёжный</span>
-                <br />
-                <span className="gold-gradient-text font-light tracking-wide">партнёр в ремонте</span>
-              </h2>
-              <div className="text-grey-text text-base sm:text-lg font-extralight leading-relaxed space-y-6">
-                <div className="p-6 rounded-2xl bg-grey-light/50 border border-grey-mid/20">
-                  <p>
-                    Мы работаем с квартирами в Москве и сопровождаем проекты на всех этапах:
-                    от концепции и визуализации до финальной реализации и комплектации.
-                  </p>
-                </div>
-                
-                <div>
-                  <p className="mb-4 text-dark font-medium">Наши интерьеры — это не набор решений, а целостная система:</p>
-                  <ul className="space-y-2 pl-1">
-                    <li className="flex items-start gap-3">
-                      <span className="text-gold mt-2 w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0"></span>
-                      <span>выверенные планировки</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-gold mt-2 w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0"></span>
-                      <span>продуманная логика пространства</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <span className="text-gold mt-2 w-1.5 h-1.5 rounded-full bg-gold flex-shrink-0"></span>
-                      <span>баланс света, материалов и деталей</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="p-6 rounded-2xl bg-grey-light/50 border border-grey-mid/20">
-                  <p>
-                    Мы ценим архитектурную выразительность и качество исполнения.
-                    Каждый проект для нас — это не просто ремонт, а создание среды, 
-                    в которой комфортно жить долгие годы.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className="relative">
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
-                <img 
-                  src="/about.jpg" 
-                  alt="Интерьер Sol Home" 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <AboutSection />
 
       <section className="relative section-padding">
         <div 
@@ -225,26 +136,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative pt-20 pb-20 bg-white">
-        <div 
-          className="absolute -top-12 left-0 right-0 h-12"
-          style={{ background: "linear-gradient(to bottom, #f7f5f3 0%, white 100%)" }}
-        />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-2xl sm:text-3xl font-extralight text-dark tracking-wide mb-6">
-            Узнайте стоимость ремонта
-          </h2>
-          <p className="text-grey-text text-base font-extralight leading-relaxed mb-10 max-w-xl mx-auto">
-            Воспользуйтесь нашим калькулятором для расчёта примерной стоимости ремонта вашей квартиры. Это бесплатно и займёт не более минуты.
-          </p>
-          <Link
-            href="/calculator"
-            className="inline-block px-14 py-4 rounded-full border border-dark/20 bg-dark/10 backdrop-blur-md text-dark text-[14px] font-light tracking-[0.15em] uppercase hover:scale-105 transition-transform duration-300"
-          >
-            Открыть калькулятор
-          </Link>
-        </div>
-      </section>
+
+
     </>
   );
 }
