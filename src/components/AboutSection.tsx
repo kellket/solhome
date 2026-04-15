@@ -18,19 +18,21 @@ export default function AboutSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "top top",
-          scrub: true,
-        },
-      });
-
-      tl.fromTo(bgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
-      tl.fromTo(overlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
-
       const mm = gsap.matchMedia();
+
+      mm.add("(min-width: 1024px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          },
+        });
+
+        tl.fromTo(bgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+        tl.fromTo(overlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+      });
 
       mm.add("(min-width: 1024px)", () => {
         if (desktopImgRef.current) {
@@ -95,7 +97,7 @@ export default function AboutSection() {
         <div className="lg:hidden relative min-h-[100vh]">
           <div 
             ref={imgRef} 
-            className="absolute inset-x-4 bottom-0 aspect-[4/5] max-h-[60vh] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)]"
+            className="absolute inset-x-4 bottom-0 aspect-[4/5] max-h-[60vh] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.3)] will-change-transform"
           >
             <img
               src="/about-new.jpg"
@@ -104,14 +106,14 @@ export default function AboutSection() {
             />
             <div
               ref={imgBlurRef}
-              className="absolute inset-0 backdrop-blur-xl opacity-0 pointer-events-none"
+              className="absolute inset-0 backdrop-blur-sm bg-black/30 opacity-0 pointer-events-none will-change-[opacity]"
               style={{
                 maskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 85%)",
                 WebkitMaskImage: "linear-gradient(to bottom, black 0%, black 50%, transparent 85%)",
               }}
             />
           </div>
-          <div ref={textRef} className="absolute inset-x-0 top-0 z-10 text-center px-4 pt-8">
+          <div ref={textRef} className="absolute inset-x-0 top-0 z-10 text-center px-4 pt-8 will-change-transform">
             <p className="text-[#3d2518] text-xs font-normal tracking-[0.3em] uppercase mb-4">
               О компании
             </p>
