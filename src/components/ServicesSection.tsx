@@ -50,30 +50,22 @@ export default function ServicesSection() {
       tl.fromTo(bgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
       tl.fromTo(overlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
 
-      const cardsTl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 80%",
-          end: "bottom 20%",
-          scrub: true,
-        },
-      });
-
       cardsRef.current.forEach((card, index) => {
         if (!card) return;
         
         const isLeft = index % 2 === 0;
         const xStart = isLeft ? -150 : 150;
         
-        cardsTl.fromTo(card, 
-          { x: xStart, opacity: 0.5 }, 
-          { x: 0, opacity: 1, ease: "none" }, 
-          0
-        );
-        
-        cardsTl.to(card, 
-          { x: xStart, opacity: 0.5, ease: "none" }, 
-          0.5
+        gsap.fromTo(card, 
+          { x: xStart, opacity: 0 }, 
+          { x: 0, opacity: 1, ease: "power2.out",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top 90%",
+              end: "top 30%",
+              scrub: 1.5,
+            },
+          }
         );
       });
     });
