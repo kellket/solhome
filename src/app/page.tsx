@@ -5,6 +5,7 @@ import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import FAQ from "@/components/FAQ";
+import Reviews from "@/components/Reviews";
 
 export const metadata: Metadata = {
   title: "Ремонт квартир под ключ в Москве",
@@ -36,6 +37,8 @@ export default function Home() {
       <ProjectsSection />
 
       <FAQ />
+
+      <Reviews />
     </>
   );
 }
