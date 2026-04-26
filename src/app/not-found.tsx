@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  title: "Страница не найдена | Sol Home",
+  description: "Запрашиваемая страница не существует. Вернитесь на главную страницу Sol Home.",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

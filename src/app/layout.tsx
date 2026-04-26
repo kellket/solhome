@@ -3,6 +3,8 @@ import { Onest, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import CookieConsent from "@/components/CookieConsent";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -80,7 +82,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#ffffff",
+  themeColor: "#1a1714",
 };
 
 const jsonLdOrganization = {
@@ -132,11 +134,6 @@ const jsonLdWebSite = {
   "@type": "WebSite",
   name: "Sol Home",
   url: "https://solhome.ru",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://solhome.ru/search?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export default function RootLayout({
@@ -164,6 +161,8 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <WhatsAppButton />
+        <CookieConsent />
       </body>
     </html>
   );

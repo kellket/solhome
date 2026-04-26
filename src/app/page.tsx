@@ -4,6 +4,7 @@ import HeroSlider from "@/components/HeroSlider";
 import AboutSection from "@/components/AboutSection";
 import ServicesSection from "@/components/ServicesSection";
 import ProjectsSection from "@/components/ProjectsSection";
+import FAQ from "@/components/FAQ";
 
 export const metadata: Metadata = {
   title: "Ремонт квартир под ключ в Москве",
@@ -33,6 +34,8 @@ export default function Home() {
       <ServicesSection />
 
       <ProjectsSection />
+
+      <FAQ />
     </>
   );
 }
