@@ -353,6 +353,93 @@ export default function Calculator() {
           )}
         </div>
       </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": [
+              {
+                "@type": "Service",
+                "position": 1,
+                "name": "Косметический ремонт квартиры",
+                "description": "Косметический ремонт квартиры в Москве",
+                "provider": { "@type": "LocalBusiness", "name": "Sol Home" },
+                "areaServed": "Москва",
+                "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "RUB",
+                  "price": "18370",
+                  "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "18370",
+                    "priceCurrency": "RUB",
+                    "unitText": "м²"
+                  }
+                }
+              },
+              {
+                "@type": "Service",
+                "position": 2,
+                "name": "Капитальный ремонт квартиры",
+                "description": "Капитальный ремонт квартиры в Москве",
+                "provider": { "@type": "LocalBusiness", "name": "Sol Home" },
+                "areaServed": "Москва",
+                "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "RUB",
+                  "price": "23715",
+                  "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "23715",
+                    "priceCurrency": "RUB",
+                    "unitText": "м²"
+                  }
+                }
+              },
+              {
+                "@type": "Service",
+                "position": 3,
+                "name": "Дизайнерский ремонт квартиры",
+                "description": "Дизайнерский ремонт квартиры в Москве",
+                "provider": { "@type": "LocalBusiness", "name": "Sol Home" },
+                "areaServed": "Москва",
+                "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "RUB",
+                  "price": "27300",
+                  "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "27300",
+                    "priceCurrency": "RUB",
+                    "unitText": "м²"
+                  }
+                }
+              },
+              {
+                "@type": "Service",
+                "position": 4,
+                "name": "Ремонт квартиры под ключ",
+                "description": "Ремонт квартиры под ключ в Москве",
+                "provider": { "@type": "LocalBusiness", "name": "Sol Home" },
+                "areaServed": "Москва",
+                "offers": {
+                  "@type": "Offer",
+                  "priceCurrency": "RUB",
+                  "price": "33050",
+                  "priceSpecification": {
+                    "@type": "UnitPriceSpecification",
+                    "price": "33050",
+                    "priceCurrency": "RUB",
+                    "unitText": "м²"
+                  }
+                }
+              }
+            ]
+          })
+        }}
+      />
     </section>
   );
 }
