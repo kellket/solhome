@@ -6,6 +6,7 @@ import { Autoplay } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper';
 import gsap from 'gsap';
 import Link from 'next/link';
+import Image from 'next/image';
 
 import 'swiper/css';
 
@@ -162,14 +163,15 @@ export default function HeroSlider() {
 
   return (
     <div ref={containerRef} className="relative h-screen overflow-hidden">
-      <div
-        className="absolute inset-0 z-[1]"
-        style={{
-          backgroundImage: `url(${currentImg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-        }}
-      />
+      <div className="absolute inset-0 z-[1]">
+        <Image
+          src={currentImg}
+          alt="Hero background"
+          fill
+          priority
+          style={{ objectFit: 'cover', objectPosition: 'center center' }}
+        />
+      </div>
       <div className="absolute inset-0 z-[2] bg-black/40" />
 
       <Swiper
