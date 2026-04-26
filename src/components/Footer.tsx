@@ -16,13 +16,14 @@ export default function Footer() {
           <div className="order-last md:order-first">
             <Image
               src="/sol_home_logo.svg"
-              alt="Sol Home"
+              alt="Sol Home — ремонт квартир в Москве"
               width={140}
               height={49}
               className="h-11 w-auto brightness-200 mb-[4px] -ml-[18px]"
             />
-            <p className="text-sm text-white/30 text-left">Политика конфиденциальности</p>
+            <Link href="/privacy" className="text-sm text-white/30 text-left hover:text-gold transition-colors duration-300 block">Политика конфиденциальности</Link>
             <p className="text-xs text-white/30 mt-[12px] text-left">&copy; {new Date().getFullYear()} Sol Home. Все права защищены.</p>
+            <p className="text-xs text-white/30 mt-2 text-left">ИП/ООО [название] ИНН [номер] ОГРН [номер]</p>
           </div>
 
           <div>
@@ -46,7 +47,7 @@ export default function Footer() {
             <h3 className="text-white text-sm font-normal tracking-wider uppercase mb-6">
               Контакты
             </h3>
-            <div className="space-y-3 text-sm text-white/50 text-left">
+            <address className="not-italic space-y-3 text-sm text-white/50 text-left">
               <a
                 href="mailto:info.solhome@yandex.ru"
                 className="block hover:text-gold transition-colors duration-300"
@@ -61,7 +62,7 @@ export default function Footer() {
               </a>
               <p>Пн–Вс: 09:00–19:00</p>
               <p>г. Москва</p>
-            </div>
+            </address>
           </div>
 </div>
       </div>

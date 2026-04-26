@@ -142,7 +142,7 @@ export default function AboutSection() {
                   <img
                     ref={desktopImgRef}
                     src="/about-new.jpg"
-                    alt="Интерьер Sol Home"
+                    alt="Ремонт квартиры Sol Home — дизайнерский интерьер гостиной"
                     className="w-full h-[120%] object-cover will-change-transform"
                   />
                 </div>

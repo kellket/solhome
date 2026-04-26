@@ -257,7 +257,7 @@ export default function ProjectsSection() {
                   className={`aspect-[3/2] bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
                 >
                   {project.cover ? (
-                    <img src={project.cover} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={project.cover} alt={`Ремонт квартиры в ${project.location} — ${project.rooms}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8" className="w-12 h-12 text-white/40">
                       <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -337,7 +337,7 @@ export default function ProjectsSection() {
               )}
               <img
                 src={openProject.images[slideIndex].src}
-                alt={openProject.title}
+                alt={`${openProject.title} — ${openProject.images[slideIndex].label || 'фото интерьера'}`}
                 className="w-full h-full object-cover"
               />
 

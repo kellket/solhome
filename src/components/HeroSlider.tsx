@@ -211,9 +211,9 @@ export default function HeroSlider() {
             }}
           />
           <div className="relative">
-            <h1 key={animKey} className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-white tracking-wide leading-tight mb-4 sm:mb-6">
-              <span className="hero-text-line1 block">{slide.line1}</span>
-              <span className="hero-text-line2 gold-gradient-text font-light block mt-1">{slide.line2}</span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-white tracking-wide leading-tight mb-4 sm:mb-6">
+              <span className="block">Ремонт квартир под ключ</span>
+              <span className="gold-gradient-text font-light block mt-1">в Москве от Sol Home</span>
             </h1>
             <p className="text-white/70 text-base sm:text-xl font-extralight tracking-wide max-w-2xl mx-auto leading-relaxed">
               Интерьеры, построенные на архитектурной логике
