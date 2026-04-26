@@ -5,31 +5,52 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import SlideInPanel from "./SlideInPanel";
 
+const MOBILE_ABOUT_TEXT = "Мы\u00a0работаем с\u00a0квартирами в\u00a0Москве и\u00a0сопровождаем проекты на\u00a0всех этапах: от\u00a0концепции и\u00a0визуализации до\u00a0финальной реализации и\u00a0комплектации.";
+
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const mobileBgImgRef = useRef<HTMLImageElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const desktopImgRef = useRef<HTMLImageElement>(null);
+  const mobileCardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "top top",
-          scrub: true,
-        },
-      });
-
-      tl.fromTo(bgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
-      tl.fromTo(overlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
-
       const mm = gsap.matchMedia();
 
+      mm.add("(max-width: 1023px)", () => {
+        if (mobileBgImgRef.current) {
+          gsap.fromTo(mobileBgImgRef.current, {
+            yPercent: -20,
+          }, {
+            yPercent: -5,
+            ease: "none",
+            scrollTrigger: {
+              trigger: sectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+      });
+
       mm.add("(min-width: 1024px)", () => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "top top",
+            scrub: true,
+          },
+        });
+
+        tl.fromTo(bgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+        tl.fromTo(overlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+
         if (desktopImgRef.current) {
           gsap.fromTo(desktopImgRef.current, {
             yPercent: -35,
@@ -45,6 +66,7 @@ export default function AboutSection() {
           });
         }
       });
+
     });
 
     return () => ctx.revert();
@@ -52,18 +74,24 @@ export default function AboutSection() {
 
   return (
     <section id="about" ref={sectionRef} className="relative overflow-hidden">
-      <div ref={bgRef} className="absolute inset-[-30%_0]">
+      <div ref={bgRef} className="absolute inset-0 lg:inset-[-30%_0] overflow-hidden lg:overflow-visible">
+        <img
+          ref={mobileBgImgRef}
+          src="/bg25.jpg"
+          alt=""
+          className="w-full h-full object-cover object-[25%_60%] scale-[1.4] lg:hidden"
+        />
         <img
           src="/bg13.jpg"
           alt=""
-          className="w-full h-full object-cover lg:object-contain object-center"
+          className="w-full h-full object-cover lg:object-contain object-center hidden lg:block"
         />
       </div>
-      <div ref={overlayRef} className="absolute inset-[-30%_0] bg-black/40" />
+      <div ref={overlayRef} className="absolute inset-0 lg:inset-[-30%_0] bg-black/40" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="lg:hidden relative min-h-[100vh] flex items-center justify-center py-16">
-          <div className="relative text-center px-6">
+        <div className="lg:hidden relative min-h-[100vh] flex items-center justify-start py-16">
+          <div className="relative text-left px-2">
             <p className="text-[#bf9b88] text-xs font-normal tracking-[0.3em] uppercase mb-6">
               О компании
             </p>
@@ -73,11 +101,12 @@ export default function AboutSection() {
               <span className="tracking-wide">Ваш надёжный </span>
               <span className="text-white font-light tracking-wide">партнёр в ремонте</span>
             </h2>
-            <div className="inline-block px-6 py-4 rounded-2xl bg-white/10 backdrop-blur-sm">
-              <p className="text-white/80 text-base font-extralight leading-relaxed">
-                Мы&nbsp;работаем с&nbsp;квартирами в&nbsp;Москве и&nbsp;сопровождаем проекты на&nbsp;всех этапах: от&nbsp;концепции и&nbsp;визуализации до&nbsp;финальной реализации и&nbsp;комплектации.
-              </p>
-            </div>
+            <p className="text-white text-[15px] font-extralight leading-[1.8] whitespace-nowrap">
+              Мы&nbsp;работаем с&nbsp;квартирами в&nbsp;Москве<br />
+              и&nbsp;сопровождаем проекты на&nbsp;всех этапах:<br />
+              от&nbsp;концепции и&nbsp;визуализации до&nbsp;финальной<br />
+              реализации и&nbsp;комплектации.
+            </p>
           </div>
         </div>
 
@@ -108,7 +137,7 @@ export default function AboutSection() {
                   </SlideInPanel>
                 </div>
               </div>
-              <div className="relative max-w-md mx-auto -mt-8">
+              <div className="relative max-w-[360px] mx-auto -mt-8">
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
                   <img
                     ref={desktopImgRef}

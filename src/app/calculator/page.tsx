@@ -10,30 +10,30 @@ const repairTypes = [
   {
     id: "cosmetic",
     label: "Косметический",
-    priceMin: 3790,
-    priceMax: 4990,
-    materialRate: 4000,
+    priceMin: 18370,
+    priceMax: 18370,
+    materialRate: 0,
   },
   {
     id: "capital",
     label: "Капитальный",
-    priceMin: 6890,
-    priceMax: 7490,
-    materialRate: 7500,
+    priceMin: 23715,
+    priceMax: 23715,
+    materialRate: 0,
   },
   {
     id: "design",
     label: "Дизайнерский",
-    priceMin: 7490,
-    priceMax: 9490,
-    materialRate: 9000,
+    priceMin: 27300,
+    priceMax: 27300,
+    materialRate: 0,
   },
   {
     id: "turnkey",
     label: "Под ключ",
-    priceMin: 9490,
-    priceMax: 12000,
-    materialRate: 11000,
+    priceMin: 33050,
+    priceMax: 33050,
+    materialRate: 0,
   },
 ];
 
@@ -82,10 +82,6 @@ export default function CalculatorPage() {
           style={{ backgroundImage: "url('/bg12.jpg')" }}
         />
         <div className="absolute inset-0 bg-black/40" />
-        <div 
-          className="absolute bottom-0 left-0 right-0 h-10 sm:h-16" 
-          style={{ background: "linear-gradient(to top, #f7f5f3 0%, rgba(247,245,243,0.85) 15%, rgba(247,245,243,0.6) 35%, rgba(247,245,243,0.35) 55%, rgba(247,245,243,0.15) 75%, rgba(247,245,243,0.05) 90%, rgba(247,245,243,0) 100%)" }}
-        />
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
           <div className="rounded-[40px] bg-black/20 backdrop-blur-[2px] p-6 sm:p-10">
             <div className="text-center mb-10">
@@ -328,52 +324,6 @@ export default function CalculatorPage() {
         </div>
       </section>
 
-      <section className="relative py-16 bg-grey-light">
-        <div 
-          className="absolute -top-12 left-0 right-0 h-12"
-          style={{ background: "linear-gradient(to bottom, white 0%, #f7f5f3 100%)" }}
-        />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extralight text-dark tracking-wide mb-2">
-              Тарифы на ремонт
-            </h2>
-            <p className="text-grey-text text-sm font-extralight">
-              Стоимость работ за квадратный метр
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {repairTypes.map((r, index) => (
-              <div
-                key={r.id}
-                className="group relative bg-white p-6 sm:p-8 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.04)] border border-grey-mid/20 hover:shadow-[0_20px_60px_rgba(191,155,136,0.15)] hover:border-gold/30 transition-all duration-500 hover:-translate-y-1"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-2xl" />
-                <h3 className="text-dark text-lg font-normal tracking-wide mb-4 group-hover:text-gold transition-colors duration-300">
-                  {r.label}
-                </h3>
-                
-                <div className="space-y-3 text-sm">
-                  <div className="flex justify-between">
-                    <span className="text-grey-text font-extralight">Работы</span>
-                    <span className="text-dark font-light">
-                      от {formatPrice(r.priceMin)} ₽/м²
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-grey-text font-extralight">Материалы</span>
-                    <span className="text-dark font-light">
-                      от {formatPrice(r.materialRate)} ₽/м²
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </>
   );
 }

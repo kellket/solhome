@@ -8,30 +8,30 @@ const repairTypes = [
   {
     id: "cosmetic",
     label: "Косметический",
-    priceMin: 3790,
-    priceMax: 4990,
-    materialRate: 4000,
+    priceMin: 18370,
+    priceMax: 18370,
+    materialRate: 0,
   },
   {
     id: "capital",
     label: "Капитальный",
-    priceMin: 6890,
-    priceMax: 7490,
-    materialRate: 7500,
+    priceMin: 23715,
+    priceMax: 23715,
+    materialRate: 0,
   },
   {
     id: "design",
     label: "Дизайнерский",
-    priceMin: 7490,
-    priceMax: 9490,
-    materialRate: 9000,
+    priceMin: 27300,
+    priceMax: 27300,
+    materialRate: 0,
   },
   {
     id: "turnkey",
     label: "Под ключ",
-    priceMin: 9490,
-    priceMax: 12000,
-    materialRate: 11000,
+    priceMin: 33050,
+    priceMax: 33050,
+    materialRate: 0,
   },
 ];
 
@@ -60,6 +60,7 @@ export default function Calculator() {
 
   const sectionRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const bgImgRef = useRef<HTMLImageElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -70,27 +71,16 @@ export default function Calculator() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top bottom",
-          end: "top top",
+          end: "bottom top",
           scrub: true,
           pin: false,
         },
       });
 
-      tl.fromTo(bgRef.current, {
-        yPercent: -30,
-        opacity: 1,
+      tl.fromTo(bgImgRef.current, {
+        yPercent: -15,
       }, {
-        yPercent: 0,
-        opacity: 1,
-        ease: "none",
-      }, 0);
-
-      tl.fromTo(overlayRef.current, {
-        yPercent: -30,
-        opacity: 1,
-      }, {
-        yPercent: 0,
-        opacity: 1,
+        yPercent: 15,
         ease: "none",
       }, 0);
     });
@@ -112,13 +102,16 @@ export default function Calculator() {
   }
 
   return (
-    <section ref={sectionRef} className="relative section-padding overflow-hidden">
-      <div
-        ref={bgRef}
-        className="absolute inset-[-30%_0] bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/bg12.jpg')" }}
-      />
-      <div ref={overlayRef} className="absolute inset-[-30%_0] bg-black/40" />
+    <section id="calculator" ref={sectionRef} className="relative section-padding overflow-hidden">
+      <div ref={bgRef} className="absolute inset-0 overflow-hidden">
+        <img
+          ref={bgImgRef}
+          src="/bg12.jpg"
+          alt=""
+          className="w-full h-full object-cover object-center scale-[1.4]"
+        />
+      </div>
+      <div ref={overlayRef} className="absolute inset-0 bg-black/40" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
         <div className="rounded-[40px] bg-black/20 backdrop-blur-[2px] p-6 sm:p-10">

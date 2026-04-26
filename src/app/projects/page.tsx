@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import WorkSteps from "@/components/WorkSteps";
 
 const advantages = [
@@ -86,26 +88,97 @@ function formatPrice(n: number): string {
 
 export default function ProjectsPage() {
   const [filter, setFilter] = useState<ProjectType | "all">("all");
+  const heroSectionRef = useRef<HTMLElement>(null);
+  const heroBgRef = useRef<HTMLDivElement>(null);
+  const heroOverlayRef = useRef<HTMLDivElement>(null);
+  const advantagesSectionRef = useRef<HTMLElement>(null);
+  const advantagesBgRef = useRef<HTMLDivElement>(null);
+  const advantagesOverlayRef = useRef<HTMLDivElement>(null);
+  const advantagesCardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const ctx = gsap.context(() => {
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: heroSectionRef.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      heroTl.fromTo(heroBgRef.current, { yPercent: -15 }, { yPercent: 30, ease: "none" }, 0);
+      heroTl.fromTo(heroOverlayRef.current, { yPercent: -15 }, { yPercent: 30, ease: "none" }, 0);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: advantagesSectionRef.current,
+          start: "top bottom",
+          end: "top top",
+          scrub: true,
+        },
+      });
+
+      tl.fromTo(advantagesBgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+      tl.fromTo(advantagesOverlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+
+      advantagesCardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        const isLeft = index % 2 === 0;
+        const xStart = isLeft ? -150 : 150;
+        gsap.fromTo(card,
+          { x: xStart },
+          { x: 0, ease: "power1.out",
+            scrollTrigger: {
+              trigger: advantagesSectionRef.current,
+              start: "top 85%",
+              end: "top 15%",
+              scrub: 2.5,
+            },
+          }
+        );
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
 
   const filtered =
     filter === "all" ? projects : projects.filter((p) => p.type === filter);
 
   return (
     <>
-      <section className="pt-24 sm:pt-32 pb-16 sm:pb-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-4">
-              Портфолио
-            </p>
-            <h1 className="text-3xl sm:text-4xl font-extralight text-dark tracking-wide">
-              Наши проекты
-            </h1>
-            
-            <p className="text-grey-text text-base font-extralight">
-              Качество наших работ вместо тысячи слов
-            </p>
-          </div>
+      <section ref={heroSectionRef} className="relative overflow-hidden">
+        <div ref={heroBgRef} className="absolute inset-[-30%_0]">
+          <img
+            src="/bg-mob1.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center lg:hidden"
+          />
+          <img
+            src="/bg4.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center hidden lg:block"
+          />
+        </div>
+        <div ref={heroOverlayRef} className="absolute inset-[-30%_0] bg-black/40" />
+        
+        <div className="relative pt-24 sm:pt-32 pb-16 sm:pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <p className="text-white/80 text-xs font-normal tracking-[0.3em] uppercase mb-4">
+                Портфолио
+              </p>
+              <h1 className="text-3xl sm:text-4xl font-extralight text-white tracking-wide">
+                Наши проекты
+              </h1>
+              
+              <p className="text-white/70 text-base font-extralight">
+                Качество наших работ вместо тысячи слов
+              </p>
+            </div>
 
           <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-12">
             {filters.map((f) => (
@@ -165,16 +238,21 @@ export default function ProjectsPage() {
               </div>
             ))}
           </div>
+          </div>
         </div>
       </section>
 
-      <section className="relative section-padding">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('/bg4.jpg')" }}
-        />
+      <section ref={advantagesSectionRef} className="relative overflow-hidden">
+        <div ref={advantagesBgRef} className="absolute inset-[-30%_0]">
+          <img
+            src="/bg4.jpg"
+            alt=""
+            className="w-full h-full object-cover object-center"
+          />
+        </div>
+        <div ref={advantagesOverlayRef} className="absolute inset-[-30%_0] bg-black/30" />
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
           <div className="text-center mb-10 sm:mb-16">
             <div className="inline-block px-8 py-6 rounded-2xl bg-white/10 backdrop-blur-sm">
               <p className="text-[#8b5a3c] text-xs font-normal tracking-[0.3em] uppercase mb-4">
@@ -190,8 +268,8 @@ export default function ProjectsPage() {
             {advantages.map((a, index) => (
               <div
                 key={a.title}
+                ref={(el) => { advantagesCardsRef.current[index] = el; }}
                 className="group relative bg-[#9a8a80]/70 backdrop-blur-md p-8 sm:p-10 rounded-2xl border border-white/30 hover:bg-[#9a8a80]/80 hover:border-gold/50 transition-all duration-500 hover:-translate-y-1"
-                style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-gold/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-2xl" />
                 <div className="w-14 h-14 flex items-center justify-center rounded-full bg-white/10 border border-white/30 mb-6 group-hover:bg-[#8b5a3c]/30 group-hover:border-[#8b5a3c]/60 group-hover:scale-110 transition-all duration-500">

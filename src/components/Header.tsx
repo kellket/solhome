@@ -1,25 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/#about", label: "О нас" },
-  { href: "/calculator", label: "Калькулятор" },
-  { href: "/projects", label: "Проекты" },
+  { href: "/#about", label: "О нас", anchor: "about" },
+  { href: "/#projects", label: "Проекты", anchor: "projects" },
   { href: "/contacts", label: "Контакты" },
+  { href: "/#calculator", label: "Калькулятор", anchor: "calculator" },
+  { href: "/#services", label: "Наши услуги", anchor: "services" },
+  { href: "/advantages", label: "Преимущества" },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const handleNavClick = (e: React.MouseEvent, link: typeof navLinks[0]) => {
+    if (link.anchor) {
+      if (pathname === "/") {
+        e.preventDefault();
+        document.getElementById(link.anchor)?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
-          <Link href="/" className="flex-shrink-0 relative">
-            <span 
+          <Link href="/" className="flex-shrink-0 relative z-[60]">
+            <span
               className="text-white text-2xl sm:text-3xl tracking-[0.2em] uppercase relative z-10"
               style={{ fontFamily: "var(--font-jost)", fontWeight: 200 }}
             >
@@ -28,52 +51,25 @@ export default function Header() {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/60 rounded-full blur-xl z-0 animate-pulse-glow" />
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-white text-[15px] font-light tracking-wide hover:text-gold transition-colors duration-300"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="hidden md:flex items-center gap-6">
-            <a
-              href="tel:+7XXXXXXXXXX"
-              className="text-white text-[15px] font-normal tracking-wide hover:text-gold transition-colors duration-300"
-            >
-              +7 (XXX) XXX-XX-XX
-            </a>
-            <Link
-              href="/calculator"
-              className="px-8 py-3 rounded-full text-[14px] font-normal tracking-wider uppercase text-white bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-all duration-300"
-            >
-              Рассчитать
-            </Link>
-          </div>
-
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5"
+            className="relative z-[60] flex flex-col justify-center items-center w-12 h-12 gap-[7px]"
             aria-label="Меню"
           >
             <span
-              className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${
-                mobileOpen ? "rotate-45 translate-y-[4.5px]" : ""
+              className={`block w-7 h-[1.5px] bg-white rounded-full transition-all duration-500 ease-[cubic-bezier(0.77,0,0.18,1)] origin-center ${
+                mobileOpen ? "rotate-45 translate-y-[8.5px]" : ""
               }`}
             />
             <span
-              className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${
-                mobileOpen ? "opacity-0" : ""
+              className={`block h-[1.5px] bg-white rounded-full transition-all duration-500 ease-[cubic-bezier(0.77,0,0.18,1)] ${
+                mobileOpen ? "w-0 opacity-0" : "w-5"
               }`}
             />
             <span
-              className={`block w-6 h-[1.5px] bg-white transition-all duration-300 ${
-                mobileOpen ? "-rotate-45 -translate-y-[4.5px]" : ""
+              className={`block w-7 h-[1.5px] bg-white rounded-full transition-all duration-500 ease-[cubic-bezier(0.77,0,0.18,1)] origin-center ${
+                mobileOpen ? "-rotate-45 -translate-y-[8.5px]" : ""
               }`}
             />
           </button>
@@ -81,32 +77,59 @@ export default function Header() {
       </div>
 
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 bg-white border-t border-grey-mid/30 ${
-          mobileOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`fixed inset-0 z-50 transition-all duration-700 ease-[cubic-bezier(0.77,0,0.18,1)] ${
+          mobileOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible"
         }`}
       >
-        <div className="px-6 py-6 space-y-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block text-dark text-lg font-light tracking-wide hover:text-gold transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="pt-4 border-t border-grey-mid/30">
-            <a
-              href="tel:+7XXXXXXXXXX"
-              className="block text-dark text-lg font-normal mb-4"
-            >
-              +7 (XXX) XXX-XX-XX
-            </a>
+        <div
+          className={`absolute inset-0 bg-[#1a1714] transition-transform duration-700 ease-[cubic-bezier(0.77,0,0.18,1)] origin-top ${
+            mobileOpen ? "scale-y-100" : "scale-y-0"
+          }`}
+        />
+
+        <div className="relative h-full flex flex-col justify-center items-center px-8">
+          <nav className="space-y-1">
+            {navLinks.map((link, i) => (
+              <div
+                key={link.href}
+                className={`overflow-hidden transition-all ease-[cubic-bezier(0.77,0,0.18,1)] ${
+                  mobileOpen
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 translate-y-8"
+                }`}
+                style={{
+                  transitionDuration: "600ms",
+                  transitionDelay: mobileOpen ? `${300 + i * 80}ms` : "0ms",
+                }}
+              >
+                <Link
+                  href={link.href}
+                  onClick={(e) => {
+                    setMobileOpen(false);
+                    handleNavClick(e, link);
+                  }}
+                  className="block py-3 text-white text-3xl md:text-5xl font-extralight tracking-wide hover:text-[#bf9b88] transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              </div>
+            ))}
+          </nav>
+
+          <div
+            className={`mt-8 transition-all duration-600 ease-[cubic-bezier(0.77,0,0.18,1)] ${
+              mobileOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-6"
+            }`}
+            style={{ transitionDelay: mobileOpen ? "700ms" : "0ms" }}
+          >
             <Link
               href="/calculator"
               onClick={() => setMobileOpen(false)}
-              className="btn-gold inline-block px-6 py-3 rounded-sm text-sm font-normal tracking-wider uppercase"
+              className="inline-block px-10 py-4 rounded-full border border-white/20 bg-white/5 text-white text-[13px] font-light tracking-[0.2em] uppercase hover:bg-white/10 transition-all duration-300"
             >
               Рассчитать стоимость
             </Link>
