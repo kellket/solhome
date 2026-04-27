@@ -8,5 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: "https://solhome.ru/projects", lastModified: new Date(), priority: 0.7, changeFrequency: "weekly" },
     { url: "https://solhome.ru/advantages", lastModified: new Date(), priority: 0.6, changeFrequency: "monthly" },
     { url: "https://solhome.ru/services", lastModified: new Date(), priority: 0.9, changeFrequency: "monthly" },
+    { url: "https://solhome.ru/services/design", lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: "https://solhome.ru/services/remont", lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+    { url: "https://solhome.ru/services/nadzor", lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+    { url: "https://solhome.ru/services/komplektaciya", lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
   ];
 }

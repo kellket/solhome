@@ -9,6 +9,7 @@ const services = [
   {
     title: "Дизайн-проект",
     desc: "Разрабатываем полный дизайн-проект с планировкой, визуализациями и рабочей документацией.",
+    href: "/services/design",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-7 h-7">
         <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -19,6 +20,7 @@ const services = [
   {
     title: "Ремонт «под ключ»",
     desc: "Берём на себя весь процесс реализации — от демонтажа до финальной уборки.",
+    href: "/services/remont",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-7 h-7">
         <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -29,6 +31,7 @@ const services = [
   {
     title: "Авторский надзор",
     desc: "Контролируем соответствие ремонта дизайн-проекту и качество выполнения работ.",
+    href: "/services/nadzor",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-7 h-7">
         <circle cx="12" cy="12" r="10" />
@@ -43,6 +46,7 @@ const services = [
   {
     title: "Комплектация",
     desc: "Подбираем, закупаем и координируем поставки всех материалов, мебели и оборудования.",
+    href: "/services/komplektaciya",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-7 h-7">
         <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
@@ -161,15 +165,23 @@ export default function ServicesPageClient() {
                   <p className="text-white/80 text-sm md:text-base font-extralight leading-relaxed mb-6">
                     {service.desc}
                   </p>
-                  <Link
-                    href="/calculator"
-                    className="inline-flex items-center gap-2 text-gold text-sm font-normal tracking-wide group-hover:text-[#8b5a3c] transition-colors duration-300"
-                  >
-                    Рассчитать стоимость
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </Link>
+                  <div className="flex items-center gap-4">
+                    <Link
+                      href={service.href}
+                      className="inline-flex items-center gap-2 text-gold text-sm font-normal tracking-wide group-hover:text-[#8b5a3c] transition-colors duration-300"
+                    >
+                      Подробнее
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                    </Link>
+                    <Link
+                      href="/calculator"
+                      className="inline-flex items-center gap-2 text-white/60 text-sm font-normal tracking-wide hover:text-white transition-colors duration-300"
+                    >
+                      Рассчитать стоимость
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))}
