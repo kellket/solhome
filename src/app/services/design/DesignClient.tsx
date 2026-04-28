@@ -29,19 +29,19 @@ const stages = [
 const packages = [
   {
     name: "Базовый",
-    price: "от 1 500 ₽/м²",
+    price: "от 1 900 ₽/м²",
     features: ["Планировочное решение", "3D-визуализация гостиной", "Подбор стилистики", "Коллаж материалов"],
     highlight: false,
   },
   {
     name: "Полный",
-    price: "от 2 500 ₽/м²",
+    price: "от 3 500 ₽/м²",
     features: ["Всё из базового пакета", "3D-визуализация всех комнат", "Рабочая документация", "Ведомость материалов", "Авторское сопровождение"],
     highlight: true,
   },
   {
     name: "Премиум",
-    price: "от 4 000 ₽/м²",
+    price: "от 4 700 ₽/м²",
     features: ["Всё из полного пакета", "Эксклюзивные решения", "Подбор мебели и декора", "Комплектация под ключ", "Выезды на объект"],
     highlight: false,
   },
@@ -98,6 +98,12 @@ const jsonLd = {
 export default function DesignClient() {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const descSectionRef = useRef<HTMLElement>(null);
+  const descBgRef = useRef<HTMLDivElement>(null);
+  const includesSectionRef = useRef<HTMLDivElement>(null);
+  const includesBgRef = useRef<HTMLDivElement>(null);
+  const pricingSectionRef = useRef<HTMLElement>(null);
+  const pricingBgRef = useRef<HTMLDivElement>(null);
   const includesRef = useRef<(HTMLDivElement | null)[]>([]);
   const stagesRef = useRef<(HTMLDivElement | null)[]>([]);
   const packagesRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -111,13 +117,67 @@ export default function DesignClient() {
       if (bgRef.current) {
         gsap.fromTo(
           bgRef.current,
-          { scale: 1.15 },
+          { yPercent: -10 },
           {
-            scale: 1,
+            yPercent: 10,
             ease: "none",
             scrollTrigger: {
               trigger: heroRef.current,
               start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Description section parallax
+      if (descBgRef.current && descSectionRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Includes section parallax
+      if (includesBgRef.current && includesSectionRef.current) {
+        gsap.fromTo(
+          includesBgRef.current,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: includesSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Pricing section parallax
+      if (pricingBgRef.current && pricingSectionRef.current) {
+        gsap.fromTo(
+          pricingBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: pricingSectionRef.current,
+              start: "top bottom",
               end: "bottom top",
               scrub: true,
             },
@@ -196,88 +256,105 @@ export default function DesignClient() {
   return (
     <>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative overflow-hidden min-h-[85vh]">
-        <div ref={bgRef} className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[#1a1714]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1714] via-[#252220] to-[#1a1714] opacity-90" />
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-gold/5 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gold/3 rounded-full blur-3xl" />
+      <section ref={heroRef} className="relative overflow-hidden min-h-screen bg-[#1a1714]">
+        {/* Background Image */}
+        <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg36.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="relative min-h-[85vh] flex flex-col justify-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-          <div className="text-center">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6 animate-fade-in-up">
-              Sol Home — Услуги
-            </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-white tracking-wide mb-6">
-              Дизайн-проект квартиры
-              <span className="block text-gold mt-2">в Москве</span>
-            </h1>
-            <p className="text-white/70 text-lg sm:text-xl font-extralight max-w-2xl mx-auto mb-10 leading-relaxed">
-              Создаём уникальный интерьер с учётом ваших пожеланий и бюджета. 
-              От идеи до полного комплекта документации для строителей.
-            </p>
-            <Link
-              href="/contacts"
-              className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#8b5a3c] to-[#a67c5b] text-white text-base font-light tracking-wide rounded-full hover:from-[#a67c5b] hover:to-[#8b5a3c] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-            >
-              Заказать дизайн-проект
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 ml-2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <div className="w-6 h-10 border border-white/20 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-gold/60 rounded-full mt-2 animate-pulse" />
+        <div className="relative min-h-screen flex flex-col justify-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+          <div className="text-center relative">
+            {/* Blur effect under text */}
+            <div 
+              className="absolute -inset-x-32 -inset-y-32 bg-black/25 backdrop-blur-[3px] pointer-events-none"
+              style={{
+                maskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+                WebkitMaskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+              }}
+            />
+            <div className="relative">
+              <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6 animate-fade-in-up">
+                Услуги
+              </p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-white tracking-wide mb-6">
+                Дизайн-проект квартиры
+                <span className="block text-gold mt-2">в Москве</span>
+              </h1>
+              <p className="text-white/70 text-lg sm:text-xl font-extralight max-w-2xl mx-auto mb-10 leading-relaxed">
+                Создаём уникальный интерьер с учётом ваших пожеланий<br className="hidden sm:block" />
+                и бюджета. От идеи до полного комплекта документации<br className="hidden sm:block" />
+                для строителей.
+              </p>
+              <Link
+                href="/contacts"
+                className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              >
+                Заказать дизайн-проект
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Description Section */}
-      <section className="bg-[#1a1714] section-padding">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-6">
-              Что такое дизайн-проект?
-            </h2>
-            <div className="gold-divider w-24 mx-auto mb-8" />
-          </div>
+      <section ref={descSectionRef} className="relative overflow-hidden bg-[#1a1714]">
+        <div ref={descBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg30.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-[10%_center] lg:object-left"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1714]/70 to-[#1a1714] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1a1714]/80 lg:to-[#1a1714]" />
+        </div>
 
-          <div className="prose prose-lg prose-invert max-w-none">
-            <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg mb-6">
-              Дизайн-проект — это фундамент успешного ремонта и залог того, что результат превзойдёт ваши ожидания. 
-              Наши дизайнеры создают функциональные и эстетичные интерьеры, тщательно учитывая особенности помещения, 
-              ваш образ жизни, привычки и бюджет. Мы не просто рисуем красивые картинки — мы продумываем каждый 
-              квадратный сантиметр вашего будущего дома.
-            </p>
-            <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg mb-6">
-              Профессиональный дизайн-проект включает полный комплект документации: планировочные решения с несколькими 
-              вариантами зонирования, фотореалистичные 3D-визуализации каждого помещения, развёртки стен, детальные 
-              чертежи для строителей, спецификации материалов с артикулами и ценами. Это позволяет избежать 
-              дорогостоящих ошибок на этапе ремонта, точно рассчитать бюджет и получить предсказуемый результат.
-            </p>
-            <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg mb-6">
-              Работа над проектом начинается с глубокого погружения в ваши потребности. Мы узнаём, как вы живёте: 
-              сколько человек в семье, есть ли дети или домашние животные, как часто принимаете гостей, работаете ли 
-              из дома. На основе этой информации создаём пространство, которое будет не просто красивым, но и 
-              по-настоящему удобным для повседневной жизни.
-            </p>
-            <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
-              Команда Sol Home работает в разных стилях — от минимализма и скандинавского до классики и ар-деко. 
-              Мы следим за мировыми трендами, но главное — создаём интерьеры вне времени, которые будут радовать 
-              вас долгие годы. Каждый проект уникален, потому что уникален каждый заказчик.
-            </p>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+          <div className="lg:ml-auto lg:w-[45%]">
+            <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:rounded-none">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-8">
+                Что такое дизайн-проект?
+              </h2>
+
+              <div className="space-y-6">
+                <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
+                  Дизайн-проект — это фундамент успешного ремонта и залог того, что результат превзойдёт 
+                  ваши ожидания. Мы создаём функциональные интерьеры, учитывая особенности помещения, 
+                  ваш образ жизни и бюджет. Каждый сантиметр продуман.
+                </p>
+                <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
+                  В проект входит полный комплект документации: планировочные решения, фотореалистичные 
+                  3D-визуализации, чертежи для строителей и спецификации материалов с артикулами. 
+                  Это позволяет избежать ошибок и точно рассчитать бюджет.
+                </p>
+                <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
+                  Работа начинается с погружения в ваши потребности. Мы создаём пространство, которое 
+                  будет не просто красивым, но и удобным для повседневной жизни. Каждый проект уникален.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* What's Included Section */}
-      <section className="bg-[#1f1c19] section-padding">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Combined Includes + Stages Section */}
+      <div ref={includesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
+        <div ref={includesBgRef} className="absolute inset-[-8%_0]">
+          <img
+            src="/bg35.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* What's Included */}
+        <div className="relative section-padding">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
               Что входит в дизайн-проект
@@ -294,7 +371,7 @@ export default function DesignClient() {
                 ref={(el) => { includesRef.current[index] = el; }}
                 className="group relative"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#2a2724]/90 to-[#1f1c19]/90 rounded-xl border border-white/5 group-hover:border-gold/30 transition-all duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#3a3734]/80 to-[#2f2c29]/80 rounded-xl border border-white/5 group-hover:border-gold/30 transition-all duration-500" />
                 <div className="relative p-5 sm:p-6">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gold/10 border border-gold/20 group-hover:bg-gold/20 group-hover:border-gold/40 transition-all duration-300">
@@ -316,14 +393,14 @@ export default function DesignClient() {
             ))}
           </div>
         </div>
-      </section>
+        </div>
 
-      {/* Stages Section */}
-      <section className="bg-[#1a1714] section-padding">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
-              Этапы работы
+        {/* Stages */}
+        <div className="relative section-padding">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12 sm:mb-16">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
+                Этапы работы
             </h2>
             <p className="text-white/60 font-extralight text-base sm:text-lg max-w-2xl mx-auto">
               От первой встречи до готового проекта — прозрачный и понятный процесс
@@ -332,7 +409,7 @@ export default function DesignClient() {
 
           <div className="relative">
             {/* Timeline line */}
-            <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-gold/40 via-gold/20 to-transparent hidden sm:block" />
+            <div className="absolute left-8 sm:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-white/60 via-white/30 to-transparent hidden sm:block" />
 
             <div className="space-y-6 sm:space-y-0">
               {stages.map((stage, index) => (
@@ -343,7 +420,7 @@ export default function DesignClient() {
                 >
                   {/* Content */}
                   <div className={`sm:w-1/2 ${index % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12"}`}>
-                    <div className="bg-gradient-to-br from-[#2a2724]/80 to-[#1f1c19]/80 rounded-xl border border-white/5 p-5 sm:p-6 hover:border-gold/20 transition-all duration-300">
+                    <div className="bg-gradient-to-br from-[#3a3734]/80 to-[#2f2c29]/80 rounded-xl border border-white/5 p-5 sm:p-6 hover:border-gold/20 transition-all duration-300">
                       <div className={`flex items-center gap-3 mb-3 ${index % 2 === 0 ? "sm:justify-end" : ""}`}>
                         <span className="text-gold text-2xl sm:text-3xl font-extralight">{stage.step}</span>
                         <span className="text-white/40 text-sm font-extralight">{stage.duration}</span>
@@ -354,8 +431,8 @@ export default function DesignClient() {
                   </div>
 
                   {/* Timeline dot */}
-                  <div className="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#1a1714] border-2 border-gold items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-gold" />
+                  <div className="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#1a1714] border-2 border-white items-center justify-center">
+                    <div className="w-2 h-2 rounded-full bg-white" />
                   </div>
 
                   {/* Empty space for alternating layout */}
@@ -365,11 +442,20 @@ export default function DesignClient() {
             </div>
           </div>
         </div>
-      </section>
+        </div>
+      </div>
 
       {/* Pricing Section */}
-      <section className="bg-[#1f1c19] section-padding">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={pricingSectionRef} className="relative overflow-hidden section-padding bg-[#1a1714]">
+        <div ref={pricingBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg31.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
               Стоимость дизайн-проекта
@@ -398,10 +484,10 @@ export default function DesignClient() {
                     Популярный
                   </div>
                 )}
-                <div className="relative p-6 sm:p-8">
+                <div className="relative p-6 sm:p-8 h-full flex flex-col">
                   <h3 className="text-white text-xl sm:text-2xl font-light mb-2">{pkg.name}</h3>
                   <p className="text-gold text-2xl sm:text-3xl font-extralight mb-6">{pkg.price}</p>
-                  <ul className="space-y-3 mb-8">
+                  <ul className="space-y-3 flex-grow">
                     {pkg.features.map((feature) => (
                       <li key={feature} className="flex items-start gap-3">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-5 h-5 text-gold flex-shrink-0 mt-0.5">
@@ -413,11 +499,7 @@ export default function DesignClient() {
                   </ul>
                   <Link
                     href="/contacts"
-                    className={`block w-full text-center py-3 rounded-full text-sm font-light tracking-wide transition-all duration-300 ${
-                      pkg.highlight
-                        ? "bg-gradient-to-r from-[#8b5a3c] to-[#a67c5b] text-white hover:from-[#a67c5b] hover:to-[#8b5a3c]"
-                        : "border border-gold/40 text-gold hover:bg-gold/10"
-                    }`}
+                    className="block w-full text-center py-3 mt-8 rounded-full text-sm font-light tracking-wide transition-all duration-300 bg-white/20 backdrop-blur-sm text-white border border-white/30 hover:bg-white/30"
                   >
                     Заказать
                   </Link>
@@ -429,7 +511,7 @@ export default function DesignClient() {
       </section>
 
       {/* FAQ Section */}
-      <section className="bg-[#1a1714] section-padding">
+      <section className="bg-dark-bg section-padding">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
@@ -444,7 +526,7 @@ export default function DesignClient() {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-gradient-to-br from-[#2a2724]/80 to-[#1f1c19]/80 rounded-xl border border-white/5 overflow-hidden"
+                className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/30 overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === index ? null : index)}
@@ -477,28 +559,20 @@ export default function DesignClient() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-[#1f1c19] section-padding">
+      <section className="bg-dark-bg section-padding">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-gold/10 via-[#8b5a3c]/5 to-gold/10 rounded-3xl blur-2xl" />
-            <div className="relative bg-gradient-to-br from-[#2a2724]/90 to-[#1f1c19]/90 rounded-3xl border border-gold/20 p-8 sm:p-12 lg:p-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
-                Закажите бесплатную консультацию
-              </h2>
-              <p className="text-white/60 font-extralight text-base sm:text-lg max-w-xl mx-auto mb-8">
-                Обсудим ваш проект, ответим на вопросы и подберём оптимальный пакет услуг
-              </p>
-              <Link
-                href="/contacts"
-                className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-[#8b5a3c] to-[#a67c5b] text-white text-base font-light tracking-wide rounded-full hover:from-[#a67c5b] hover:to-[#8b5a3c] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-              >
-                Связаться с нами
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5 ml-2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
+            Закажите бесплатную консультацию
+          </h2>
+          <p className="text-white/60 font-extralight text-base sm:text-lg max-w-xl mx-auto mb-8">
+            Обсудим ваш проект, ответим на вопросы и подберём оптимальный пакет услуг
+          </p>
+          <Link
+            href="/contacts"
+            className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+          >
+            Связаться с нами
+          </Link>
         </div>
       </section>
 

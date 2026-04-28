@@ -190,7 +190,7 @@ export default function ServicesPageClient() {
           <div className="text-center mt-12 sm:mt-16">
             <Link
               href="/calculator"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#8b5a3c] to-[#a67c5b] text-white text-base font-light tracking-wide rounded-full hover:from-[#a67c5b] hover:to-[#8b5a3c] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
             >
               Рассчитать стоимость ремонта
             </Link>

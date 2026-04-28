@@ -36,13 +36,10 @@ const includedWorks = [
   "Демонтаж старых покрытий",
   "Электромонтажные работы",
   "Сантехнические работы",
-  "Выравнивание стен и потолков",
-  "Стяжка пола",
+  "Выравнивание стен",
   "Укладка плитки",
   "Покраска/поклейка обоев",
   "Установка дверей",
-  "Монтаж сантехники",
-  "Установка электроприборов",
   "Финальная уборка",
 ];
 
@@ -182,6 +179,12 @@ function FAQAccordionItem({
 export default function RemontClient() {
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const descSectionRef = useRef<HTMLElement>(null);
+  const descBgRef = useRef<HTMLDivElement>(null);
+  const includesSectionRef = useRef<HTMLDivElement>(null);
+  const includesBgRef = useRef<HTMLDivElement>(null);
+  const typesSectionRef = useRef<HTMLElement>(null);
+  const typesBgRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const stagesRef = useRef<(HTMLDivElement | null)[]>([]);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
@@ -194,37 +197,87 @@ export default function RemontClient() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      if (bgRef.current) {
+      if (bgRef.current && heroRef.current) {
         gsap.fromTo(
           bgRef.current,
-          { scale: 1.1 },
+          { yPercent: -10 },
           {
-            scale: 1,
+            yPercent: 10,
             ease: "none",
             scrollTrigger: {
               trigger: heroRef.current,
-              start: "top bottom",
-              end: "top top",
+              start: "top top",
+              end: "bottom top",
               scrub: true,
             },
           }
         );
       }
 
-      cardsRef.current.forEach((card, index) => {
+      if (descBgRef.current && descSectionRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (typesBgRef.current && typesSectionRef.current) {
+        gsap.fromTo(
+          typesBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: typesSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (includesBgRef.current && includesSectionRef.current) {
+        gsap.fromTo(
+          includesBgRef.current,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: includesSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      cardsRef.current.forEach((card) => {
         if (!card) return;
         gsap.fromTo(
           card,
-          { opacity: 0, y: 60 },
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
             y: 0,
-            duration: 0.8,
-            delay: index * 0.1,
+            duration: 0.6,
             ease: "power2.out",
             scrollTrigger: {
               trigger: card,
-              start: "top 85%",
+              start: "top 90%",
               toggleActions: "play none none none",
             },
           }
@@ -258,180 +311,138 @@ export default function RemontClient() {
   return (
     <>
       {/* Hero Section */}
-      <section ref={heroRef} className="relative overflow-hidden min-h-[70vh] flex items-center">
-        <div ref={bgRef} className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1714] via-[#1E1E1E] to-[#2A2A2A]" />
-          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E\")" }} />
+      <section ref={heroRef} className="relative overflow-hidden min-h-screen bg-[#1a1714]">
+        <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg38.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-dark-bg/90 via-transparent to-transparent" />
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-          <div className="max-w-3xl">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-4 hero-text-line1">
-              Sol Home
-            </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-extralight text-white tracking-wide mb-6 hero-text-line2">
-              Ремонт квартир под ключ в Москве
-            </h1>
-            <p className="text-white/70 text-lg sm:text-xl font-extralight leading-relaxed mb-8 max-w-2xl">
-              Берём на себя весь процесс — от демонтажа до финальной уборки
-            </p>
-            <Link
-              href="/calculator"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#8b5a3c] to-[#a67c5b] text-white text-base font-light tracking-wide rounded-full hover:from-[#a67c5b] hover:to-[#8b5a3c] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-            >
-              Рассчитать стоимость
-              <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
+        <div className="relative min-h-screen flex flex-col justify-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+          <div className="text-center relative">
+            <div 
+              className="absolute -inset-x-32 -inset-y-32 bg-black/25 backdrop-blur-[3px] pointer-events-none"
+              style={{
+                maskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+                WebkitMaskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+              }}
+            />
+            <div className="relative">
+              <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6 animate-fade-in-up">
+                Услуги
+              </p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-white tracking-wide mb-6">
+                Ремонт квартир под ключ
+                <span className="block text-gold mt-2">в Москве</span>
+              </h1>
+              <p className="text-white/70 text-lg sm:text-xl font-extralight max-w-2xl mx-auto mb-10 leading-relaxed">
+                Берём на себя весь процесс — от демонтажа<br />
+                до финальной уборки
+              </p>
+              <Link
+                href="/calculator"
+                className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              >
+                Рассчитать стоимость
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Description Section */}
-      <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
-              Что такое ремонт под ключ?
-            </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
-          </div>
+      <section ref={descSectionRef} className="relative overflow-hidden bg-[#1a1714]">
+        <div ref={descBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg39.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-[10%_center] lg:object-left"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1714]/50 to-[#1a1714] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1a1714]/60 lg:to-[#1a1714]" />
+        </div>
 
-          <div className="prose prose-invert prose-lg max-w-none">
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed mb-6">
-              Ремонт под ключ — это комплексное решение, когда мы берём на себя все этапы: от демонтажа старых покрытий до финальной уборки и расстановки мебели. Вам не нужно искать разных подрядчиков, контролировать сроки и качество. Персональный менеджер координирует все работы, а вы получаете готовую квартиру точно в срок.
-            </p>
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed mb-6">
-              В отличие от частичного ремонта, где вы самостоятельно решаете вопросы с электриками, сантехниками, штукатурами и отделочниками, ремонт под ключ предполагает единую команду профессионалов под управлением опытного прораба. Это исключает ситуации, когда один мастер переделывает работу за другим, а сроки растягиваются на месяцы.
-            </p>
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed mb-6">
-              Мы работаем по фиксированной смете — цена, указанная в договоре, не изменится в процессе ремонта. Никаких «непредвиденных расходов» и дополнительных счетов. При обнаружении скрытых дефектов немедленно уведомляем вас и согласовываем решение.
-            </p>
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed">
-              Команда Sol Home специализируется на ремонте квартир в Москве более 10 лет. За это время мы выработали чёткие стандарты качества и научились предвидеть типичные проблемы старого жилого фонда. Каждый проект — это внимание к деталям, честные сроки и результат, которым вы будете гордиться.
-            </p>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
+          <div className="lg:ml-auto lg:w-[45%]">
+            <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:rounded-none">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-8">
+                Что такое ремонт под ключ?
+              </h2>
+
+              <div className="space-y-6">
+                <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
+                  Ремонт под ключ — это комплексное решение, когда мы берём на себя все этапы: 
+                  от демонтажа до финальной уборки. Вам не нужно искать разных подрядчиков — 
+                  персональный менеджер координирует все работы.
+                </p>
+                <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
+                  Единая команда профессионалов под управлением опытного прораба исключает ситуации, 
+                  когда один мастер переделывает работу за другим. Чёткие сроки и контроль качества 
+                  на каждом этапе.
+                </p>
+                <p className="text-white/80 font-extralight leading-relaxed text-base sm:text-lg">
+                  Работаем по фиксированной смете — цена в договоре не изменится. Никаких 
+                  «непредвиденных расходов». Sol Home более 10 лет специализируется на ремонте 
+                  квартир в Москве.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Renovation Types */}
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-14">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
-              Виды ремонта
-            </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {renovationTypes.map((type, index) => (
-              <div
-                key={type.title}
-                ref={(el) => { cardsRef.current[index] = el; }}
-                className="group relative"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-sm rounded-2xl border border-white/10 group-hover:border-gold/40 group-hover:-translate-y-2 transition-all duration-500" />
-                <div className="relative p-6 md:p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <h3 className="text-white text-xl md:text-2xl font-light tracking-wide group-hover:text-gold transition-colors duration-300">
-                      {type.title}
-                    </h3>
-                    <span className="text-gold text-lg md:text-xl font-light whitespace-nowrap ml-4">
-                      {type.price}
-                    </span>
-                  </div>
-                  <p className="text-white/60 text-sm md:text-base font-extralight leading-relaxed mb-5">
-                    {type.desc}
-                  </p>
-                  <ul className="space-y-2">
-                    {type.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-2 text-white/70 text-sm font-extralight">
-                        <svg className="w-4 h-4 text-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
+      <section ref={typesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
+        <div ref={typesBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg41.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
-      </section>
+        <div className="relative py-16 sm:py-20 lg:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 sm:mb-14">
+              <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+                Виды ремонта
+              </h2>
+            </div>
 
-      {/* What's Included */}
-      <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-14">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
-              Что входит в ремонт под ключ
-            </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {includedWorks.map((work, index) => (
-              <div
-                key={work}
-                ref={(el) => { cardsRef.current[renovationTypes.length + index] = el; }}
-                className="flex items-center gap-3 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-gold/30 transition-all duration-300"
-              >
-                <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center flex-shrink-0">
-                  <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <span className="text-white/80 text-sm sm:text-base font-extralight">{work}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Work Stages */}
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-14">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
-              Этапы работы
-            </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
-          </div>
-
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-gold/50 via-gold/20 to-transparent" />
-
-            <div className="space-y-8 md:space-y-0">
-              {workStages.map((stage, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+              {renovationTypes.map((type, index) => (
                 <div
-                  key={stage.num}
-                  ref={(el) => { stagesRef.current[index] = el; }}
-                  className={`relative flex flex-col md:flex-row ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"} items-center gap-4 md:gap-8 py-4 md:py-8`}
+                  key={type.title}
+                  ref={(el) => { cardsRef.current[index] = el; }}
+                  className="group relative"
                 >
-                  {/* Content */}
-                  <div className={`flex-1 ${index % 2 === 0 ? "md:text-right" : "md:text-left"}`}>
-                    <div className={`p-5 rounded-xl bg-white/5 border border-white/10 hover:border-gold/30 transition-all duration-300 ${index % 2 === 0 ? "md:ml-auto" : "md:mr-auto"} max-w-md`}>
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="text-gold text-xs font-normal tracking-widest">{stage.num}</span>
-                        <span className="text-gold/60 text-xs font-extralight">{stage.duration}</span>
-                      </div>
-                      <h3 className="text-white text-lg font-light tracking-wide mb-2">{stage.title}</h3>
-                      <p className="text-white/60 text-sm font-extralight leading-relaxed">{stage.desc}</p>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#3a3734]/80 to-[#2f2c29]/80 backdrop-blur-sm rounded-2xl border border-white/5 group-hover:border-gold/40 group-hover:-translate-y-2 transition-all duration-500" />
+                  <div className="relative p-6 md:p-8">
+                    <div className="flex items-start justify-between mb-4">
+                      <h3 className="text-white text-xl md:text-2xl font-light tracking-wide group-hover:text-gold transition-colors duration-300">
+                        {type.title}
+                      </h3>
+                      <span className="text-gold text-lg md:text-xl font-light whitespace-nowrap ml-4">
+                        {type.price}
+                      </span>
                     </div>
+                    <p className="text-white/60 text-sm md:text-base font-extralight leading-relaxed mb-5">
+                      {type.desc}
+                    </p>
+                    <ul className="space-y-2">
+                      {type.features.map((feature) => (
+                        <li key={feature} className="flex items-center gap-2 text-white/70 text-sm font-extralight">
+                          <svg className="w-4 h-4 text-gold flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                          </svg>
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-
-                  {/* Circle */}
-                  <div className="hidden md:flex w-12 h-12 rounded-full bg-dark-bg border-2 border-gold items-center justify-center flex-shrink-0 z-10">
-                    <span className="text-gold text-sm font-light">{stage.num}</span>
-                  </div>
-
-                  {/* Spacer */}
-                  <div className="hidden md:block flex-1" />
                 </div>
               ))}
             </div>
@@ -439,14 +450,99 @@ export default function RemontClient() {
         </div>
       </section>
 
+      {/* Combined What's Included + Work Stages Section */}
+      <div ref={includesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
+        <div ref={includesBgRef} className="absolute inset-[-8%_0]">
+          <img
+            src="/bg40.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        {/* What's Included */}
+        <div className="relative py-16 sm:py-20 lg:py-24">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 sm:mb-14">
+              <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+                Что входит в ремонт под ключ
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              {includedWorks.map((work, index) => (
+                <div
+                  key={work}
+                  ref={(el) => { cardsRef.current[renovationTypes.length + index] = el; }}
+                  className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-[#3a3734]/80 to-[#2f2c29]/80 border border-white/5 hover:border-gold/30 transition-all duration-300 w-full"
+                >
+                  <div className="w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center flex-shrink-0">
+                    <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span className="text-white/80 text-sm sm:text-base font-extralight">{work}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Work Stages */}
+        <div className="relative py-16 sm:py-20 lg:py-24">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10 sm:mb-14">
+              <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+                Этапы работы
+              </h2>
+            </div>
+
+            <div className="relative">
+              <div className="absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-white/60 via-white/30 to-transparent hidden sm:block" />
+
+              <div className="space-y-6 sm:space-y-0">
+                {workStages.map((stage, index) => (
+                  <div
+                    key={stage.num}
+                    ref={(el) => { stagesRef.current[index] = el; }}
+                    className={`relative sm:flex ${index % 2 === 0 ? "sm:flex-row" : "sm:flex-row-reverse"} items-center sm:pb-12`}
+                  >
+                    {/* Content */}
+                    <div className={`sm:w-1/2 ${index % 2 === 0 ? "sm:pr-12 sm:text-right" : "sm:pl-12"}`}>
+                      <div className="bg-gradient-to-br from-[#3a3734]/80 to-[#2f2c29]/80 rounded-xl border border-white/5 p-5 sm:p-6 hover:border-gold/20 transition-all duration-300">
+                        <div className={`flex items-center gap-3 mb-3 ${index % 2 === 0 ? "sm:justify-end" : ""}`}>
+                          <span className="text-gold text-2xl sm:text-3xl font-extralight">{stage.num}</span>
+                          <span className="text-white/40 text-sm font-extralight">{stage.duration}</span>
+                        </div>
+                        <h3 className="text-white text-lg sm:text-xl font-light mb-2">{stage.title}</h3>
+                        <p className="text-white/60 text-sm font-extralight leading-relaxed">{stage.desc}</p>
+                      </div>
+                    </div>
+
+                    {/* Timeline dot */}
+                    <div className="hidden sm:flex absolute left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-[#1a1714] border-2 border-white items-center justify-center">
+                      <div className="w-2 h-2 rounded-full bg-white" />
+                    </div>
+
+                    {/* Empty space for alternating layout */}
+                    <div className="hidden sm:block sm:w-1/2" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Guarantees */}
       <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-14">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide">
               Наши гарантии
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -468,24 +564,45 @@ export default function RemontClient() {
       </section>
 
       {/* FAQ */}
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
+      <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+            <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-extralight tracking-wide">
               Частые вопросы о ремонте
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
           </div>
 
-          <div className="divide-y divide-white/10">
+          <div className="space-y-4">
             {faqData.map((item, index) => (
-              <FAQAccordionItem
+              <div
                 key={index}
-                item={item}
-                index={index}
-                isOpen={openFaqIndex === index}
-                onToggle={() => handleFaqToggle(index)}
-              />
+                className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/30 overflow-hidden"
+              >
+                <button
+                  onClick={() => handleFaqToggle(index)}
+                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left transition-colors duration-300 hover:bg-white/5"
+                >
+                  <span className="text-white text-base sm:text-lg font-light pr-4">{item.question}</span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className={`w-5 h-5 text-gold flex-shrink-0 transition-transform duration-300 ${openFaqIndex === index ? "rotate-180" : ""}`}
+                  >
+                    <path d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openFaqIndex === index ? "max-h-96" : "max-h-0"
+                  }`}
+                >
+                  <p className="px-5 sm:px-6 pb-5 sm:pb-6 text-white/60 text-sm sm:text-base font-extralight leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
@@ -498,16 +615,13 @@ export default function RemontClient() {
             Рассчитайте стоимость ремонта за 1 минуту
           </h2>
           <p className="text-white/60 text-base sm:text-lg font-extralight mb-8 max-w-2xl mx-auto">
-            Укажите площадь и тип ремонта — получите точную стоимость работ без скрытых платежей
+            Укажите площадь и тип ремонта — получите примерную стоимость<br />работ без скрытых платежей
           </p>
           <Link
             href="/calculator"
-            className="inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-[#8b5a3c] to-[#a67c5b] text-white text-lg font-light tracking-wide rounded-full hover:from-[#a67c5b] hover:to-[#8b5a3c] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+            className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
           >
             Рассчитать стоимость
-            <svg className="w-5 h-5 ml-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
           </Link>
         </div>
       </section>

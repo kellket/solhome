@@ -215,7 +215,7 @@ export default function NadzorClient() {
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
           <div className="max-w-3xl">
             <p className="hero-animate text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6">
-              Sol Home / Услуги
+              Услуги
             </p>
             <h1 className="hero-animate text-3xl sm:text-4xl lg:text-5xl font-extralight text-white tracking-wide leading-tight mb-6">
               Авторский надзор за ремонтом в Москве
@@ -225,7 +225,7 @@ export default function NadzorClient() {
             </p>
             <Link
               href="/contacts"
-              className="hero-animate inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gold-dark to-gold text-white text-base font-light tracking-wide rounded-full hover:from-gold hover:to-gold-light transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="hero-animate inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
             >
               Заказать авторский надзор
             </Link>
@@ -396,7 +396,7 @@ export default function NadzorClient() {
             </p>
             <Link
               href="/contacts"
-              className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-gold-dark to-gold text-white text-base font-light tracking-wide rounded-full hover:from-gold hover:to-gold-light transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
             >
               Получить консультацию
             </Link>

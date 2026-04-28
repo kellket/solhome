@@ -359,7 +359,7 @@ export default function KomplektaciyaClient() {
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
           <div className="max-w-3xl">
             <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6">
-              Sol Home / Услуги
+              Услуги
             </p>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white tracking-wide mb-6">
               Комплектация объекта{" "}
@@ -370,7 +370,7 @@ export default function KomplektaciyaClient() {
             </p>
             <Link
               href="/contacts"
-              className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-gold-dark to-gold text-white text-base font-light tracking-wide rounded-full hover:from-gold hover:to-gold-light transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+              className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
             >
               Заказать комплектацию
             </Link>
@@ -563,7 +563,7 @@ export default function KomplektaciyaClient() {
           </p>
           <Link
             href="/contacts"
-            className="inline-flex items-center justify-center px-10 py-4 bg-gradient-to-r from-gold-dark to-gold text-white text-base font-light tracking-wide rounded-full hover:from-gold hover:to-gold-light transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
+            className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
           >
             Связаться с нами
           </Link>

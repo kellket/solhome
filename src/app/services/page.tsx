@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import ServicesPageClient from "./ServicesPageClient";
 
 export const metadata: Metadata = {
-  title: "Услуги — Дизайн-проект, Ремонт под ключ, Авторский надзор",
+  title: "Услуги",
   description:
     "Услуги Sol Home: дизайн-проект интерьера, ремонт квартир под ключ, авторский надзор и комплектация. Полный цикл работ от идеи до сдачи объекта в Москве.",
   openGraph: {
-    title: "Услуги — Дизайн-проект, Ремонт под ключ, Авторский надзор",
+    title: "Услуги | Sol Home",
     description:
       "Услуги Sol Home: дизайн-проект интерьера, ремонт квартир под ключ, авторский надзор и комплектация. Полный цикл работ от идеи до сдачи объекта в Москве.",
     url: "/services",
