@@ -232,6 +232,13 @@ input[type="range"]::-moz-range-thumb {
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
   margin-top: -18px !important;
+  color: var(--gold) !important;
+}
+
+.reviews-swiper .swiper-button-prev svg,
+.reviews-swiper .swiper-button-next svg {
+  width: 10px !important;
+  height: 10px !important;
 }
 
 .reviews-swiper .swiper-button-prev {
