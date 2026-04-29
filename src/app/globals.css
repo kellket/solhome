@@ -216,9 +216,14 @@ input[type="range"]::-moz-range-thumb {
   padding: 0 60px !important;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .reviews-swiper {
-    padding: 0 40px !important;
+    padding: 0 16px !important;
+  }
+  
+  .reviews-swiper .swiper-button-prev,
+  .reviews-swiper .swiper-button-next {
+    display: none !important;
   }
 }
 
