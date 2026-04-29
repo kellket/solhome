@@ -42,7 +42,6 @@ export default function HeroSlider() {
 
     const tl = gsap.timeline({
       onComplete: () => {
-        setCurrentImg(curtain.inImg);
         setCurtain(null);
       },
     });
@@ -105,6 +104,7 @@ export default function HeroSlider() {
     if (tlRef.current) tlRef.current.kill();
     const outImg = currentImg;
     const inImg = slides[swiper.realIndex].img;
+    setCurrentImg(inImg);
     setActiveIdx(swiper.realIndex);
     setAnimKey((k) => k + 1);
     setCurtain({ outImg, inImg });
@@ -163,7 +163,7 @@ export default function HeroSlider() {
 
   return (
     <div ref={containerRef} className="relative h-screen overflow-hidden">
-      <div className={`absolute inset-0 z-[1] ${curtain ? 'opacity-0' : 'opacity-100'}`}>
+      <div className="absolute inset-0 z-[1]">
         <Image
           src={currentImg}
           alt="Hero background"
@@ -172,7 +172,7 @@ export default function HeroSlider() {
           style={{ objectFit: 'cover', objectPosition: 'center center' }}
         />
       </div>
-      <div className={`absolute inset-0 z-[2] bg-black/40 ${curtain ? 'opacity-0' : 'opacity-100'}`} />
+      <div className="absolute inset-0 z-[2] bg-black/40" />
 
       <Swiper
         modules={[Autoplay]}
