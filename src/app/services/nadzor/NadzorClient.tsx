@@ -176,6 +176,57 @@ export default function NadzorClient() {
         );
       }
 
+      if (descBgRef.current && descSectionRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (checklistBgRef.current && checklistSectionRef.current) {
+        gsap.fromTo(
+          checklistBgRef.current,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: checklistSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (combinedBgRef.current && combinedSectionRef.current) {
+        gsap.fromTo(
+          combinedBgRef.current,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: combinedSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
       gsap.fromTo(
         checklistRef.current?.querySelectorAll(".checklist-item") || [],
         { opacity: 0, x: -30 },

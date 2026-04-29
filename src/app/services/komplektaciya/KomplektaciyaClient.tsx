@@ -243,6 +243,40 @@ export default function KomplektaciyaClient() {
         );
       }
 
+      if (descBgRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (checklistBgRef.current) {
+        gsap.fromTo(
+          checklistBgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: checklistSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
       if (checklistRef.current) {
         const items = checklistRef.current.querySelectorAll(".checklist-item");
         gsap.fromTo(
@@ -258,6 +292,23 @@ export default function KomplektaciyaClient() {
               trigger: checklistRef.current,
               start: "top 80%",
               toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+
+      if (advPricingBgRef.current) {
+        gsap.fromTo(
+          advPricingBgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: advPricingSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
             },
           }
         );

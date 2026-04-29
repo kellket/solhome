@@ -74,18 +74,15 @@ export default function AdvantagesClient() {
       cardsRef.current.forEach((card, index) => {
         if (!card) return;
         const isLeft = index % 2 === 0;
-        const xStart = isLeft ? -50 : 50;
+        const xStart = isLeft ? -150 : 150;
         gsap.fromTo(card,
-          { x: xStart, opacity: 0 },
-          {
-            x: 0,
-            opacity: 1,
-            duration: 0.6,
-            ease: "power2.out",
+          { x: xStart },
+          { x: 0, ease: "power1.out",
             scrollTrigger: {
-              trigger: card,
+              trigger: sectionRef.current,
               start: "top 85%",
-              toggleActions: "play none none none",
+              end: "top 15%",
+              scrub: 2.5,
             },
           }
         );

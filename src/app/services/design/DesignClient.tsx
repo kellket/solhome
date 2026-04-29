@@ -131,6 +131,60 @@ export default function DesignClient() {
         );
       }
 
+      // Description section parallax
+      if (descBgRef.current && descSectionRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Includes section parallax
+      if (includesBgRef.current && includesSectionRef.current) {
+        gsap.fromTo(
+          includesBgRef.current,
+          { yPercent: -8 },
+          {
+            yPercent: 8,
+            ease: "none",
+            scrollTrigger: {
+              trigger: includesSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      // Pricing section parallax
+      if (pricingBgRef.current && pricingSectionRef.current) {
+        gsap.fromTo(
+          pricingBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: pricingSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
       // Includes cards stagger
       includesRef.current.forEach((card, index) => {
         if (!card) return;
