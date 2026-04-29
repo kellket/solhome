@@ -99,13 +99,24 @@ export default function ContactsClient() {
                   </div>
                   <div>
                     <p className="text-xs text-white/70 font-normal tracking-wider uppercase mb-1">
-                      Адрес
+                      Мы на карте
                     </p>
                     <p className="text-white text-base font-light">
-                      г. Москва
+                      Работаем по всей Московской области
                     </p>
                   </div>
                 </div>
+              </div>
+
+              <div className="mt-8 rounded-xl overflow-hidden border border-white/10">
+                <iframe
+                  src="https://yandex.ru/map-widget/v1/?ll=37.617671%2C55.755864&z=9&lang=ru_RU"
+                  width="100%"
+                  height="200"
+                  frameBorder="0"
+                  title="Яндекс.Карта — Московская область"
+                  className="block w-full"
+                />
               </div>
             </div>
 
@@ -212,28 +223,6 @@ export default function ContactsClient() {
                 </div>
               )}
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 sm:py-16 bg-dark">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-white/60 text-xs font-normal tracking-[0.3em] uppercase mb-3">
-            Мы на карте
-          </p>
-          <h2 className="text-xl font-light text-white tracking-wide mb-6">
-            Работаем по всей Москве
-          </h2>
-          <div className="rounded-xl overflow-hidden border border-white/10">
-            <iframe
-              src="https://yandex.ru/map-widget/v1/?ll=37.617671%2C55.755864&z=10&mode=whatshere&whatshere%5Bpoint%5D=37.617671%2C55.755864&whatshere%5Bzoom%5D=10&lang=ru_RU"
-              width="100%"
-              height="400"
-              frameBorder="0"
-              allowFullScreen
-              title="Яндекс.Карта — г. Москва"
-              className="block w-full"
-            />
           </div>
         </div>
       </section>
