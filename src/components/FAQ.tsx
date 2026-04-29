@@ -116,43 +116,25 @@ function AccordionItem({
   }, [isOpen]);
 
   return (
-    <div
-      className={`border-b border-white/10 transition-colors duration-300 ${
-        isOpen ? "border-gold/30" : ""
-      }`}
-    >
+    <div className="bg-white/10 backdrop-blur-sm rounded-xl border border-white/30 overflow-hidden">
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 sm:py-6 text-left group"
+        className="w-full flex items-center justify-between p-5 sm:p-6 text-left transition-colors duration-300 hover:bg-white/5"
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${index}`}
       >
-        <span
-          className={`text-base sm:text-lg font-light tracking-wide pr-4 transition-colors duration-300 ${
-            isOpen ? "text-gold" : "text-white group-hover:text-gold-light"
-          }`}
-        >
+        <span className="text-white text-base sm:text-lg font-light pr-4">
           {item.question}
         </span>
-        <span
-          className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${
-            isOpen
-              ? "border-gold bg-gold/10 rotate-45"
-              : "border-white/30 group-hover:border-gold/50"
-          }`}
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.5"
+          className={`w-5 h-5 text-gold flex-shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
         >
-          <svg
-            className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${
-              isOpen ? "text-gold" : "text-white/70 group-hover:text-gold-light"
-            }`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
-        </span>
+          <path d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
       <div
         ref={contentRef}
@@ -160,8 +142,8 @@ function AccordionItem({
         className="overflow-hidden"
         style={{ height: 0, opacity: 0 }}
       >
-        <div ref={innerRef} className="pb-5 sm:pb-6">
-          <p className="text-white/70 text-sm sm:text-base font-extralight leading-relaxed pr-12">
+        <div ref={innerRef} className="px-5 sm:px-6 pb-5 sm:pb-6">
+          <p className="text-white/60 text-sm sm:text-base font-extralight leading-relaxed">
             {item.answer}
           </p>
         </div>
@@ -182,13 +164,12 @@ export default function FAQ() {
       <FAQSchema />
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+          <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide">
             Частые вопросы
           </h2>
-          <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
         </div>
 
-        <div className="divide-y divide-white/10">
+        <div className="space-y-4">
           {faqData.map((item, index) => (
             <AccordionItem
               key={index}

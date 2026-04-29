@@ -168,10 +168,9 @@ export default function Reviews() {
       <ReviewsSchema />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-14">
-          <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
+          <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
             Отзывы наших клиентов
           </h2>
-          <div className="w-16 h-[1.5px] mx-auto gold-gradient mb-4" />
           <p className="text-white/50 text-sm sm:text-base font-extralight tracking-wide">
             Более 100 выполненных проектов
           </p>

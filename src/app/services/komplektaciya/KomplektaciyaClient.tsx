@@ -384,7 +384,7 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
               Что такое комплектация объекта
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
+            
           </div>
 
           <div className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed space-y-6">
@@ -422,7 +422,7 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
               Что включает комплектация
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
+            
           </div>
 
           <div ref={checklistRef} className="space-y-4">
@@ -449,7 +449,7 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
               Преимущества нашей комплектации
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
+            
           </div>
 
           <div ref={advantagesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -479,7 +479,7 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
               Категории товаров
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
+            
           </div>
 
           <div ref={categoriesRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -506,7 +506,7 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
               Стоимость услуги
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
+            
           </div>
 
           <div ref={pricingRef} className="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -536,7 +536,7 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
               Частые вопросы
             </h2>
-            <div className="w-16 h-[1.5px] mx-auto gold-gradient" />
+            
           </div>
 
           <div className="divide-y divide-white/10">
