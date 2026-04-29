@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
@@ -19,37 +20,37 @@ const reviews: Review[] = [
     name: "Анна Михайлова",
     rating: 5,
     text: "Отличная работа! Ремонт квартиры выполнен качественно и в срок. Бригада профессиональная, всё чисто и аккуратно. Рекомендую!",
-    date: "2024-03-15",
+    date: "2026-03-15",
   },
   {
-    name: "Дмитрий Козлов",
+    name: "Мистер Никто",
     rating: 5,
     text: "Делали капитальный ремонт двушки. Результат превзошёл ожидания. Особенно понравился подход к деталям и соблюдение сроков.",
-    date: "2024-02-28",
+    date: "2026-02-28",
   },
   {
     name: "Елена Сорокина",
     rating: 5,
     text: "Заказывали дизайн-проект и ремонт под ключ. Команда Sol Home — настоящие профессионалы. Квартира как с картинки!",
-    date: "2024-02-10",
+    date: "2026-01-10",
   },
   {
     name: "Сергей Петров",
     rating: 5,
     text: "Ремонт в новостройке прошёл без проблем. Менеджер всегда на связи, мастера вежливые. Цена соответствует качеству.",
-    date: "2024-01-20",
+    date: "2025-12-20",
   },
   {
     name: "Мария Волкова",
     rating: 5,
     text: "Косметический ремонт кухни и ванной. Быстро, качественно, недорого. Буду обращаться снова!",
-    date: "2024-01-05",
+    date: "2025-11-05",
   },
   {
     name: "Алексей Новиков",
     rating: 5,
     text: "Долго выбирали компанию для ремонта. Sol Home предложили лучшие условия. Результатом довольны на 100%.",
-    date: "2023-12-18",
+    date: "2025-10-18",
   },
 ];
 
@@ -163,6 +164,20 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 }
 
 export default function Reviews() {
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ name: "", text: "", rating: 5 });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+    setTimeout(() => {
+      setShowForm(false);
+      setSubmitted(false);
+      setFormData({ name: "", text: "", rating: 5 });
+    }, 2000);
+  };
+
   return (
     <section id="reviews" className="bg-dark-bg py-16 sm:py-20 lg:py-24 overflow-hidden">
       <ReviewsSchema />
@@ -204,6 +219,90 @@ export default function Reviews() {
             ))}
           </Swiper>
         </div>
+
+        <div className="text-center mt-8">
+          <button
+            onClick={() => setShowForm(true)}
+            className="inline-flex items-center justify-center px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.15em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+          >
+            Оставить отзыв
+          </button>
+        </div>
+
+        {showForm && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+            <div className="relative w-full max-w-md bg-dark-bg border border-white/20 rounded-2xl p-6 sm:p-8">
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-4 right-4 text-white/50 hover:text-white transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+
+              {!submitted ? (
+                <>
+                  <h3 className="text-white text-xl font-light tracking-wide mb-6 text-center">
+                    Оставить отзыв
+                  </h3>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <input
+                      type="text"
+                      placeholder="Ваше имя"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="w-full px-5 py-3 bg-white/10 border border-white/30 rounded-full text-sm font-light text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors"
+                    />
+                    <div className="flex items-center justify-center gap-2 py-2">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <button
+                          key={star}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, rating: star })}
+                          className="transition-transform hover:scale-110"
+                        >
+                          <svg
+                            className={`w-8 h-8 ${star <= formData.rating ? "text-[#bf9b88]" : "text-white/20"}`}
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
+                          >
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                          </svg>
+                        </button>
+                      ))}
+                    </div>
+                    <textarea
+                      placeholder="Ваш отзыв"
+                      rows={4}
+                      value={formData.text}
+                      onChange={(e) => setFormData({ ...formData, text: e.target.value })}
+                      required
+                      className="w-full px-5 py-3 bg-white/10 border border-white/30 rounded-2xl text-sm font-light text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors resize-none"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full py-3 rounded-full text-sm font-light tracking-[0.15em] uppercase bg-white/10 border border-white/30 text-white hover:bg-white/20 transition-colors"
+                    >
+                      Отправить
+                    </button>
+                  </form>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full border-2 border-gold flex items-center justify-center">
+                    <svg className="w-8 h-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <p className="text-white text-lg font-light">Спасибо за отзыв!</p>
+                  <p className="text-white/60 text-sm mt-2">Он будет опубликован после модерации</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );
