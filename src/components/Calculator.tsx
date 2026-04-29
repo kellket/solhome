@@ -156,10 +156,10 @@ export default function Calculator() {
                       key={r.id}
                       type="button"
                       onClick={() => setRepair(r.id)}
-                      className={`text-left p-5 rounded-full backdrop-blur-md transition-all duration-300 hover:scale-[1.02] ${
+                      className={`text-left p-5 rounded-full backdrop-blur-md transition-all duration-300 hover:scale-[1.02] border border-white/30 ${
                         repair === r.id
-                          ? "border-2 border-gold bg-gold/20"
-                          : "border border-white/30 bg-white/10 hover:border-gold/40"
+                          ? "ring-2 ring-gold bg-gold/20"
+                          : "bg-white/10 hover:border-gold/40"
                       }`}
                     >
                       <div className="text-white text-base font-normal tracking-wide mb-1">
@@ -203,10 +203,10 @@ export default function Calculator() {
                         key={String(val)}
                         type="button"
                         onClick={() => setNeedDesign(val)}
-                        className={`py-3 px-8 rounded-full backdrop-blur-md text-sm font-light tracking-wide transition-all duration-300 hover:scale-105 ${
+                        className={`py-3 px-8 rounded-full backdrop-blur-md text-sm font-light tracking-wide transition-all duration-300 hover:scale-105 border border-white/30 ${
                           needDesign === val
-                            ? "border-2 border-gold bg-gold/20 text-white"
-                            : "border border-white/30 bg-white/10 text-white/70 hover:border-gold/40"
+                            ? "ring-2 ring-gold bg-gold/20 text-white"
+                            : "bg-white/10 text-white/70 hover:border-gold/40"
                         }`}
                       >
                         {val ? "Да" : "Нет"}
