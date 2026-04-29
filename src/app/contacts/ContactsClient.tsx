@@ -35,9 +35,9 @@ export default function ContactsClient() {
             </h1>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start max-w-4xl mx-auto">
-            <div>
-              <h2 className="text-xl font-light text-white tracking-wide mb-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start max-w-4xl mx-auto">
+            <div className="lg:order-2">
+              <h2 className="text-xl font-light text-white tracking-wide mb-8 text-center lg:text-left">
                 Контакты
               </h2>
 
@@ -120,10 +120,10 @@ export default function ContactsClient() {
               </div>
             </div>
 
-            <div>
+            <div className="lg:order-1">
               {!submitted ? (
                 <>
-                  <h2 className="text-xl font-light text-white tracking-wide mb-8">
+                  <h2 className="text-xl font-light text-white tracking-wide mb-8 text-center lg:text-left">
                     Оставить заявку
                   </h2>
                   <form onSubmit={handleSubmit} className="space-y-5">
