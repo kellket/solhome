@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navLinks = [
@@ -15,7 +14,6 @@ const navLinks = [
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const pathname = usePathname();
 
   useEffect(() => {
     if (mobileOpen) {
@@ -27,15 +25,6 @@ export default function Header() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
-
-  const handleNavClick = (e: React.MouseEvent, link: typeof navLinks[0]) => {
-    if (link.anchor) {
-      if (pathname === "/") {
-        e.preventDefault();
-        document.getElementById(link.anchor)?.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-transparent">
@@ -106,10 +95,7 @@ export default function Header() {
               >
                 <Link
                   href={link.href}
-                  onClick={(e) => {
-                    setMobileOpen(false);
-                    handleNavClick(e, link);
-                  }}
+                  onClick={() => setMobileOpen(false)}
                   className="block py-3 text-white text-3xl md:text-5xl font-extralight tracking-wide hover:text-[#bf9b88] transition-colors duration-300"
                 >
                   {link.label}
