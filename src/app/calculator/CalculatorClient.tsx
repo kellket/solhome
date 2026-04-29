@@ -51,6 +51,17 @@ function calcDuration(area: number): string {
   return `~${rounded} месяцев`;
 }
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (!digits) return '';
+  let result = '+7';
+  if (digits.length > 1) result += ' (' + digits.slice(1, 4);
+  if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
+  if (digits.length >= 7) result += '-' + digits.slice(7, 9);
+  if (digits.length >= 9) result += '-' + digits.slice(9, 11);
+  return result;
+}
+
 export default function CalculatorClient() {
   const [step, setStep] = useState(1);
   const [property, setProperty] = useState("apartment");
@@ -269,9 +280,10 @@ export default function CalculatorClient() {
                     />
                     <input
                       type="tel"
-                      placeholder="Телефон"
+                      placeholder="+7 (___) ___-__-__"
                       value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
+                      onChange={(e) => setPhone(formatPhone(e.target.value))}
+                      onFocus={(e) => { if (!e.target.value) setPhone('+7'); }}
                       required
                       className="w-full px-5 py-3.5 border border-white/30 bg-white/10 backdrop-blur-md rounded-full text-sm font-light text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors"
                     />

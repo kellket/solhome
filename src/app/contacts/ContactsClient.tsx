@@ -3,6 +3,17 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 
+function formatPhone(value: string): string {
+  const digits = value.replace(/\D/g, '').slice(0, 11);
+  if (!digits) return '';
+  let result = '+7';
+  if (digits.length > 1) result += ' (' + digits.slice(1, 4);
+  if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
+  if (digits.length >= 7) result += '-' + digits.slice(7, 9);
+  if (digits.length >= 9) result += '-' + digits.slice(9, 11);
+  return result;
+}
+
 export default function ContactsClient() {
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", agree: false });
@@ -142,12 +153,10 @@ export default function ContactsClient() {
                     <input
                       type="tel"
                       inputMode="numeric"
-                      placeholder="Телефон"
+                      placeholder="+7 (___) ___-__-__"
                       value={form.phone}
-                      onChange={(e) => updateField("phone", e.target.value)}
-                      onInput={(e) => {
-                        e.currentTarget.value = e.currentTarget.value.replace(/[^0-9+\-\(\)\s]/g, '');
-                      }}
+                      onChange={(e) => updateField("phone", formatPhone(e.target.value))}
+                      onFocus={(e) => { if (!e.currentTarget.value) updateField("phone", "+7"); }}
                       required
                       className="w-full px-6 py-3.5 bg-white/10 border border-white/30 rounded-full text-sm font-light text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors"
                     />
