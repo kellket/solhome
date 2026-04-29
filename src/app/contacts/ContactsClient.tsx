@@ -29,20 +29,10 @@ export default function ContactsClient() {
         </div>
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10 sm:mb-16">
-            <p className="text-white text-xs font-normal tracking-[0.3em] uppercase mb-4">
-              Контакты
-            </p>
-            <h1 className="text-3xl sm:text-4xl font-extralight text-white tracking-wide">
-              Свяжитесь с нами
-            </h1>
-            
-          </div>
-
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start max-w-4xl mx-auto">
-            <div className="lg:ml-auto">
+            <div>
               <h2 className="text-xl font-light text-white tracking-wide mb-8">
-                Sol Home
+                Контакты
               </h2>
 
               <div className="space-y-6">
