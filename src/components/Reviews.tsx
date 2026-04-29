@@ -297,7 +297,7 @@ export default function Reviews() {
                     </svg>
                   </div>
                   <p className="text-white text-lg font-light">Спасибо за отзыв!</p>
-                  <p className="text-white/60 text-sm mt-2">Он будет опубликован после модерации</p>
+                  <p className="text-white/60 text-sm mt-2">Он будет опубликован в ближайшее время</p>
                 </div>
               )}
             </div>
