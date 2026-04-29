@@ -129,6 +129,11 @@ export default function ProjectsSection() {
   useEffect(() => {
     if (openProject) {
       document.body.style.overflow = 'hidden';
+      // Preload all images in the gallery
+      openProject.images.forEach((img) => {
+        const preload = new Image();
+        preload.src = img.src;
+      });
     } else {
       document.body.style.overflow = '';
     }

@@ -60,14 +60,14 @@ export default function HeroSlider() {
         rotationY: 0,
         scale: 1,
         rotationX: 0,
-        force3D: 'auto',
+        force3D: true,
         transformPerspective: 600,
         transformOrigin: 'center right',
       }, {
         opacity: 0,
         rotationY: 110,
         rotationX: 0,
-        force3D: 'auto',
+        force3D: true,
         ease: 'power2.inOut',
         duration: slotDur,
         delay: i * stagger,
@@ -82,7 +82,7 @@ export default function HeroSlider() {
         rotationY: 90,
         scale: 1,
         rotationX: 0,
-        force3D: 'auto',
+        force3D: true,
         transformPerspective: 600,
         transformOrigin: 'center left',
       }, {
@@ -91,7 +91,7 @@ export default function HeroSlider() {
         left: 0,
         rotationX: 0,
         rotationY: 0,
-        force3D: 'auto',
+        force3D: true,
         ease: 'power2.inOut',
         duration: slotDur,
         delay: i * stagger,
@@ -118,7 +118,7 @@ export default function HeroSlider() {
     const el = containerRef.current;
     const fullW = el ? el.offsetWidth : (typeof window !== 'undefined' ? window.innerWidth : 1920);
     const fullH = el ? el.offsetHeight : (typeof window !== 'undefined' ? window.innerHeight : 1080);
-    const slotW = fullW / SLOTS;
+    const slotW = Math.ceil(fullW / SLOTS);
 
     return Array.from({ length: SLOTS }, (_, k) => (
       <div
@@ -128,7 +128,7 @@ export default function HeroSlider() {
           overflow: 'hidden',
           top: 0,
           left: k * slotW,
-          width: slotW + 0.3,
+          width: slotW + 1,
           height: fullH,
         }}
       >
@@ -138,7 +138,7 @@ export default function HeroSlider() {
             position: 'absolute',
             top: 0,
             left: 0,
-            width: slotW + 0.6,
+            width: slotW + 1,
             height: fullH,
             overflow: 'hidden',
           }}
