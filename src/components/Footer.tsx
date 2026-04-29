@@ -2,16 +2,16 @@ import Link from "next/link";
 import Image from "next/image";
 
 const footerLinks = [
-  { href: "/#about", label: "О нас" },
-  { href: "/services", label: "Услуги" },
-  { href: "/#projects", label: "Проекты" },
-  { href: "/contacts", label: "Контакты" },
-  { href: "/#calculator", label: "Калькулятор" },
+{ href: "/about", label: "О нас" },
+{ href: "/services", label: "Услуги" },
+{ href: "/projects", label: "Проекты" },
+{ href: "/contacts", label: "Контакты" },
+{ href: "/calculator", label: "Калькулятор" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-dark-bg text-white/70">
+    <footer className="bg-dark-bg text-white/70 -mt-1">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-12">
           <div className="order-last md:order-first">
@@ -65,7 +65,7 @@ export default function Footer() {
             </address>
             <div className="flex items-center gap-4 mt-6">
               <a
-                href="https://t.me/solhome_ru"
+                href="https://t.me/solhomeru"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/50 hover:text-gold transition-colors duration-300"
@@ -87,7 +87,7 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="https://vk.com/solhome"
+                href="https://vk.ru/sol_home"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white/50 hover:text-gold transition-colors duration-300"

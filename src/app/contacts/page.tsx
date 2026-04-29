@@ -17,6 +17,23 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://solhome.ru" },
+    { "@type": "ListItem", "position": 2, "name": "Контакты", "item": "https://solhome.ru/contacts" }
+  ]
+};
+
 export default function ContactsPage() {
-  return <ContactsClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <ContactsClient />
+    </>
+  );
 }

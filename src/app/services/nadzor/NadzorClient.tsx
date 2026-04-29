@@ -6,10 +6,10 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const checklistItems = [
-  "Регулярные визиты на объект (2-3 раза в неделю)",
+  "Регулярные визиты на объект",
   "Проверка соответствия работ проекту",
   "Контроль качества материалов",
-  "Проверка скрытых работ (электрика, сантехника)",
+  "Проверка скрытых работ",
   "Консультации по выбору материалов",
   "Решение спорных вопросов с подрядчиком",
   "Фотоотчёты о ходе работ",
@@ -62,17 +62,17 @@ const whenNeeded = [
 const prices = [
   {
     title: "Разовый визит",
-    price: "от 5 000 ₽",
+    price: "от 3 000 ₽",
     desc: "Экспертная оценка текущего состояния работ",
   },
   {
     title: "Пакет 10 визитов",
-    price: "от 40 000 ₽",
+    price: "от 30 000 ₽",
     desc: "Регулярный контроль ключевых этапов ремонта",
   },
   {
-    title: "Полное сопровождение",
-    price: "от 15 000 ₽/мес",
+    title: "Сопровождение",
+    price: "от 18 000 ₽/мес",
     desc: "Непрерывный авторский надзор на весь период",
   },
 ];
@@ -120,19 +120,19 @@ const jsonLd = {
     {
       "@type": "Offer",
       "name": "Разовый визит",
-      "price": "5000",
+      "price": "3000",
       "priceCurrency": "RUB",
     },
     {
       "@type": "Offer",
       "name": "Пакет 10 визитов",
-      "price": "40000",
+      "price": "30000",
       "priceCurrency": "RUB",
     },
     {
       "@type": "Offer",
-      "name": "Полное сопровождение",
-      "price": "15000",
+      "name": "Сопровождение",
+      "price": "18000",
       "priceCurrency": "RUB",
       "priceSpecification": {
         "@type": "UnitPriceSpecification",
@@ -144,6 +144,13 @@ const jsonLd = {
 
 export default function NadzorClient() {
   const heroRef = useRef<HTMLElement>(null);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const descSectionRef = useRef<HTMLElement>(null);
+  const descBgRef = useRef<HTMLDivElement>(null);
+  const checklistSectionRef = useRef<HTMLElement>(null);
+  const checklistBgRef = useRef<HTMLDivElement>(null);
+  const combinedSectionRef = useRef<HTMLElement>(null);
+  const combinedBgRef = useRef<HTMLDivElement>(null);
   const checklistRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -152,17 +159,73 @@ export default function NadzorClient() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        heroRef.current?.querySelectorAll(".hero-animate") || [],
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power2.out",
-        }
-      );
+      if (bgRef.current) {
+        gsap.fromTo(
+          bgRef.current,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: heroRef.current,
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (descBgRef.current && descSectionRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { yPercent: -15 },
+          {
+            yPercent: 15,
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (checklistBgRef.current && checklistSectionRef.current) {
+        gsap.fromTo(
+          checklistBgRef.current,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: checklistSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (combinedBgRef.current && combinedSectionRef.current) {
+        gsap.fromTo(
+          combinedBgRef.current,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: combinedSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
 
       gsap.fromTo(
         checklistRef.current?.querySelectorAll(".checklist-item") || [],
@@ -207,187 +270,229 @@ export default function NadzorClient() {
 
   return (
     <>
-      <section ref={heroRef} className="relative min-h-[70vh] flex items-center" style={{ background: "#1a1714" }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-gold/5 via-transparent to-transparent" />
-        <div className="absolute top-20 right-10 w-64 h-64 rounded-full bg-gold/5 blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-48 h-48 rounded-full bg-gold/3 blur-2xl" />
+      <section ref={heroRef} className="relative overflow-hidden min-h-screen bg-dark-bg">
+        <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg42.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
-          <div className="max-w-3xl">
-            <p className="hero-animate text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6">
-              Услуги
-            </p>
-            <h1 className="hero-animate text-3xl sm:text-4xl lg:text-5xl font-extralight text-white tracking-wide leading-tight mb-6">
-              Авторский надзор за ремонтом в Москве
-            </h1>
-            <p className="hero-animate text-white/70 text-lg sm:text-xl font-extralight leading-relaxed mb-10">
-              Контролируем качество и соответствие дизайн-проекту на каждом этапе
-            </p>
-            <Link
-              href="/contacts"
-              className="hero-animate inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
-            >
-              Заказать авторский надзор
-            </Link>
+        <div className="relative min-h-screen flex flex-col justify-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+          <div className="text-center relative">
+            <div 
+              className="absolute -inset-x-32 -inset-y-32 bg-black/25 backdrop-blur-[3px] pointer-events-none"
+              style={{
+                maskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+                WebkitMaskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+              }}
+            />
+            <div className="relative">
+              <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6 animate-fade-in-up">
+                Услуги
+              </p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-white tracking-wide mb-6">
+                Авторский надзор
+                <span className="block">за ремонтом</span>
+                <span className="block text-gold mt-2">в Москве</span>
+              </h1>
+              <p className="text-white/70 text-lg sm:text-xl font-extralight max-w-2xl mx-auto mb-10 leading-relaxed">
+                Контролируем качество и соответствие{" "}
+                <br className="hidden sm:block" />
+                дизайн-проекту на каждом этапе
+              </p>
+              <Link
+                href="/contacts"
+                className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              >
+                Заказать авторский надзор
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24" style={{ background: "#1a1714" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-invert max-w-none">
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed mb-6">
-              Авторский надзор — это профессиональный контроль за ходом ремонтных работ, который гарантирует соответствие результата вашему дизайн-проекту. Наш дизайнер или прораб регулярно посещает объект, проверяет качество исполнения каждого этапа и контролирует использование материалов.
-            </p>
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed mb-6">
-              Это особенно важно, если вы делаете ремонт с другой бригадой, но хотите быть уверены, что всё выполняется правильно. Даже опытные мастера могут по-своему интерпретировать чертежи, использовать другие материалы или отступать от технологий. Авторский надзор исключает такие риски.
-            </p>
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed mb-6">
-              Мы фиксируем каждый визит в акте с детальным фотоотчётом. Проверяем скрытые работы до их закрытия — электропроводку, сантехнику, вентиляцию, гидроизоляцию. Контролируем соблюдение технологий: правильность грунтовки, армирования, выравнивания, укладки. Следим за качеством и подлинностью материалов.
-            </p>
-            <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed">
-              Авторский надзор помогает избежать ошибок, которые дорого исправлять. По статистике, стоимость переделок после некачественного ремонта составляет до 30% от бюджета. Профессиональный контроль окупается многократно — вы экономите деньги, время и нервы, получая результат, который точно соответствует вашим ожиданиям.
-            </p>
+      <section ref={descSectionRef} className="relative overflow-hidden min-h-screen bg-dark-bg">
+        <div ref={descBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg43.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1a1714]/40 to-[#1a1714]/95" />
+        </div>
+
+        <div className="relative min-h-screen flex items-center">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 w-full">
+            <div className="ml-auto max-w-xl lg:max-w-2xl">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-8">
+                Что такое авторский надзор?
+              </h2>
+              <div className="space-y-6">
+                <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed">
+                  Авторский надзор — это профессиональный контроль за ходом ремонта, гарантирующий соответствие результата дизайн-проекту. Наш специалист регулярно посещает объект и проверяет качество каждого этапа.
+                </p>
+                <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed">
+                  Особенно важен, если ремонт делает другая бригада. Даже опытные мастера могут по-своему интерпретировать чертежи или отступать от технологий. Авторский надзор исключает такие риски.
+                </p>
+                <p className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed">
+                  Мы фиксируем каждый визит с фотоотчётом. Проверяем скрытые работы до закрытия — электрику, сантехнику, гидроизоляцию. Контролируем технологии и качество материалов.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 border-t border-white/10" style={{ background: "#1a1714" }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-4">
-              Комплекс услуг
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
-              Что включает авторский надзор
-            </h2>
-          </div>
+      <section ref={checklistSectionRef} className="relative overflow-hidden">
+        <div ref={checklistBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg49.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
 
-          <div ref={checklistRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {checklistItems.map((item, index) => (
-              <div key={index} className="checklist-item flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-gold/30 transition-colors">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-gold">
-                    <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+        <div className="relative py-24 sm:py-32 lg:py-40">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
+                Что включает авторский надзор
+              </h2>
+            </div>
+
+            <div ref={checklistRef} className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {checklistItems.map((item, index) => (
+                <div key={index} className="checklist-item flex items-center gap-4 p-4 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 hover:border-gold/30 transition-colors min-h-[72px]">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gold/20 flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-gold">
+                      <path d="M5 13l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <span className="text-white/90 text-sm sm:text-base font-light">{item}</span>
                 </div>
-                <span className="text-white/90 text-sm sm:text-base font-light">{item}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 border-t border-white/10" style={{ background: "#1a1714" }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-4">
-              Когда нужен
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
-              Когда нужен авторский надзор
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {whenNeeded.map((item, index) => (
-              <div
-                key={index}
-                ref={(el) => { cardsRef.current[index] = el; }}
-                className="group p-6 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-gold/40 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/30 transition-colors">
-                  <div className="text-gold">{item.icon}</div>
-                </div>
-                <h3 className="text-white text-lg font-light tracking-wide mb-2">{item.title}</h3>
-                <p className="text-white/60 text-sm font-extralight leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
+      <section ref={combinedSectionRef} className="relative overflow-hidden bg-dark-bg">
+        <div ref={combinedBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg40.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
-      </section>
 
-      <section className="py-16 sm:py-24 border-t border-white/10" style={{ background: "#1a1714" }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-4">
-              Стоимость
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
-              Цены на авторский надзор
-            </h2>
-          </div>
+        <div className="relative py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
+                Когда нужен авторский надзор
+              </h2>
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {prices.map((item, index) => (
-              <div
-                key={index}
-                ref={(el) => { cardsRef.current[whenNeeded.length + index] = el; }}
-                className="group relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 border border-white/10 hover:border-gold/40 transition-all duration-300 text-center"
-              >
-                <h3 className="text-white text-lg font-light tracking-wide mb-4">{item.title}</h3>
-                <div className="text-gold text-2xl sm:text-3xl font-light mb-4">{item.price}</div>
-                <p className="text-white/60 text-sm font-extralight leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-24 border-t border-white/10" style={{ background: "#1a1714" }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-4">
-              Вопросы и ответы
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
-              FAQ по авторскому надзору
-            </h2>
-          </div>
-
-          <div className="space-y-4">
-            {faqItems.map((item, index) => (
-              <div
-                key={index}
-                className="rounded-xl border border-white/10 overflow-hidden"
-              >
-                <button
-                  onClick={() => setOpenFaq(openFaq === index ? null : index)}
-                  className="w-full flex items-center justify-between p-5 text-left bg-white/5 hover:bg-white/10 transition-colors"
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {whenNeeded.map((item, index) => (
+                <div
+                  key={index}
+                  ref={(el) => { cardsRef.current[index] = el; }}
+                  className="group p-6 rounded-2xl bg-black/30 backdrop-blur-sm border border-white/10 hover:border-gold/40 transition-all duration-300 hover:-translate-y-1"
                 >
-                  <span className="text-white font-light pr-4">{item.q}</span>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    className={`w-5 h-5 text-gold flex-shrink-0 transition-transform duration-300 ${
-                      openFaq === index ? "rotate-180" : ""
+                  <div className="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center mb-4 group-hover:bg-gold/30 transition-colors">
+                    <div className="text-gold">{item.icon}</div>
+                  </div>
+                  <h3 className="text-white text-lg font-light tracking-wide mb-2">{item.title}</h3>
+                  <p className="text-white/60 text-sm font-extralight leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="relative py-16 sm:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide">
+                Цены на авторский надзор
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              {prices.map((item, index) => (
+                <div
+                  key={index}
+                  ref={(el) => { cardsRef.current[whenNeeded.length + index] = el; }}
+                  className="group relative p-6 sm:p-8 rounded-2xl bg-black/30 backdrop-blur-sm border border-white/10 hover:border-gold/40 transition-all duration-300 text-center"
+                >
+                  <h3 className="text-white text-lg font-light tracking-wide mb-4">{item.title}</h3>
+                  <div className="text-gold text-2xl sm:text-3xl font-light mb-4">{item.price}</div>
+                  <p className="text-white/60 text-sm font-extralight leading-relaxed">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-dark-bg">
+        <div className="py-16 sm:py-24">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide mb-4">
+                Частые вопросы
+              </h2>
+              <p className="text-white/60 text-base font-extralight">
+                Ответы на популярные вопросы об авторском надзоре
+              </p>
+            </div>
+
+            <div className="space-y-4">
+              {faqItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="rounded-xl border border-white/10 overflow-hidden"
+                >
+                  <button
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    className="w-full flex items-center justify-between p-5 text-left bg-white/5 hover:bg-white/10 transition-colors"
+                  >
+                    <span className="text-white font-light pr-4">{item.q}</span>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className={`w-5 h-5 text-gold flex-shrink-0 transition-transform duration-300 ${
+                        openFaq === index ? "rotate-180" : ""
+                      }`}
+                    >
+                      <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ${
+                      openFaq === index ? "max-h-96" : "max-h-0"
                     }`}
                   >
-                    <path d="M19 9l-7 7-7-7" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openFaq === index ? "max-h-96" : "max-h-0"
-                  }`}
-                >
-                  <p className="p-5 pt-0 text-white/70 text-sm font-extralight leading-relaxed">
-                    {item.a}
-                  </p>
+                    <p className="p-5 pt-0 text-white/70 text-sm font-extralight leading-relaxed">
+                      {item.a}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </section>
 
-      <section className="py-16 sm:py-24 border-t border-white/10" style={{ background: "#1a1714" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="relative p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-gold/20 via-gold/10 to-transparent border border-gold/30">
-            <div className="absolute inset-0 rounded-3xl bg-gold/5 blur-xl -z-10" />
-            
+        <div className="py-16 sm:py-24">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-2xl sm:text-3xl font-extralight text-white tracking-wide mb-4">
               Закажите консультацию по авторскому надзору
             </h2>

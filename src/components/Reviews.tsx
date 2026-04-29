@@ -179,7 +179,7 @@ export default function Reviews() {
   };
 
   return (
-    <section id="reviews" className="bg-dark-bg py-16 sm:py-20 lg:py-24 overflow-hidden">
+    <section id="reviews" className="bg-dark-bg py-16 sm:py-20 lg:py-24">
       <ReviewsSchema />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 sm:mb-14">
@@ -191,7 +191,7 @@ export default function Reviews() {
           </p>
         </div>
 
-        <div className="reviews-swiper">
+        <div className="reviews-swiper relative">
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={24}

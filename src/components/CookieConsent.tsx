@@ -29,7 +29,7 @@ export default function CookieConsent() {
         visible ? "opacity-100" : "opacity-0"
       }`}
     >
-      <div className="bg-black/90 backdrop-blur-sm border-t border-white/10">
+      <div className="bg-black/90 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <p className="text-white/80 text-sm leading-relaxed flex-1">

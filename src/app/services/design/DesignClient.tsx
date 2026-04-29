@@ -307,14 +307,14 @@ export default function DesignClient() {
           <img
             src="/bg30.jpg"
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[10%_center] lg:object-left"
+            className="absolute inset-0 w-full h-full object-cover object-[center_130%] lg:object-left"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1714]/70 to-[#1a1714] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1a1714]/80 lg:to-[#1a1714]" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="lg:ml-auto lg:w-[45%]">
-            <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:rounded-none">
+            <div className="p-6 lg:p-0">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-8">
                 Что такое дизайн-проект?
               </h2>
@@ -342,12 +342,11 @@ export default function DesignClient() {
 
       {/* Combined Includes + Stages Section */}
       <div ref={includesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
-        <div ref={includesBgRef} className="absolute inset-[-8%_0]">
+        <div ref={includesBgRef} className="absolute inset-0">
           <img
-            src="/bg35.jpg"
+            src="/bg40.jpg"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
-            style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
@@ -356,12 +355,9 @@ export default function DesignClient() {
         <div className="relative section-padding">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide">
               Что входит в дизайн-проект
             </h2>
-            <p className="text-white/60 font-extralight text-base sm:text-lg max-w-2xl mx-auto">
-              Полный комплект документации для качественного ремонта
-            </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
@@ -399,13 +395,10 @@ export default function DesignClient() {
         <div className="relative section-padding">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12 sm:mb-16">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-4">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide">
                 Этапы работы
-            </h2>
-            <p className="text-white/60 font-extralight text-base sm:text-lg max-w-2xl mx-auto">
-              От первой встречи до готового проекта — прозрачный и понятный процесс
-            </p>
-          </div>
+              </h2>
+            </div>
 
           <div className="relative">
             {/* Timeline line */}

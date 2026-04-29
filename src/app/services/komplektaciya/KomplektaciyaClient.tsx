@@ -6,27 +6,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const checklistItems = [
-  "Подбор отделочных материалов по проекту",
+  "Подбор отделочных материалов",
   "Расчёт необходимого количества",
-  "Поиск лучших цен у поставщиков",
   "Закупка и логистика",
   "Доставка на объект",
   "Контроль качества при приёмке",
   "Подбор мебели и техники",
   "Подбор сантехники и освещения",
-  "Координация поставок по графику ремонта",
+  "Координация поставок",
 ];
 
 const advantages = [
-  {
-    title: "Скидки до 30%",
-    desc: "от розничных цен благодаря оптовым закупкам",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2" className="w-6 h-6">
-        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
-      </svg>
-    ),
-  },
   {
     title: "Проверенные поставщики",
     desc: "только надёжные партнёры с многолетней репутацией",
@@ -68,17 +58,6 @@ const advantages = [
       </svg>
     ),
   },
-];
-
-const categories = [
-  { name: "Строительные и отделочные материалы", icon: "🧱" },
-  { name: "Сантехника и смесители", icon: "🚿" },
-  { name: "Электрика и освещение", icon: "💡" },
-  { name: "Двери и напольные покрытия", icon: "🚪" },
-  { name: "Плитка и керамогранит", icon: "◻️" },
-  { name: "Мебель и кухни", icon: "🪑" },
-  { name: "Бытовая техника", icon: "🔌" },
-  { name: "Декор и текстиль", icon: "🎨" },
 ];
 
 const pricing = [
@@ -189,27 +168,25 @@ function AccordionItem({
   }, [isOpen]);
 
   return (
-    <div className={`border-b border-white/10 transition-colors duration-300 ${isOpen ? "border-gold/30" : ""}`}>
+    <div className={`rounded-2xl bg-white/5 border transition-all duration-300 ${isOpen ? "border-gold/30" : "border-white/10"}`}>
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between py-5 sm:py-6 text-left group"
+        className="w-full flex items-center justify-between px-6 py-5 sm:py-6 text-left group"
         aria-expanded={isOpen}
         aria-controls={`faq-komplektaciya-${index}`}
       >
         <span className={`text-base sm:text-lg font-light tracking-wide pr-4 transition-colors duration-300 ${isOpen ? "text-gold" : "text-white group-hover:text-gold-light"}`}>
           {item.question}
         </span>
-        <span className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-all duration-300 ${isOpen ? "border-gold bg-gold/10 rotate-45" : "border-white/30 group-hover:border-gold/50"}`}>
-          <svg
-            className={`w-4 h-4 sm:w-5 sm:h-5 transition-colors duration-300 ${isOpen ? "text-gold" : "text-white/70 group-hover:text-gold-light"}`}
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth={1.5}
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
-          </svg>
-        </span>
+        <svg
+          className={`flex-shrink-0 w-5 h-5 transition-all duration-300 ${isOpen ? "text-gold rotate-180" : "text-white/50 group-hover:text-gold-light"}`}
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={1.5}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
       </button>
       <div
         ref={contentRef}
@@ -217,8 +194,8 @@ function AccordionItem({
         className="overflow-hidden"
         style={{ height: 0, opacity: 0 }}
       >
-        <div ref={innerRef} className="pb-5 sm:pb-6">
-          <p className="text-white/70 text-sm sm:text-base font-extralight leading-relaxed pr-12">
+        <div ref={innerRef} className="px-6 pb-5 sm:pb-6">
+          <p className="text-white/70 text-sm sm:text-base font-extralight leading-relaxed">
             {item.answer}
           </p>
         </div>
@@ -231,9 +208,14 @@ export default function KomplektaciyaClient() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
+  const descSectionRef = useRef<HTMLElement>(null);
+  const descBgRef = useRef<HTMLDivElement>(null);
+  const checklistSectionRef = useRef<HTMLElement>(null);
+  const checklistBgRef = useRef<HTMLDivElement>(null);
   const checklistRef = useRef<HTMLDivElement>(null);
+  const advPricingSectionRef = useRef<HTMLElement>(null);
+  const advPricingBgRef = useRef<HTMLDivElement>(null);
   const advantagesRef = useRef<HTMLDivElement>(null);
-  const categoriesRef = useRef<HTMLDivElement>(null);
   const pricingRef = useRef<HTMLDivElement>(null);
 
   const handleFaqToggle = useCallback((index: number) => {
@@ -253,6 +235,40 @@ export default function KomplektaciyaClient() {
             ease: "none",
             scrollTrigger: {
               trigger: heroRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (descBgRef.current) {
+        gsap.fromTo(
+          descBgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: descSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
+      if (checklistBgRef.current) {
+        gsap.fromTo(
+          checklistBgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: checklistSectionRef.current,
               start: "top bottom",
               end: "bottom top",
               scrub: true,
@@ -281,6 +297,23 @@ export default function KomplektaciyaClient() {
         );
       }
 
+      if (advPricingBgRef.current) {
+        gsap.fromTo(
+          advPricingBgRef.current,
+          { y: "-10%" },
+          {
+            y: "10%",
+            ease: "none",
+            scrollTrigger: {
+              trigger: advPricingSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
       if (advantagesRef.current) {
         const cards = advantagesRef.current.querySelectorAll(".advantage-card");
         gsap.fromTo(
@@ -294,26 +327,6 @@ export default function KomplektaciyaClient() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: advantagesRef.current,
-              start: "top 80%",
-              toggleActions: "play none none none",
-            },
-          }
-        );
-      }
-
-      if (categoriesRef.current) {
-        const items = categoriesRef.current.querySelectorAll(".category-item");
-        gsap.fromTo(
-          items,
-          { opacity: 0, scale: 0.9 },
-          {
-            opacity: 1,
-            scale: 1,
-            duration: 0.4,
-            stagger: 0.08,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-              trigger: categoriesRef.current,
               start: "top 80%",
               toggleActions: "play none none none",
             },
@@ -347,185 +360,183 @@ export default function KomplektaciyaClient() {
 
   return (
     <>
-      <section ref={heroRef} className="relative overflow-hidden min-h-[70vh] flex items-center">
+      <section ref={heroRef} className="relative overflow-hidden">
         <div ref={bgRef} className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-[#1a1714]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1a1714] via-[#1a1714]/95 to-[#2a2520]/90" />
-          <div className="absolute top-0 right-0 w-1/2 h-full opacity-20">
-            <div className="absolute inset-0 bg-gradient-to-l from-gold/30 to-transparent" />
-          </div>
+          <img
+            src="/bg44.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-28">
-          <div className="max-w-3xl">
-            <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6">
-              Услуги
-            </p>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extralight text-white tracking-wide mb-6">
-              Комплектация объекта{" "}
-              <span className="text-gold">в Москве</span>
-            </h1>
-            <p className="text-white/70 text-lg sm:text-xl font-extralight leading-relaxed mb-10">
-              Подберём, закупим и доставим все материалы, мебель и технику для вашего ремонта
-            </p>
-            <Link
-              href="/contacts"
-              className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
-            >
-              Заказать комплектацию
-            </Link>
+        <div className="relative min-h-screen flex flex-col justify-center max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
+          <div className="text-center relative">
+            <div 
+              className="absolute -inset-x-32 -inset-y-32 bg-black/25 backdrop-blur-[3px] pointer-events-none"
+              style={{
+                maskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+                WebkitMaskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+              }}
+            />
+            <div className="relative">
+              <p className="text-gold text-xs font-normal tracking-[0.3em] uppercase mb-6">
+                Услуги
+              </p>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extralight text-white tracking-wide mb-6">
+                Комплектация объекта
+                <span className="block text-gold mt-2">в Москве</span>
+              </h1>
+              <p className="text-white/70 text-lg sm:text-xl font-extralight max-w-2xl mx-auto mb-10 leading-relaxed">
+                Подберём, закупим и доставим все материалы, мебель и технику<br className="hidden sm:block" />
+                для <span className="sm:hidden"><br /></span>вашего ремонта
+              </p>
+              <Link
+                href="/contacts"
+                className="inline-flex items-center justify-center px-10 py-4 bg-white/10 backdrop-blur-sm border border-white/30 text-white text-sm font-light tracking-[0.2em] uppercase rounded-full hover:bg-white/20 hover:border-white/50 transition-all duration-300"
+              >
+                Заказать комплектацию
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
-              Что такое комплектация объекта
+      <section ref={descSectionRef} className="relative overflow-hidden bg-dark-bg">
+        <div ref={descBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg46.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-[center_80%]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#1a1714] via-[#1a1714]/70 to-[#1a1714]/30 lg:bg-gradient-to-l lg:from-[#1a1714] lg:via-[#1a1714]/80 lg:to-transparent" />
+        </div>
+
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-40">
+          <div className="lg:w-[55%] lg:ml-auto">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-8">
+              Что такое комплектация?
             </h2>
-            
-          </div>
 
-          <div className="text-white/80 text-base sm:text-lg font-extralight leading-relaxed space-y-6">
-            <p>
-              Комплектация объекта — это полный цикл подбора и закупки всего необходимого
-              для вашего ремонта: от строительных материалов до мебели и декора. Мы берём
-              на себя всю рутину, связанную с поиском, сравнением цен, логистикой и контролем
-              качества.
-            </p>
-            <p>
-              Мы работаем с проверенными поставщиками и получаем оптовые скидки, которые
-              передаём вам. Вам не нужно тратить время на поездки по магазинам и сравнение
-              цен — мы всё сделаем за вас. Наши специалисты знают рынок отделочных материалов,
-              мебели и техники, поэтому могут предложить оптимальные решения для любого
-              бюджета.
-            </p>
-            <p>
-              Комплектация включает не только закупку, но и координацию поставок согласно
-              графику ремонтных работ. Материалы приезжают на объект именно тогда, когда
-              они нужны — не раньше и не позже. Это экономит место на объекте и исключает
-              риск порчи материалов при хранении.
-            </p>
-            <p>
-              При приёмке каждой партии мы проводим контроль качества: проверяем соответствие
-              заказанным позициям, отсутствие брака и повреждений. Если что-то не так —
-              решаем вопрос с поставщиком самостоятельно, без вашего участия.
-            </p>
+            <div className="space-y-6 text-white/80 text-base sm:text-lg font-extralight leading-relaxed">
+              <p>
+                Комплектация — это подбор и закупка всего необходимого для ремонта: 
+                от материалов до мебели и декора. Мы берём на себя поиск, сравнение цен, 
+                логистику и контроль качества.
+              </p>
+              <p>
+                Работаем с проверенными поставщиками и получаем оптовые скидки, которые 
+                передаём вам. Наши специалисты знают рынок и предложат оптимальные 
+                решения для любого бюджета.
+              </p>
+              <p>
+                Координируем поставки по графику ремонта — материалы приезжают когда нужны. 
+                При приёмке проверяем качество и соответствие заказу. Если что-то не так — 
+                решаем вопрос с поставщиком сами.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section ref={checklistSectionRef} className="relative overflow-hidden">
+        <div ref={checklistBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg47.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-right lg:object-center"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
           <div className="text-center mb-12">
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
               Что включает комплектация
             </h2>
-            
           </div>
 
-          <div ref={checklistRef} className="space-y-4">
+          <div ref={checklistRef} className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
             {checklistItems.map((item, index) => (
               <div
                 key={index}
-                className="checklist-item flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-gold/30 transition-colors duration-300"
+                className="checklist-item h-full min-h-[72px] flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/30 backdrop-blur-sm"
               >
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center">
-                  <svg className="w-4 h-4 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <div className="flex-shrink-0 w-10 h-10 rounded-full border border-gold/50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                   </svg>
                 </div>
-                <span className="text-white/90 text-base font-light">{item}</span>
+                <span className="text-white text-lg font-light">{item}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
-              Преимущества нашей комплектации
-            </h2>
-            
-          </div>
+      <section ref={advPricingSectionRef} className="relative overflow-hidden">
+        <div ref={advPricingBgRef} className="absolute inset-[-15%_0]">
+          <img
+            src="/bg48.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
 
-          <div ref={advantagesRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {advantages.map((adv, index) => (
-              <div
-                key={index}
-                className="advantage-card group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-gold/40 hover:bg-white/[0.07] transition-all duration-300"
-              >
-                <div className="w-12 h-12 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-4 group-hover:bg-gold/20 transition-colors duration-300">
-                  <div className="text-gold">{adv.icon}</div>
+        <div className="relative py-16 sm:py-20 lg:py-24">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
+                Преимущества нашей комплектации
+              </h2>
+            </div>
+
+            <div ref={advantagesRef} className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl mx-auto">
+              {advantages.map((adv, index) => (
+                <div
+                  key={index}
+                  className="advantage-card group p-5 rounded-xl bg-black/30 backdrop-blur-sm border border-white/10 hover:border-gold/40 hover:bg-black/40 transition-all duration-300"
+                >
+                  <div className="w-10 h-10 rounded-full bg-gold/10 border border-gold/30 flex items-center justify-center mb-3 group-hover:bg-gold/20 transition-colors duration-300">
+                    <div className="text-gold">{adv.icon}</div>
+                  </div>
+                  <h3 className="text-white text-base font-light tracking-wide mb-1">
+                    {adv.title}
+                  </h3>
+                  <p className="text-white/60 text-sm font-extralight leading-relaxed">
+                    {adv.desc}
+                  </p>
                 </div>
-                <h3 className="text-white text-lg font-light tracking-wide mb-2">
-                  {adv.title}
-                </h3>
-                <p className="text-white/60 text-sm font-extralight leading-relaxed">
-                  {adv.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
-              Категории товаров
-            </h2>
-            
+              ))}
+            </div>
           </div>
 
-          <div ref={categoriesRef} className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {categories.map((cat, index) => (
-              <div
-                key={index}
-                className="category-item flex flex-col items-center justify-center p-5 rounded-xl bg-white/5 border border-white/10 hover:border-gold/40 hover:bg-white/[0.07] transition-all duration-300 group"
-              >
-                <span className="text-2xl mb-3 grayscale group-hover:grayscale-0 transition-all duration-300">
-                  {cat.icon}
-                </span>
-                <span className="text-white/80 text-sm font-light text-center leading-tight">
-                  {cat.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 sm:mt-20 lg:mt-24">
+            <div className="text-center mb-12">
+              <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
+                Стоимость услуги
+              </h2>
+            </div>
 
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
-              Стоимость услуги
-            </h2>
-            
-          </div>
-
-          <div ref={pricingRef} className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            {pricing.map((item, index) => (
-              <div
-                key={index}
-                className="pricing-card p-6 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.03] border border-white/10 hover:border-gold/40 transition-all duration-300 text-center"
-              >
-                <h3 className="text-white/90 text-base font-light tracking-wide mb-4">
-                  {item.title}
-                </h3>
-                <p className="text-gold text-3xl sm:text-4xl font-extralight mb-2">
-                  {item.price}
-                </p>
-                <p className="text-white/50 text-sm font-extralight">
-                  {item.desc}
-                </p>
-              </div>
-            ))}
+            <div ref={pricingRef} className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {pricing.map((item, index) => (
+                <div
+                  key={index}
+                  className="pricing-card p-6 rounded-2xl bg-black/30 backdrop-blur-sm border border-white/10 hover:border-gold/40 transition-all duration-300 text-center"
+                >
+                  <h3 className="text-white/90 text-sm font-light tracking-wide mb-4 whitespace-nowrap">
+                    {item.title}
+                  </h3>
+                  <p className={`text-gold font-extralight mb-2 ${item.price === "индивидуально" ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl"}`}>
+                    {item.price}
+                  </p>
+                  <p className="text-white/50 text-sm font-extralight">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -536,10 +547,12 @@ export default function KomplektaciyaClient() {
             <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
               Частые вопросы
             </h2>
-            
+            <p className="text-white/60 text-base sm:text-lg font-extralight">
+              Ответы на популярные вопросы о комплектации объекта
+            </p>
           </div>
 
-          <div className="divide-y divide-white/10">
+          <div className="space-y-4">
             {faqItems.map((item, index) => (
               <AccordionItem
                 key={index}
@@ -553,13 +566,13 @@ export default function KomplektaciyaClient() {
         </div>
       </section>
 
-      <section className="bg-[#1a1714] py-16 sm:py-20 lg:py-24">
+      <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-4">
             Получите расчёт стоимости комплектации
           </h2>
           <p className="text-white/60 text-base sm:text-lg font-extralight mb-8">
-            Отправьте нам дизайн-проект или список материалов — подготовим смету с учётом скидок
+            Отправьте нам дизайн-проект<span className="sm:hidden"><br /></span> или список материалов —<br />подготовим смету с учётом скидок
           </p>
           <Link
             href="/contacts"

@@ -157,9 +157,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdWebSite) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-dark-bg">
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 bg-dark-bg">{children}</main>
         <Footer />
         <WhatsAppButton />
         <CookieConsent />

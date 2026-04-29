@@ -183,6 +183,8 @@ export default function RemontClient() {
   const descBgRef = useRef<HTMLDivElement>(null);
   const includesSectionRef = useRef<HTMLDivElement>(null);
   const includesBgRef = useRef<HTMLDivElement>(null);
+  const stagesSectionRef = useRef<HTMLElement>(null);
+  const stagesBgRef = useRef<HTMLDivElement>(null);
   const typesSectionRef = useRef<HTMLElement>(null);
   const typesBgRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -265,6 +267,23 @@ export default function RemontClient() {
         );
       }
 
+      if (stagesBgRef.current && stagesSectionRef.current) {
+        gsap.fromTo(
+          stagesBgRef.current,
+          { yPercent: -10 },
+          {
+            yPercent: 10,
+            ease: "none",
+            scrollTrigger: {
+              trigger: stagesSectionRef.current,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: true,
+            },
+          }
+        );
+      }
+
       cardsRef.current.forEach((card) => {
         if (!card) return;
         gsap.fromTo(
@@ -339,8 +358,8 @@ export default function RemontClient() {
                 <span className="block text-gold mt-2">в Москве</span>
               </h1>
               <p className="text-white/70 text-lg sm:text-xl font-extralight max-w-2xl mx-auto mb-10 leading-relaxed">
-                Берём на себя весь процесс — от демонтажа<br />
-                до финальной уборки
+                Берём на себя весь процесс —<br />
+                от демонтажа до финальной уборки
               </p>
               <Link
                 href="/calculator"
@@ -359,14 +378,14 @@ export default function RemontClient() {
           <img
             src="/bg39.jpg"
             alt=""
-            className="absolute inset-0 w-full h-full object-cover object-[10%_center] lg:object-left"
+            className="absolute inset-0 w-full h-full object-cover object-right lg:object-left"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1714]/50 to-[#1a1714] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1a1714]/60 lg:to-[#1a1714]" />
         </div>
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="lg:ml-auto lg:w-[45%]">
-            <div className="bg-black/40 backdrop-blur-sm rounded-2xl p-6 lg:bg-transparent lg:backdrop-blur-none lg:p-0 lg:rounded-none">
+            <div className="p-6 lg:p-0">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extralight text-white tracking-wide mb-8">
                 Что такое ремонт под ключ?
               </h2>
@@ -450,20 +469,18 @@ export default function RemontClient() {
         </div>
       </section>
 
-      {/* Combined What's Included + Work Stages Section */}
-      <div ref={includesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
-        <div ref={includesBgRef} className="absolute inset-[-8%_0]">
+      {/* What's Included */}
+      <section ref={includesSectionRef} className="relative overflow-hidden">
+        <div ref={includesBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg40.jpg"
+            src="/bg50.jpg"
             alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-            style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
+            className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
         </div>
 
-        {/* What's Included */}
-        <div className="relative py-16 sm:py-20 lg:py-24">
+        <div className="relative py-24 sm:py-32 lg:py-40">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10 sm:mb-14">
               <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
@@ -489,9 +506,20 @@ export default function RemontClient() {
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Work Stages */}
-        <div className="relative py-16 sm:py-20 lg:py-24">
+      {/* Work Stages */}
+      <section ref={stagesSectionRef} className="relative overflow-hidden">
+        <div ref={stagesBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
+          <img
+            src="/bg40.jpg"
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+
+        <div className="relative py-20 sm:py-28 lg:py-32">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10 sm:mb-14">
               <h2 className="text-white text-2xl sm:text-3xl font-extralight tracking-wide mb-3">
@@ -534,7 +562,7 @@ export default function RemontClient() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Guarantees */}
       <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
@@ -567,9 +595,12 @@ export default function RemontClient() {
       <section className="bg-dark-bg py-16 sm:py-20 lg:py-24">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 sm:mb-12">
-            <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-extralight tracking-wide">
+            <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-extralight tracking-wide mb-3">
               Частые вопросы о ремонте
             </h2>
+            <p className="text-white/60 text-base sm:text-lg font-extralight">
+              Ответы на популярные вопросы о ремонте квартир
+            </p>
           </div>
 
           <div className="space-y-4">
@@ -615,7 +646,7 @@ export default function RemontClient() {
             Рассчитайте стоимость ремонта за 1 минуту
           </h2>
           <p className="text-white/60 text-base sm:text-lg font-extralight mb-8 max-w-2xl mx-auto">
-            Укажите площадь и тип ремонта — получите примерную стоимость<br />работ без скрытых платежей
+            Укажите площадь и тип ремонта —<br />получите примерную стоимость работ без скрытых платежей
           </p>
           <Link
             href="/calculator"

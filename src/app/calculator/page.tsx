@@ -17,6 +17,23 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://solhome.ru" },
+    { "@type": "ListItem", "position": 2, "name": "Калькулятор", "item": "https://solhome.ru/calculator" }
+  ]
+};
+
 export default function CalculatorPage() {
-  return <CalculatorClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <CalculatorClient />
+    </>
+  );
 }

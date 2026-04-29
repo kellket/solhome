@@ -71,34 +71,34 @@ interface Project {
 }
 
 const projects: Project[] = [
-  { id: 1, type: "apartment", title: "Ремонт 2-комн. квартиры", location: "ЖК Московский", area: 65, rooms: "2 комнаты", repairType: "Капитальный", price: 890000, gradient: "from-stone-300 to-stone-400", cover: "/zal-kuhnya-2-posle.jpg", images: [
+  { id: 1, type: "apartment", title: "Ремонт квартиры", location: "г. Москва, ЖК Алые Паруса", area: 108, rooms: "2 комнаты", repairType: "Капитальный", price: 1925000, gradient: "from-stone-300 to-stone-400", cover: "/zal-kuhnya-2-posle.jpg", images: [
     { src: "/zal-kuhnya-2-do.jpg", label: "До" },
-    { src: "/spalnya-do-2.jpg", label: "До" },
-    { src: "/detskaya-2-do.jpg", label: "До" },
-    { src: "/vanna-2-do.jpg", label: "До" },
     { src: "/zal-kuhnya-2-posle.jpg", label: "После" },
+    { src: "/spalnya-do-2.jpg", label: "До" },
     { src: "/spalnya-2-posle.jpg", label: "После" },
+    { src: "/detskaya-2-do.jpg", label: "До" },
     { src: "/detskaya-2-posle.jpg", label: "После" },
+    { src: "/vanna-2-do.jpg", label: "До" },
     { src: "/vanna-2-posle.jpg", label: "После" },
   ] },
-  { id: 2, type: "studio", title: "Ремонт студии", location: "ЖК Парковый", area: 28, rooms: "Студия", repairType: "Дизайнерский", price: 520000, gradient: "from-amber-200/60 to-amber-300/60", cover: "/koridor-posle.jpg", images: [
-    { src: "/koridor-do.jpg", label: "До" },
-    { src: "/spalnya-do.jpg", label: "До" },
-    { src: "/vanna-do.jpg", label: "До" },
-    { src: "/koridor-posle.jpg", label: "После" },
-    { src: "/spalnya-posle.jpg", label: "После" },
-    { src: "/vanna-posle.jpg", label: "После" },
+  { id: 2, type: "studio", title: "Ремонт студии", location: "г. Котельники, ЖК Парковый", area: 40, rooms: "Студия", repairType: "Дизайнерский", price: 1100000, gradient: "from-amber-200/60 to-amber-300/60", cover: "/koridor-chernovaya-posle.jpg", images: [
+    { src: "/koridor-chernovaya-do.jpg", label: "До" },
+    { src: "/koridor-chernovaya-posle.jpg", label: "После" },
+    { src: "/spalnya-chernovaya-do.jpg", label: "До" },
+    { src: "/spalnya-chernovaya-posle.jpg", label: "После" },
+    { src: "/vanna-chernovaya-do.jpg", label: "До" },
+    { src: "/vanna-chernovaya-posle.jpg", label: "После" },
   ] },
-  { id: 3, type: "apartment", title: "Ремонт 3-комн. квартиры", location: "ЖК Солнечный", area: 95, rooms: "3 комнаты", repairType: "Под ключ", price: 1850000, gradient: "from-zinc-300 to-zinc-400", cover: "/spalnya-posle.jpg", images: [
+  { id: 3, type: "apartment", title: "Ремонт 3-комн. квартиры", location: "г. Москва, ул Крылатские Холмы", area: 110, rooms: "3 комнаты", repairType: "Под ключ", price: 2470000, gradient: "from-zinc-300 to-zinc-400", cover: "/kuhnya-posle.jpg", images: [
     { src: "/kuhnya-do.jpg", label: "До" },
-    { src: "/zal-do.jpg", label: "До" },
-    { src: "/spalnya-do.jpg", label: "До" },
-    { src: "/detskaya-do.jpg", label: "До" },
-    { src: "/vanna-do.jpg", label: "До" },
     { src: "/kuhnya-posle.jpg", label: "После" },
+    { src: "/zal-do.jpg", label: "До" },
     { src: "/zal-posle.jpg", label: "После" },
+    { src: "/spalnya-do.jpg", label: "До" },
     { src: "/spalnya-posle.jpg", label: "После" },
+    { src: "/detskaya-do.jpg", label: "До" },
     { src: "/detskaya-posle.jpg", label: "После" },
+    { src: "/vanna-do.jpg", label: "До" },
     { src: "/vanna-posle.jpg", label: "После" },
   ] },
 ];

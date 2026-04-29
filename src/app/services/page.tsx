@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ServicesPageClient from "./ServicesPageClient";
+import ServicesSection from "@/components/ServicesSection";
 
 export const metadata: Metadata = {
   title: "Услуги",
@@ -17,6 +17,23 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://solhome.ru" },
+    { "@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://solhome.ru/services" }
+  ]
+};
+
 export default function ServicesPage() {
-  return <ServicesPageClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <ServicesSection />
+    </>
+  );
 }

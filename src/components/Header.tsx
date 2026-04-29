@@ -5,13 +5,12 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const navLinks = [
-  { href: "/#about", label: "О нас", anchor: "about" },
-  { href: "/services", label: "Услуги" },
-  { href: "/#projects", label: "Проекты", anchor: "projects" },
-  { href: "/contacts", label: "Контакты" },
-  { href: "/#calculator", label: "Калькулятор", anchor: "calculator" },
-  { href: "/#services", label: "Наши услуги", anchor: "services" },
-  { href: "/advantages", label: "Преимущества" },
+{ href: "/about", label: "О нас" },
+{ href: "/services", label: "Услуги" },
+{ href: "/projects", label: "Проекты" },
+{ href: "/contacts", label: "Контакты" },
+{ href: "/calculator", label: "Калькулятор" },
+{ href: "/advantages", label: "Преимущества" },
 ];
 
 export default function Header() {

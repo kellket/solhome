@@ -17,6 +17,24 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://solhome.ru" },
+    { "@type": "ListItem", "position": 2, "name": "Услуги", "item": "https://solhome.ru/services" },
+    { "@type": "ListItem", "position": 3, "name": "Комплектация", "item": "https://solhome.ru/services/komplektaciya" }
+  ]
+};
+
 export default function KomplektaciyaPage() {
-  return <KomplektaciyaClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <KomplektaciyaClient />
+    </>
+  );
 }

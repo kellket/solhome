@@ -17,6 +17,23 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdBreadcrumb = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://solhome.ru" },
+    { "@type": "ListItem", "position": 2, "name": "Преимущества", "item": "https://solhome.ru/advantages" }
+  ]
+};
+
 export default function AdvantagesPage() {
-  return <AdvantagesClient />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <AdvantagesClient />
+    </>
+  );
 }
