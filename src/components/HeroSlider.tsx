@@ -11,9 +11,9 @@ import Image from 'next/image';
 import 'swiper/css';
 
 const slides = [
-  { img: '/bg7.jpg', line1: 'Ремонт квартир', line2: 'в Москве под ключ' },
-  { img: '/bg10.jpg', line1: 'Дизайн-проект', line2: 'и реализация' },
-  { img: '/bg11.jpg', line1: 'Премиальное', line2: 'качество работ' },
+  { img: '/bg7.webp', line1: 'Ремонт квартир', line2: 'в Москве под ключ' },
+  { img: '/bg10.webp', line1: 'Дизайн-проект', line2: 'и реализация' },
+  { img: '/bg11.webp', line1: 'Премиальное', line2: 'качество работ' },
 ];
 
 const SLOTS = 7;
