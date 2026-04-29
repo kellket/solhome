@@ -77,12 +77,12 @@ export default function AboutSection() {
       <div ref={bgRef} className="absolute inset-0 lg:inset-[-30%_0] overflow-hidden lg:overflow-visible">
         <img
           ref={mobileBgImgRef}
-          src="/bg25.jpg"
+          src="/bg25.webp"
           alt=""
           className="w-full h-full object-cover object-[25%_60%] scale-[1.4] lg:hidden"
         />
         <img
-          src="/bg13.jpg"
+          src="/bg13.webp"
           alt=""
           className="w-full h-full object-cover lg:object-contain object-center hidden lg:block"
         />
@@ -112,7 +112,7 @@ export default function AboutSection() {
 
         <div className="hidden lg:block relative">
           <img
-            src="/bg13.jpg"
+            src="/bg13.webp"
             alt=""
             className="w-full h-auto invisible"
           />
@@ -141,7 +141,7 @@ export default function AboutSection() {
                 <div className="aspect-[3/4] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.1)]">
                   <img
                     ref={desktopImgRef}
-                    src="/about-new.jpg"
+                    src="/about-new.webp"
                     alt="Ремонт квартиры Sol Home — дизайнерский интерьер гостиной"
                     className="w-full h-[120%] object-cover will-change-transform"
                   />

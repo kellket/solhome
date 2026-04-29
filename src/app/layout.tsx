@@ -38,7 +38,7 @@ export const metadata: Metadata = {
       "Профессиональный ремонт квартир под ключ в Москве. Фиксированная цена, гарантия качества, поэтапная оплата.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.webp",
         width: 1200,
         height: 630,
         alt: "Sol Home — Ремонт квартир под ключ",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     title: "Sol Home — Ремонт квартир под ключ в Москве",
     description:
       "Профессиональный ремонт квартир под ключ в Москве. Фиксированная цена, гарантия качества.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.webp"],
   },
 
   formatDetection: {

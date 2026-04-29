@@ -333,7 +333,7 @@ export default function RemontClient() {
       <section ref={heroRef} className="relative overflow-hidden min-h-screen bg-[#1a1714]">
         <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg38.jpg"
+            src="/bg38.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -376,7 +376,7 @@ export default function RemontClient() {
       <section ref={descSectionRef} className="relative overflow-hidden bg-[#1a1714]">
         <div ref={descBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg39.jpg"
+            src="/bg39.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-right lg:object-left"
           />
@@ -416,7 +416,7 @@ export default function RemontClient() {
       <section ref={typesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
         <div ref={typesBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg41.jpg"
+            src="/bg41.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
             style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
@@ -473,7 +473,7 @@ export default function RemontClient() {
       <section ref={includesSectionRef} className="relative overflow-hidden">
         <div ref={includesBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg50.jpg"
+            src="/bg50.webp"
             alt=""
             className="w-full h-full object-cover"
           />
@@ -512,7 +512,7 @@ export default function RemontClient() {
       <section ref={stagesSectionRef} className="relative overflow-hidden">
         <div ref={stagesBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg40.jpg"
+            src="/bg40.webp"
             alt=""
             className="w-full h-full object-cover"
           />

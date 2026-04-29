@@ -71,35 +71,35 @@ interface Project {
 }
 
 const projects: Project[] = [
-  { id: 1, type: "apartment", title: "Ремонт квартиры", location: "г. Москва, ЖК Алые Паруса", area: 108, rooms: "2 комнаты", repairType: "Капитальный", price: 1925000, gradient: "from-stone-300 to-stone-400", cover: "/zal-kuhnya-2-posle.jpg", images: [
-    { src: "/zal-kuhnya-2-do.jpg", label: "До" },
-    { src: "/zal-kuhnya-2-posle.jpg", label: "После" },
-    { src: "/spalnya-do-2.jpg", label: "До" },
-    { src: "/spalnya-2-posle.jpg", label: "После" },
-    { src: "/detskaya-2-do.jpg", label: "До" },
-    { src: "/detskaya-2-posle.jpg", label: "После" },
-    { src: "/vanna-2-do.jpg", label: "До" },
-    { src: "/vanna-2-posle.jpg", label: "После" },
+  { id: 1, type: "apartment", title: "Ремонт квартиры", location: "г. Москва, ЖК Алые Паруса", area: 108, rooms: "2 комнаты", repairType: "Капитальный", price: 1925000, gradient: "from-stone-300 to-stone-400", cover: "/zal-kuhnya-2-posle.webp", images: [
+    { src: "/zal-kuhnya-2-do.webp", label: "До" },
+    { src: "/zal-kuhnya-2-posle.webp", label: "После" },
+    { src: "/spalnya-do-2.webp", label: "До" },
+    { src: "/spalnya-2-posle.webp", label: "После" },
+    { src: "/detskaya-2-do.webp", label: "До" },
+    { src: "/detskaya-2-posle.webp", label: "После" },
+    { src: "/vanna-2-do.webp", label: "До" },
+    { src: "/vanna-2-posle.webp", label: "После" },
   ] },
-  { id: 2, type: "studio", title: "Ремонт студии", location: "г. Котельники, ЖК Парковый", area: 40, rooms: "Студия", repairType: "Дизайнерский", price: 1100000, gradient: "from-amber-200/60 to-amber-300/60", cover: "/koridor-chernovaya-posle.jpg", images: [
-    { src: "/koridor-chernovaya-do.jpg", label: "До" },
-    { src: "/koridor-chernovaya-posle.jpg", label: "После" },
-    { src: "/spalnya-chernovaya-do.jpg", label: "До" },
-    { src: "/spalnya-chernovaya-posle.jpg", label: "После" },
-    { src: "/vanna-chernovaya-do.jpg", label: "До" },
-    { src: "/vanna-chernovaya-posle.jpg", label: "После" },
+  { id: 2, type: "studio", title: "Ремонт студии", location: "г. Котельники, ЖК Парковый", area: 40, rooms: "Студия", repairType: "Дизайнерский", price: 1100000, gradient: "from-amber-200/60 to-amber-300/60", cover: "/koridor-chernovaya-posle.webp", images: [
+    { src: "/koridor-chernovaya-do.webp", label: "До" },
+    { src: "/koridor-chernovaya-posle.webp", label: "После" },
+    { src: "/spalnya-chernovaya-do.webp", label: "До" },
+    { src: "/spalnya-chernovaya-posle.webp", label: "После" },
+    { src: "/vanna-chernovaya-do.webp", label: "До" },
+    { src: "/vanna-chernovaya-posle.webp", label: "После" },
   ] },
-  { id: 3, type: "apartment", title: "Ремонт 3-комн. квартиры", location: "г. Москва, ул Крылатские Холмы", area: 110, rooms: "3 комнаты", repairType: "Под ключ", price: 2470000, gradient: "from-zinc-300 to-zinc-400", cover: "/kuhnya-posle.jpg", images: [
-    { src: "/kuhnya-do.jpg", label: "До" },
-    { src: "/kuhnya-posle.jpg", label: "После" },
-    { src: "/zal-do.jpg", label: "До" },
-    { src: "/zal-posle.jpg", label: "После" },
-    { src: "/spalnya-do.jpg", label: "До" },
-    { src: "/spalnya-posle.jpg", label: "После" },
-    { src: "/detskaya-do.jpg", label: "До" },
-    { src: "/detskaya-posle.jpg", label: "После" },
-    { src: "/vanna-do.jpg", label: "До" },
-    { src: "/vanna-posle.jpg", label: "После" },
+  { id: 3, type: "apartment", title: "Ремонт 3-комн. квартиры", location: "г. Москва, ул Крылатские Холмы", area: 110, rooms: "3 комнаты", repairType: "Под ключ", price: 2470000, gradient: "from-zinc-300 to-zinc-400", cover: "/kuhnya-posle.webp", images: [
+    { src: "/kuhnya-do.webp", label: "До" },
+    { src: "/kuhnya-posle.webp", label: "После" },
+    { src: "/zal-do.webp", label: "До" },
+    { src: "/zal-posle.webp", label: "После" },
+    { src: "/spalnya-do.webp", label: "До" },
+    { src: "/spalnya-posle.webp", label: "После" },
+    { src: "/detskaya-do.webp", label: "До" },
+    { src: "/detskaya-posle.webp", label: "После" },
+    { src: "/vanna-do.webp", label: "До" },
+    { src: "/vanna-posle.webp", label: "После" },
   ] },
 ];
 
@@ -217,14 +217,14 @@ export default function ProjectsSection() {
       <section id="projects" ref={projectsSectionRef} className="relative pt-16 sm:pt-20 pb-16 sm:pb-20 overflow-hidden">
         <div ref={projectsBgRef} className="absolute inset-[-30%_0] hidden lg:block">
           <img
-            src="/bg15.jpg"
+            src="/bg15.webp"
             alt=""
             className="w-full h-full object-cover lg:object-contain object-center"
           />
         </div>
         <div ref={projectsMobileBgRef} className="absolute inset-[-30%_0] lg:hidden">
           <img
-            src="/bg27.jpg"
+            src="/bg27.webp"
             alt=""
             className="w-full h-full object-cover object-center"
           />

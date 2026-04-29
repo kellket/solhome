@@ -73,7 +73,7 @@ const pricing = [
   },
   {
     title: "Полная комплектация",
-    price: "индивидуально",
+    price: "Индивидуально",
     desc: "расчёт по проекту",
   },
 ];
@@ -363,7 +363,7 @@ export default function KomplektaciyaClient() {
       <section ref={heroRef} className="relative overflow-hidden">
         <div ref={bgRef} className="absolute inset-0 w-full h-full">
           <img
-            src="/bg44.jpg"
+            src="/bg44.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -405,7 +405,7 @@ export default function KomplektaciyaClient() {
       <section ref={descSectionRef} className="relative overflow-hidden bg-dark-bg">
         <div ref={descBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg46.jpg"
+            src="/bg46.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-[center_80%]"
           />
@@ -442,7 +442,7 @@ export default function KomplektaciyaClient() {
       <section ref={checklistSectionRef} className="relative overflow-hidden">
         <div ref={checklistBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg47.jpg"
+            src="/bg47.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-right lg:object-center"
           />
@@ -477,7 +477,7 @@ export default function KomplektaciyaClient() {
       <section ref={advPricingSectionRef} className="relative overflow-hidden">
         <div ref={advPricingBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg48.jpg"
+            src="/bg48.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -528,7 +528,7 @@ export default function KomplektaciyaClient() {
                   <h3 className="text-white/90 text-sm font-light tracking-wide mb-4 whitespace-nowrap">
                     {item.title}
                   </h3>
-                  <p className={`text-gold font-extralight mb-2 ${item.price === "индивидуально" ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl"}`}>
+                  <p className={`text-gold font-extralight mb-2 ${item.price === "Индивидуально" ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl"}`}>
                     {item.price}
                   </p>
                   <p className="text-white/50 text-sm font-extralight">

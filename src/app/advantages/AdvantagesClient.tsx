@@ -96,8 +96,8 @@ export default function AdvantagesClient() {
     <>
       <section ref={sectionRef} className="relative overflow-hidden">
         <div ref={bgRef} className="absolute inset-0 w-full h-full">
-          <img src="/bg18.jpg" alt="" className="w-full h-full object-cover object-center lg:hidden" />
-          <img src="/bg17.jpg" alt="" className="w-full h-full object-cover object-center hidden lg:block" />
+          <img src="/bg18.webp" alt="" className="w-full h-full object-cover object-center lg:hidden" />
+          <img src="/bg17.webp" alt="" className="w-full h-full object-cover object-center hidden lg:block" />
         </div>
 
         <div className="relative min-h-screen flex flex-col justify-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-36">

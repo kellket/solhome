@@ -273,7 +273,7 @@ export default function NadzorClient() {
       <section ref={heroRef} className="relative overflow-hidden min-h-screen bg-dark-bg">
         <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg42.jpg"
+            src="/bg42.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -317,7 +317,7 @@ export default function NadzorClient() {
       <section ref={descSectionRef} className="relative overflow-hidden min-h-screen bg-dark-bg">
         <div ref={descBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg43.jpg"
+            src="/bg43.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -349,7 +349,7 @@ export default function NadzorClient() {
       <section ref={checklistSectionRef} className="relative overflow-hidden">
         <div ref={checklistBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg49.jpg"
+            src="/bg49.webp"
             alt=""
             className="w-full h-full object-cover"
           />
@@ -383,7 +383,7 @@ export default function NadzorClient() {
       <section ref={combinedSectionRef} className="relative overflow-hidden bg-dark-bg">
         <div ref={combinedBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg40.jpg"
+            src="/bg40.webp"
             alt=""
             className="w-full h-full object-cover"
           />

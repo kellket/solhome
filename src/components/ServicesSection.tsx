@@ -183,12 +183,12 @@ export default function ServicesSection() {
     <section id="services" ref={sectionRef} className="relative overflow-hidden">
       <div ref={bgRef} className="absolute inset-[-30%_0]">
         <img
-          src="/bg-mob1.jpg"
+          src="/bg-mob1.webp"
           alt=""
           className="w-full h-full object-cover object-center md:hidden"
         />
         <img
-          src="/bg14.jpg"
+          src="/bg14.webp"
           alt=""
           className="w-full h-full object-cover object-center hidden md:block"
         />

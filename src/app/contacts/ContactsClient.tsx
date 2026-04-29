@@ -21,7 +21,7 @@ export default function ContactsClient() {
       <section className="relative overflow-hidden pt-24 sm:pt-32 pb-16 sm:pb-20">
         <div className="absolute inset-0 overflow-hidden">
           <img
-            src="/bg28.jpg"
+            src="/bg28.webp"
             alt=""
             className="w-full h-full object-cover object-center"
           />

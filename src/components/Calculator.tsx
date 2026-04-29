@@ -106,7 +106,7 @@ export default function Calculator() {
       <div ref={bgRef} className="absolute inset-0 overflow-hidden">
         <img
           ref={bgImgRef}
-          src="/bg12.jpg"
+          src="/bg12.webp"
           alt=""
           className="w-full h-full object-cover object-center scale-[1.4]"
         />

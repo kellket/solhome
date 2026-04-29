@@ -260,7 +260,7 @@ export default function DesignClient() {
         {/* Background Image */}
         <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
-            src="/bg36.jpg"
+            src="/bg36.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -305,7 +305,7 @@ export default function DesignClient() {
       <section ref={descSectionRef} className="relative overflow-hidden bg-[#1a1714]">
         <div ref={descBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg30.jpg"
+            src="/bg30.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover object-[center_130%] lg:object-left"
           />
@@ -344,7 +344,7 @@ export default function DesignClient() {
       <div ref={includesSectionRef} className="relative overflow-hidden bg-[#1a1714]">
         <div ref={includesBgRef} className="absolute inset-0">
           <img
-            src="/bg40.jpg"
+            src="/bg40.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
@@ -442,7 +442,7 @@ export default function DesignClient() {
       <section ref={pricingSectionRef} className="relative overflow-hidden section-padding bg-[#1a1714]">
         <div ref={pricingBgRef} className="absolute inset-[-15%_0]">
           <img
-            src="/bg31.jpg"
+            src="/bg31.webp"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
