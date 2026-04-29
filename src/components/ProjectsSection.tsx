@@ -146,22 +146,9 @@ export default function ProjectsSection() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      if (bgRef.current) {
-        gsap.fromTo(bgRef.current, 
-          { yPercent: -15 }, 
-          { yPercent: 0, ease: "none",
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          }
-        );
-      }
-
       const mm = gsap.matchMedia();
 
+      // Desktop only parallax (optimized - reduced range)
       mm.add("(min-width: 1024px)", () => {
         const ptl = gsap.timeline({
           scrollTrigger: {
@@ -172,39 +159,45 @@ export default function ProjectsSection() {
           },
         });
 
-        ptl.fromTo(projectsBgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
-        ptl.fromTo(projectsOverlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+        ptl.fromTo(projectsBgRef.current, { yPercent: -20 }, { yPercent: 0, ease: "none" }, 0);
+        ptl.fromTo(projectsOverlayRef.current, { yPercent: -20 }, { yPercent: 0, ease: "none" }, 0);
       });
 
+      // Mobile: simple reveal, no parallax
       mm.add("(max-width: 1023px)", () => {
         if (projectsMobileBgRef.current) {
-          gsap.fromTo(projectsMobileBgRef.current, {
-            yPercent: -30,
-          }, {
-            yPercent: 0,
-            ease: "none",
-            scrollTrigger: {
-              trigger: projectsSectionRef.current,
-              start: "top bottom",
-              end: "top top",
-              scrub: true,
-            },
-          });
+          gsap.fromTo(projectsMobileBgRef.current, 
+            { scale: 1.1 },
+            { 
+              scale: 1,
+              ease: "none",
+              scrollTrigger: {
+                trigger: projectsSectionRef.current,
+                start: "top bottom",
+                end: "top top",
+                scrub: true,
+              },
+            }
+          );
         }
       });
 
+      // Card reveal animations
       advCardsRef.current.forEach((card, index) => {
         if (!card) return;
         const isLeft = index % 2 === 0;
-        const xStart = isLeft ? -150 : 150;
+        const xStart = isLeft ? -50 : 50;
         gsap.fromTo(card,
-          { x: xStart },
-          { x: 0, ease: "power1.out",
+          { x: xStart, opacity: 0 },
+          { 
+            x: 0, 
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
             scrollTrigger: {
-              trigger: sectionRef.current,
+              trigger: card,
               start: "top 85%",
-              end: "top 15%",
-              scrub: 2.5,
+              toggleActions: "play none none none",
             },
           }
         );
@@ -224,6 +217,8 @@ export default function ProjectsSection() {
           <img
             src="/bg15.webp"
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover lg:object-contain object-center"
           />
         </div>
@@ -231,6 +226,8 @@ export default function ProjectsSection() {
           <img
             src="/bg27.webp"
             alt=""
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover object-center"
           />
         </div>
@@ -262,7 +259,7 @@ export default function ProjectsSection() {
                   className={`aspect-[3/2] bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
                 >
                   {project.cover ? (
-                    <img src={project.cover} alt={`Ремонт квартиры в ${project.location} — ${project.rooms}`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <img src={project.cover} alt={`Ремонт квартиры в ${project.location} — ${project.rooms}`} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                   ) : (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.8" className="w-12 h-12 text-white/40">
                       <rect x="3" y="3" width="18" height="18" rx="2" />
@@ -343,6 +340,8 @@ export default function ProjectsSection() {
               <img
                 src={openProject.images[slideIndex].src}
                 alt={`${openProject.title} — ${openProject.images[slideIndex].label || 'фото интерьера'}`}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
 

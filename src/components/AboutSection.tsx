@@ -24,9 +24,9 @@ export default function AboutSection() {
       mm.add("(max-width: 1023px)", () => {
         if (mobileBgImgRef.current) {
           gsap.fromTo(mobileBgImgRef.current, {
-            yPercent: -20,
+            yPercent: -15,
           }, {
-            yPercent: -5,
+            yPercent: 0,
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -48,14 +48,14 @@ export default function AboutSection() {
           },
         });
 
-        tl.fromTo(bgRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
-        tl.fromTo(overlayRef.current, { yPercent: -30 }, { yPercent: 0, ease: "none" }, 0);
+        tl.fromTo(bgRef.current, { yPercent: -20 }, { yPercent: 0, ease: "none" }, 0);
+        tl.fromTo(overlayRef.current, { yPercent: -20 }, { yPercent: 0, ease: "none" }, 0);
 
         if (desktopImgRef.current) {
           gsap.fromTo(desktopImgRef.current, {
-            yPercent: -35,
+            yPercent: -25,
           }, {
-            yPercent: 20,
+            yPercent: 15,
             ease: "none",
             scrollTrigger: {
               trigger: sectionRef.current,
@@ -66,7 +66,6 @@ export default function AboutSection() {
           });
         }
       });
-
     });
 
     return () => ctx.revert();

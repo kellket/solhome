@@ -78,22 +78,22 @@ export default function Calculator() {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-          pin: false,
-        },
-      });
+      const mm = gsap.matchMedia();
 
-      tl.fromTo(bgImgRef.current, {
-        yPercent: -15,
-      }, {
-        yPercent: 15,
-        ease: "none",
-      }, 0);
+      mm.add("(min-width: 768px)", () => {
+        gsap.fromTo(bgImgRef.current, {
+          yPercent: -10,
+        }, {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+          },
+        });
+      });
     });
 
     return () => ctx.revert();

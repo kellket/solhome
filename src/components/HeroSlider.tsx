@@ -24,6 +24,11 @@ export default function HeroSlider() {
   const [animKey, setAnimKey] = useState(0);
   const [currentImg, setCurrentImg] = useState(slides[0].img);
   const [curtain, setCurtain] = useState<{ outImg: string; inImg: string } | null>(null);
+  const [prefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+  const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
   const swiperRef = useRef<SwiperType | null>(null);
   const outRef = useRef<HTMLDivElement>(null);
   const inRef = useRef<HTMLDivElement>(null);
@@ -31,14 +36,45 @@ export default function HeroSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    slides.forEach((s) => {
-      const img = new window.Image();
-      img.src = s.img;
-    });
+    const updateDimensions = () => {
+      const el = containerRef.current;
+      if (el) {
+        setDimensions({ width: el.offsetWidth, height: el.offsetHeight });
+      }
+    };
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
+  useEffect(() => {
+    const firstImg = new window.Image();
+    firstImg.src = slides[0].img;
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('load', () => {
+        slides.slice(1).forEach((s) => {
+          const img = new window.Image();
+          img.src = s.img;
+        });
+      }, { once: true });
+    }
   }, []);
 
   useEffect(() => {
     if (!curtain || !outRef.current || !inRef.current) return;
+
+    // Check user preferences and device capabilities
+    const prefersReducedMotion = typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = typeof window !== 'undefined' &&
+      window.matchMedia('(max-width: 768px)').matches;
+
+    // Skip animation entirely for reduced motion preference
+    if (prefersReducedMotion) {
+      setTimeout(() => setCurtain(null), 0);
+      return;
+    }
 
     const tl = gsap.timeline({
       onComplete: () => {
@@ -47,55 +83,56 @@ export default function HeroSlider() {
     });
     tlRef.current = tl;
 
-    const slotDur = DURATION / SLOTS;
-    const stagger = slotDur / 2;
-
     const outSlots = outRef.current.querySelectorAll('.slotslide');
     const inSlots = inRef.current.querySelectorAll('.slotslide');
 
-    outSlots.forEach((el, i) => {
-      tl.fromTo(el, {
-        opacity: 1,
-        rotationY: 0,
-        scale: 1,
-        rotationX: 0,
-        force3D: true,
-        transformPerspective: 600,
-        transformOrigin: 'center right',
-      }, {
-        opacity: 0,
-        rotationY: 110,
-        rotationX: 0,
-        force3D: true,
-        ease: 'power2.inOut',
-        duration: slotDur,
-        delay: i * stagger,
-      }, 0);
-    });
+    if (isMobile) {
+      // Mobile: simple crossfade for better performance
+      outSlots.forEach((el) => {
+        tl.to(el, {
+          opacity: 0,
+          duration: 0.4,
+          ease: 'power1.inOut',
+        }, 0);
+      });
+      inSlots.forEach((el) => {
+        tl.fromTo(el,
+          { opacity: 0 },
+          {
+            opacity: 1,
+            duration: 0.4,
+            ease: 'power1.inOut',
+          }, 0);
+      });
+    } else {
+      // Desktop: 2D slide effect (performant x + opacity)
+      const slotDur = DURATION / SLOTS;
+      const stagger = slotDur / 2;
 
-    inSlots.forEach((el, i) => {
-      tl.fromTo(el, {
-        opacity: 0,
-        top: 0,
-        left: 0,
-        rotationY: 90,
-        scale: 1,
-        rotationX: 0,
-        force3D: true,
-        transformPerspective: 600,
-        transformOrigin: 'center left',
-      }, {
-        opacity: 1,
-        top: 0,
-        left: 0,
-        rotationX: 0,
-        rotationY: 0,
-        force3D: true,
-        ease: 'power2.inOut',
-        duration: slotDur,
-        delay: i * stagger,
-      }, 0);
-    });
+      outSlots.forEach((el, i) => {
+        tl.fromTo(el,
+          { opacity: 1, x: 0 },
+          {
+            opacity: 0,
+            x: -30,
+            duration: slotDur,
+            delay: i * stagger,
+            ease: 'power2.inOut',
+          }, 0);
+      });
+
+      inSlots.forEach((el, i) => {
+        tl.fromTo(el,
+          { opacity: 0, x: 30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: slotDur,
+            delay: i * stagger,
+            ease: 'power2.inOut',
+          }, 0);
+      });
+    }
 
     return () => { tl.kill(); };
   }, [curtain]);
@@ -115,9 +152,8 @@ export default function HeroSlider() {
   const total = String(slides.length).padStart(2, '0');
 
   const renderSlots = (imgSrc: string) => {
-    const el = containerRef.current;
-    const fullW = el ? el.offsetWidth : (typeof window !== 'undefined' ? window.innerWidth : 1920);
-    const fullH = el ? el.offsetHeight : (typeof window !== 'undefined' ? window.innerHeight : 1080);
+    const fullW = dimensions.width;
+    const fullH = dimensions.height;
     const slotW = Math.ceil(fullW / SLOTS);
 
     return Array.from({ length: SLOTS }, (_, k) => (
@@ -169,6 +205,8 @@ export default function HeroSlider() {
           alt="Hero background"
           fill
           priority
+          sizes="100vw"
+          quality={80}
           style={{ objectFit: 'cover', objectPosition: 'center center' }}
         />
       </div>
@@ -177,7 +215,15 @@ export default function HeroSlider() {
       <Swiper
         modules={[Autoplay]}
         slidesPerView={1}
-        autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={
+          prefersReducedMotion
+            ? false
+            : {
+                delay: 5000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }
+        }
         loop
         speed={50}
         onSwiper={(s) => { swiperRef.current = s; }}

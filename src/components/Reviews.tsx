@@ -164,6 +164,10 @@ function ReviewCard({ review, index }: { review: Review; index: number }) {
 }
 
 export default function Reviews() {
+  const [prefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", text: "", rating: 5 });
   const [submitted, setSubmitted] = useState(false);
@@ -198,7 +202,15 @@ export default function Reviews() {
             slidesPerView={1}
             navigation
             pagination={{ clickable: true }}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
+            autoplay={
+              prefersReducedMotion
+                ? false
+                : {
+                    delay: 5000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                  }
+            }
             loop
             breakpoints={{
               640: {
