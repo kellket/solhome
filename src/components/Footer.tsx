@@ -24,11 +24,6 @@ export default function Footer() {
             />
             <Link href="/privacy" className="text-sm text-white/30 text-left hover:text-gold transition-colors duration-300 block">Политика конфиденциальности</Link>
             <p className="text-xs text-white/30 mt-[12px] text-left">&copy; {new Date().getFullYear()} Sol Home. Все права защищены.</p>
-            <div className="text-xs text-white/30 mt-2 text-left">
-              <p>ИП Соломатин Олег Валерьевич</p>
-              <p>ИНН 250551557109</p>
-              <p>ОГРНИП 326253600044160</p>
-            </div>
           </div>
 
           <div>
