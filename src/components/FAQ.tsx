@@ -97,22 +97,27 @@ function AccordionItem({
 
     const content = contentRef.current;
     const inner = innerRef.current;
+    let tween: gsap.core.Tween;
 
     if (isOpen) {
       const height = inner.offsetHeight;
-      gsap.fromTo(
+      tween = gsap.fromTo(
         content,
         { height: 0, opacity: 0 },
         { height, opacity: 1, duration: 0.4, ease: "power2.out" }
       );
     } else {
-      gsap.to(content, {
+      tween = gsap.to(content, {
         height: 0,
         opacity: 0,
         duration: 0.3,
         ease: "power2.inOut",
       });
     }
+
+    return () => {
+      tween?.kill();
+    };
   }, [isOpen]);
 
   return (

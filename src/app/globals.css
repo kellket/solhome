@@ -89,10 +89,8 @@ body {
   left: 0;
   height: 100%;
   overflow: hidden;
-  will-change: transform, opacity;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  transform: translateZ(0);
 }
 
 @keyframes heroFadeIn {

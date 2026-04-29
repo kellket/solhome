@@ -37,7 +37,8 @@ export default function Header() {
             >
               Sol Home
             </span>
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/60 rounded-full blur-xl z-0 animate-pulse-glow" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/60 rounded-full blur-xl z-0" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white/60 rounded-full z-0 animate-pulse-glow" />
           </Link>
 
           <button

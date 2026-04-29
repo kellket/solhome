@@ -54,6 +54,19 @@ const reviews: Review[] = [
   },
 ];
 
+const SWIPER_MODULES = [Navigation, Pagination, Autoplay];
+
+const SWIPER_BREAKPOINTS = {
+  640: {
+    slidesPerView: 2,
+    spaceBetween: 24,
+  },
+  1024: {
+    slidesPerView: 3,
+    spaceBetween: 32,
+  },
+};
+
 function getInitials(name: string): string {
   return name
     .split(" ")
@@ -197,7 +210,7 @@ export default function Reviews() {
 
         <div className="reviews-swiper relative">
           <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
+            modules={SWIPER_MODULES}
             spaceBetween={24}
             slidesPerView={1}
             navigation
@@ -212,16 +225,7 @@ export default function Reviews() {
                   }
             }
             loop
-            breakpoints={{
-              640: {
-                slidesPerView: 2,
-                spaceBetween: 24,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 32,
-              },
-            }}
+            breakpoints={SWIPER_BREAKPOINTS}
             className="!pb-14"
           >
             {reviews.map((review, index) => (

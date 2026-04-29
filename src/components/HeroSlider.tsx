@@ -36,15 +36,23 @@ export default function HeroSlider() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
     const updateDimensions = () => {
       const el = containerRef.current;
       if (el) {
         setDimensions({ width: el.offsetWidth, height: el.offsetHeight });
       }
     };
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(updateDimensions, 300);
+    };
     updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   useEffect(() => {
@@ -151,7 +159,7 @@ export default function HeroSlider() {
   const current = String(activeIdx + 1).padStart(2, '0');
   const total = String(slides.length).padStart(2, '0');
 
-  const renderSlots = (imgSrc: string) => {
+  const renderSlots = useCallback((imgSrc: string) => {
     const fullW = dimensions.width;
     const fullH = dimensions.height;
     const slotW = Math.ceil(fullW / SLOTS);
@@ -195,7 +203,7 @@ export default function HeroSlider() {
         </div>
       </div>
     ));
-  };
+  }, [dimensions]);
 
   return (
     <div ref={containerRef} className="relative h-screen overflow-hidden">

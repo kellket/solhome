@@ -12,7 +12,10 @@ export default function SlideInPanel({ children, className = "" }: { children: R
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setVisible(entry.isIntersecting);
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
       },
       { threshold: 0.2 }
     );
