@@ -3,7 +3,6 @@ import { Onest, Jost } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import CookieConsent from "@/components/CookieConsent";
 
 const onest = Onest({
@@ -161,7 +160,6 @@ export default function RootLayout({
         <Header />
         <main className="flex-1 bg-dark-bg">{children}</main>
         <Footer />
-        <WhatsAppButton />
         <CookieConsent />
       </body>
     </html>
