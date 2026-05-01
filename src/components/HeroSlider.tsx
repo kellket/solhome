@@ -16,8 +16,10 @@ const slides = [
   { img: '/bg11.webp', line1: 'Премиальное', line2: 'качество работ' },
 ];
 
-const SLOTS = 7;
-const DURATION = 2;
+const SLOTS_DESKTOP = 7;
+const SLOTS_MOBILE = 3;
+const DURATION_DESKTOP = 2;
+const DURATION_MOBILE = 0.8;
 
 export default function HeroSlider() {
   const [activeIdx, setActiveIdx] = useState(0);
@@ -29,11 +31,16 @@ export default function HeroSlider() {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
   const [dimensions, setDimensions] = useState({ width: 1920, height: 1080 });
+  const [isMobile, setIsMobile] = useState(false);
   const swiperRef = useRef<SwiperType | null>(null);
   const outRef = useRef<HTMLDivElement>(null);
   const inRef = useRef<HTMLDivElement>(null);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia('(max-width: 768px)').matches);
+  }, []);
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -72,13 +79,6 @@ export default function HeroSlider() {
   useEffect(() => {
     if (!curtain || !outRef.current || !inRef.current) return;
 
-    // Check user preferences and device capabilities
-    const prefersReducedMotion = typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isMobile = typeof window !== 'undefined' &&
-      window.matchMedia('(max-width: 768px)').matches;
-
-    // Skip animation entirely for reduced motion preference
     if (prefersReducedMotion) {
       setTimeout(() => setCurtain(null), 0);
       return;
@@ -94,70 +94,39 @@ export default function HeroSlider() {
     const outSlots = outRef.current.querySelectorAll('.slotslide');
     const inSlots = inRef.current.querySelectorAll('.slotslide');
 
-    if (isMobile) {
-      // Mobile: simple crossfade for better performance
-      outSlots.forEach((el) => {
-        tl.to(el, {
+    const slots = isMobile ? SLOTS_MOBILE : SLOTS_DESKTOP;
+    const duration = isMobile ? DURATION_MOBILE : DURATION_DESKTOP;
+    const slotDur = duration / slots;
+    const stagger = slotDur / 2;
+
+    outSlots.forEach((el, i) => {
+      tl.fromTo(el,
+        { opacity: 1, x: 0 },
+        {
           opacity: 0,
-          duration: 0.4,
-          ease: 'power1.inOut',
+          x: -30,
+          duration: slotDur,
+          delay: i * stagger,
+          ease: 'power2.inOut',
         }, 0);
-      });
-      inSlots.forEach((el) => {
-        tl.fromTo(el,
-          { opacity: 0 },
-          {
-            opacity: 1,
-            duration: 0.4,
-            ease: 'power1.inOut',
-          }, 0);
-      });
-    } else {
-      // Desktop: 2D slide effect (performant x + opacity)
-      const slotDur = DURATION / SLOTS;
-      const stagger = slotDur / 2;
+    });
 
-      outSlots.forEach((el, i) => {
-        tl.fromTo(el,
-          { opacity: 1, x: 0 },
-          {
-            opacity: 0,
-            x: -30,
-            duration: slotDur,
-            delay: i * stagger,
-            ease: 'power2.inOut',
-          }, 0);
-      });
-
-      inSlots.forEach((el, i) => {
-        tl.fromTo(el,
-          { opacity: 0, x: 30 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: slotDur,
-            delay: i * stagger,
-            ease: 'power2.inOut',
-          }, 0);
-      });
-    }
+    inSlots.forEach((el, i) => {
+      tl.fromTo(el,
+        { opacity: 0, x: 30 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: slotDur,
+          delay: i * stagger,
+          ease: 'power2.inOut',
+        }, 0);
+    });
 
     return () => { tl.kill(); };
-  }, [curtain]);
+  }, [curtain, isMobile, prefersReducedMotion]);
 
   const handleSlideChange = useCallback((swiper: SwiperType) => {
-    const isMobile = typeof window !== 'undefined' && 
-      window.matchMedia('(max-width: 768px)').matches;
-    
-    if (isMobile) {
-      // На мобильных просто меняем картинку без curtain анимации
-      setCurrentImg(slides[swiper.realIndex].img);
-      setActiveIdx(swiper.realIndex);
-      setAnimKey((k) => k + 1);
-      return;
-    }
-    
-    // Desktop - curtain анимация
     if (tlRef.current) tlRef.current.kill();
     const outImg = currentImg;
     const inImg = slides[swiper.realIndex].img;
@@ -172,13 +141,15 @@ export default function HeroSlider() {
   const total = String(slides.length).padStart(2, '0');
 
   const renderSlots = useCallback((imgSrc: string) => {
+    const slots = isMobile ? SLOTS_MOBILE : SLOTS_DESKTOP;
     const fullW = dimensions.width;
     const fullH = dimensions.height;
-    const slotW = Math.ceil(fullW / SLOTS);
+    const slotW = Math.ceil(fullW / slots);
 
-    return Array.from({ length: SLOTS }, (_, k) => (
+    return Array.from({ length: slots }, (_, k) => (
       <div
         key={k}
+        className="slotslide"
         style={{
           position: 'absolute',
           overflow: 'hidden',
@@ -186,36 +157,28 @@ export default function HeroSlider() {
           left: k * slotW,
           width: slotW + 1,
           height: fullH,
+          transform: 'translateZ(0)',
+          willChange: 'transform, opacity',
+          backfaceVisibility: 'hidden',
+          contain: 'layout paint',
         }}
       >
         <div
-          className="slotslide"
           style={{
             position: 'absolute',
             top: 0,
-            left: 0,
-            width: slotW + 1,
+            left: -k * slotW,
+            width: fullW,
             height: fullH,
-            overflow: 'hidden',
+            backgroundImage: `url(${imgSrc})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center center',
+            backgroundRepeat: 'no-repeat',
           }}
-        >
-          <div
-            style={{
-              position: 'absolute',
-              top: 0,
-              left: -k * slotW,
-              width: fullW,
-              height: fullH,
-              backgroundImage: `url(${imgSrc})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center center',
-              backgroundRepeat: 'no-repeat',
-            }}
-          />
-        </div>
+        />
       </div>
     ));
-  }, [dimensions]);
+  }, [dimensions, isMobile]);
 
   return (
     <div ref={containerRef} className="relative h-screen overflow-hidden">
@@ -273,10 +236,14 @@ export default function HeroSlider() {
       <div className="relative z-[25] flex items-center justify-center h-full pt-16 sm:pt-20 pb-8 sm:pb-48">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative">
           <div 
-            className="absolute -inset-x-32 -inset-y-32 bg-black/25 sm:backdrop-blur-[3px] pointer-events-none"
+            className="absolute -inset-x-32 -inset-y-32 bg-black/25 backdrop-blur-[3px] pointer-events-none"
             style={{
               maskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
               WebkitMaskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
+              transform: 'translateZ(0)',
+              willChange: 'backdrop-filter',
+              backfaceVisibility: 'hidden',
+              contain: 'layout paint',
             }}
           />
           <div className="relative">
