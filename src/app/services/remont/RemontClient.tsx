@@ -334,7 +334,7 @@ export default function RemontClient() {
         <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg38.webp"
-            alt=""
+            alt="Интерьер квартиры после ремонта под ключ"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -377,7 +377,7 @@ export default function RemontClient() {
         <div ref={descBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg39.webp"
-            alt=""
+            alt="Процесс ремонта квартиры — отделочные работы"
             className="absolute inset-0 w-full h-full object-cover object-right lg:object-left"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1714]/50 to-[#1a1714] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1a1714]/60 lg:to-[#1a1714]" />
@@ -417,7 +417,7 @@ export default function RemontClient() {
         <div ref={typesBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg41.webp"
-            alt=""
+            alt="Виды ремонта квартиры — варианты отделки и цены"
             className="absolute inset-0 w-full h-full object-cover"
             style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
           />
@@ -474,7 +474,7 @@ export default function RemontClient() {
         <div ref={includesBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg50.webp"
-            alt=""
+            alt="Чистовые отделочные работы при ремонте под ключ"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -513,7 +513,7 @@ export default function RemontClient() {
         <div ref={stagesBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg40.webp"
-            alt=""
+            alt="Этапы ремонтных работ в квартире"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />

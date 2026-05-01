@@ -20,6 +20,39 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Авторский надзор за ремонтом",
+  description: "Авторский надзор за ремонтом квартиры в Москве. Контроль качества работ, проверка соответствия проекту.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Sol Home",
+    telephone: "+7-901-901-84-43",
+    email: "info.solhome@yandex.ru",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Москва",
+      addressCountry: "RU",
+    },
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Москва",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "500",
+    priceCurrency: "RUB",
+    priceSpecification: {
+      "@type": "UnitPriceSpecification",
+      price: "500",
+      priceCurrency: "RUB",
+      unitText: "м²",
+    },
+  },
+};
+
 const jsonLdBreadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -36,6 +69,10 @@ export default function NadzorPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
       />
       <NadzorClient />
     </>

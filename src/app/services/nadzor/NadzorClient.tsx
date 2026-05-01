@@ -274,7 +274,7 @@ export default function NadzorClient() {
         <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg42.webp"
-            alt=""
+            alt="Авторский надзор на объекте — контроль качества ремонта"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -318,7 +318,7 @@ export default function NadzorClient() {
         <div ref={descBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg43.webp"
-            alt=""
+            alt="Специалист проверяет ход ремонтных работ на объекте"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#1a1714]/40 to-[#1a1714]/95" />
@@ -350,7 +350,7 @@ export default function NadzorClient() {
         <div ref={checklistBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg49.webp"
-            alt=""
+            alt="Проверка скрытых работ при авторском надзоре за ремонтом"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -384,7 +384,7 @@ export default function NadzorClient() {
         <div ref={combinedBgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg40.webp"
-            alt=""
+            alt="Контроль соответствия ремонта дизайн-проекту"
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />

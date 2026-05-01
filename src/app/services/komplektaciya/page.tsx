@@ -20,6 +20,28 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLdService = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Комплектация объекта",
+  description: "Комплектация квартиры под ремонт в Москве. Подбор и закупка материалов, мебели, техники со скидками.",
+  provider: {
+    "@type": "LocalBusiness",
+    name: "Sol Home",
+    telephone: "+7-901-901-84-43",
+    email: "info.solhome@yandex.ru",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Москва",
+      addressCountry: "RU",
+    },
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Москва",
+  },
+};
+
 const jsonLdBreadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -36,6 +58,10 @@ export default function KomplektaciyaPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdService) }}
       />
       <KomplektaciyaClient />
     </>

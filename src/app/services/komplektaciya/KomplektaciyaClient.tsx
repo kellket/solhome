@@ -364,7 +364,7 @@ export default function KomplektaciyaClient() {
         <div ref={bgRef} className="absolute inset-0 w-full h-full">
           <img
             src="/bg44.webp"
-            alt=""
+            alt="Подбор материалов для комплектации объекта под ремонт"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -406,7 +406,7 @@ export default function KomplektaciyaClient() {
         <div ref={descBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg46.webp"
-            alt=""
+            alt="Выбор отделочных материалов и мебели для интерьера"
             className="absolute inset-0 w-full h-full object-cover object-[center_80%]"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#1a1714] via-[#1a1714]/70 to-[#1a1714]/30 lg:bg-gradient-to-l lg:from-[#1a1714] lg:via-[#1a1714]/80 lg:to-transparent" />
@@ -443,7 +443,7 @@ export default function KomplektaciyaClient() {
         <div ref={checklistBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg47.webp"
-            alt=""
+            alt="Закупка и доставка строительных материалов для ремонта"
             className="absolute inset-0 w-full h-full object-cover object-right lg:object-center"
           />
           <div className="absolute inset-0 bg-black/50" />
@@ -478,7 +478,7 @@ export default function KomplektaciyaClient() {
         <div ref={advPricingBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg48.webp"
-            alt=""
+            alt="Образцы отделочных материалов для комплектации квартиры"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/50" />

@@ -261,7 +261,7 @@ export default function DesignClient() {
         <div ref={bgRef} className="absolute inset-[-15%_0] w-full h-[130%]">
           <img
             src="/bg36.webp"
-            alt=""
+            alt="Современный интерьер квартиры по авторскому дизайн-проекту"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -306,7 +306,7 @@ export default function DesignClient() {
         <div ref={descBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg30.webp"
-            alt=""
+            alt="3D-визуализация дизайн-проекта интерьера квартиры"
             className="absolute inset-0 w-full h-full object-cover object-[center_130%] lg:object-left"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#1a1714]/70 to-[#1a1714] lg:bg-gradient-to-r lg:from-transparent lg:via-[#1a1714]/80 lg:to-[#1a1714]" />
@@ -345,7 +345,7 @@ export default function DesignClient() {
         <div ref={includesBgRef} className="absolute inset-0">
           <img
             src="/bg40.webp"
-            alt=""
+            alt="Разработка дизайн-проекта — рабочая документация и чертежи"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
@@ -443,7 +443,7 @@ export default function DesignClient() {
         <div ref={pricingBgRef} className="absolute inset-[-15%_0]">
           <img
             src="/bg31.webp"
-            alt=""
+            alt="Дизайн интерьера — подбор стилистики и отделочных материалов"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black/40" />
