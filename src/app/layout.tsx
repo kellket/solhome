@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
+import { Suspense } from "react";
+import YandexMetrika from "@/components/YandexMetrika";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -161,6 +163,9 @@ export default function RootLayout({
         <main className="flex-1 bg-dark-bg">{children}</main>
         <Footer />
         <CookieConsent />
+        <Suspense fallback={null}>
+          <YandexMetrika />
+        </Suspense>
       </body>
     </html>
   );
