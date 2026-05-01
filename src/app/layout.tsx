@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import CookieConsent from "@/components/CookieConsent";
 import { Suspense } from "react";
 import YandexMetrika from "@/components/YandexMetrika";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const onest = Onest({
   variable: "--font-onest",
@@ -165,6 +166,7 @@ export default function RootLayout({
         <CookieConsent />
         <Suspense fallback={null}>
           <YandexMetrika />
+          <GoogleAnalytics />
         </Suspense>
       </body>
     </html>
