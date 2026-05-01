@@ -23,7 +23,7 @@ const jost = Jost({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://solhome.ru"),
+  metadataBase: new URL("https://sol-home.ru"),
   title: {
     default: "Sol Home — Ремонт квартир под ключ в Москве",
     template: "%s | Sol Home",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ru_RU",
-    url: "https://solhome.ru",
+url: "https://sol-home.ru",
     siteName: "Sol Home",
     title: "Sol Home — Ремонт квартир под ключ в Москве",
     description:
@@ -68,6 +68,10 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
+  },
+  verification: {
+    google: "yV_MzLaCTv_jgIutNvHfhrvZ9fFlrZANTSc9-HBWKtg",
+    yandex: "b66b7888ea76e748",
   },
   icons: {
     icon: [
