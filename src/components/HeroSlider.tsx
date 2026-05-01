@@ -146,6 +146,18 @@ export default function HeroSlider() {
   }, [curtain]);
 
   const handleSlideChange = useCallback((swiper: SwiperType) => {
+    const isMobile = typeof window !== 'undefined' && 
+      window.matchMedia('(max-width: 768px)').matches;
+    
+    if (isMobile) {
+      // На мобильных просто меняем картинку без curtain анимации
+      setCurrentImg(slides[swiper.realIndex].img);
+      setActiveIdx(swiper.realIndex);
+      setAnimKey((k) => k + 1);
+      return;
+    }
+    
+    // Desktop - curtain анимация
     if (tlRef.current) tlRef.current.kill();
     const outImg = currentImg;
     const inImg = slides[swiper.realIndex].img;
@@ -215,6 +227,7 @@ export default function HeroSlider() {
           priority
           sizes="100vw"
           quality={80}
+          className="transition-opacity duration-500"
           style={{ objectFit: 'cover', objectPosition: 'center center' }}
         />
       </div>
@@ -260,14 +273,14 @@ export default function HeroSlider() {
       <div className="relative z-[25] flex items-center justify-center h-full pt-16 sm:pt-20 pb-8 sm:pb-48">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative">
           <div 
-            className="absolute -inset-x-32 -inset-y-32 bg-black/25 backdrop-blur-[3px] pointer-events-none"
+            className="absolute -inset-x-32 -inset-y-32 bg-black/25 sm:backdrop-blur-[3px] pointer-events-none"
             style={{
               maskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
               WebkitMaskImage: "radial-gradient(ellipse 60% 60% at center, black 30%, transparent 65%)",
             }}
           />
           <div className="relative">
-            <h1 key={animKey} className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-white tracking-wide leading-tight mb-4 sm:mb-6">
+            <h1 key={animKey} className="text-3xl sm:text-5xl lg:text-6xl font-extralight text-white tracking-wide leading-tight mb-4 sm:mb-6 will-change-transform">
               <span className="hero-text-line1 block">{slide.line1}</span>
               <span className="hero-text-line2 gold-gradient-text font-light block mt-1">{slide.line2}</span>
             </h1>
