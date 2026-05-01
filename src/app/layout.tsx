@@ -95,8 +95,8 @@ const jsonLdOrganization = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Sol Home",
-  url: "https://solhome.ru",
-  logo: "https://solhome.ru/sol_home_logo.svg",
+  url: "https://sol-home.ru",
+  logo: "https://sol-home.ru/sol_home_logo.svg",
   contactPoint: {
     "@type": "ContactPoint",
     telephone: "+7-901-901-84-43",
@@ -110,7 +110,7 @@ const jsonLdLocalBusiness = {
   "@type": "LocalBusiness",
   name: "Sol Home",
   description: "Ремонт квартир под ключ в Москве",
-  url: "https://solhome.ru",
+  url: "https://sol-home.ru",
   telephone: "+7-901-901-84-43",
   email: "info.solhome@yandex.ru",
   address: {
@@ -139,7 +139,7 @@ const jsonLdWebSite = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "Sol Home",
-  url: "https://solhome.ru",
+  url: "https://sol-home.ru",
 };
 
 export default function RootLayout({

@@ -15,14 +15,17 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
   },
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const jsonLdBreadcrumb = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://solhome.ru" },
-    { "@type": "ListItem", "position": 2, "name": "О компании", "item": "https://solhome.ru/about" }
+    { "@type": "ListItem", "position": 1, "name": "Главная", "item": "https://sol-home.ru" },
+    { "@type": "ListItem", "position": 2, "name": "О компании", "item": "https://sol-home.ru/about" }
   ]
 };
 

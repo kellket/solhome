@@ -118,7 +118,7 @@ export default function Calculator() {
         <img
           ref={bgImgRef}
           src="/bg12.webp"
-          alt=""
+          alt="Ремонт квартиры под ключ в Москве — расчёт стоимости от Sol Home"
           className="w-full h-full object-cover object-center scale-[1.4]"
         />
       </div>

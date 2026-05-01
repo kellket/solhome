@@ -34,7 +34,7 @@ export default function ContactsClient() {
         <div className="absolute inset-0 overflow-hidden">
           <img
             src="/bg28.webp"
-            alt=""
+            alt="Интерьер квартиры после ремонта — свяжитесь с Sol Home"
             className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-black/40" />

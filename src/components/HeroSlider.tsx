@@ -210,7 +210,7 @@ export default function HeroSlider() {
       <div className="absolute inset-0 z-[1]">
         <Image
           src={currentImg}
-          alt="Hero background"
+          alt={`${slide.line1} ${slide.line2} — Sol Home`}
           fill
           priority
           sizes="100vw"

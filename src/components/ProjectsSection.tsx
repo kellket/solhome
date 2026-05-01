@@ -216,7 +216,7 @@ export default function ProjectsSection() {
         <div ref={projectsBgRef} className="absolute inset-[-30%_0] hidden lg:block">
           <img
             src="/bg15.webp"
-            alt=""
+            alt="Портфолио ремонтных работ Sol Home — реализованные проекты в Москве"
             loading="lazy"
             decoding="async"
             className="w-full h-full object-cover lg:object-contain object-center"
@@ -225,7 +225,7 @@ export default function ProjectsSection() {
         <div ref={projectsMobileBgRef} className="absolute inset-[-30%_0] lg:hidden">
           <img
             src="/bg27.webp"
-            alt=""
+            alt="Наши проекты — ремонт квартир и студий в Москве от Sol Home"
             loading="lazy"
             decoding="async"
             className="w-full h-full object-cover object-center"

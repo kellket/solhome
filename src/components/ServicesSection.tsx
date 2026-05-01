@@ -184,12 +184,12 @@ export default function ServicesSection() {
       <div ref={bgRef} className="absolute inset-[-30%_0]">
         <img
           src="/bg-mob1.webp"
-          alt=""
+          alt="Ремонт квартиры под ключ в Москве — Sol Home"
           className="w-full h-full object-cover object-center md:hidden"
         />
         <img
           src="/bg14.webp"
-          alt=""
+          alt="Качественный ремонт интерьера квартиры — результат работы Sol Home"
           className="w-full h-full object-cover object-center hidden md:block"
         />
       </div>

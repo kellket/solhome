@@ -77,12 +77,12 @@ export default function AboutSection() {
         <img
           ref={mobileBgImgRef}
           src="/bg25.webp"
-          alt=""
+          alt="Современный интерьер квартиры после ремонта от Sol Home"
           className="w-full h-full object-cover object-[25%_60%] scale-[1.4] lg:hidden"
         />
         <img
           src="/bg13.webp"
-          alt=""
+          alt="Дизайнерский интерьер гостиной после ремонта под ключ — Sol Home"
           className="w-full h-full object-cover lg:object-contain object-center hidden lg:block"
         />
       </div>
