@@ -38,6 +38,7 @@ const repairTypes = [
 ];
 
 const DESIGN_PROJECT_RATE = 2500;
+const LEADS_API_URL = process.env.NEXT_PUBLIC_LEADS_API_URL || 'https://solhome-leads-worker.solhome.workers.dev/api/lead';
 
 function formatPrice(n: number): string {
   return n.toLocaleString("ru-RU");
@@ -71,6 +72,8 @@ export default function CalculatorClient() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const selectedRepair = repairTypes.find((r) => r.id === repair)!;
   const designAdd = needDesign ? DESIGN_PROJECT_RATE * area : 0;
@@ -80,9 +83,35 @@ export default function CalculatorClient() {
   const totalMin = laborMin + materials + designAdd;
   const totalMax = laborMax + materials + designAdd;
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch(LEADS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form_type: 'calculator',
+          name,
+          phone,
+          repair_type: repair,
+          area,
+          need_design: needDesign,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка отправки');
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError('Не удалось отправить заявку. Попробуйте позже или позвоните нам.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -287,11 +316,15 @@ export default function CalculatorClient() {
                       required
                       className="w-full px-5 py-3.5 border border-white/30 bg-white/10 backdrop-blur-md rounded-full text-sm font-light text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors"
                     />
+                    {error && (
+                      <p className="text-red-400 text-sm font-light text-center">{error}</p>
+                    )}
                     <button
                       type="submit"
-                      className="w-full py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-[14px] font-light tracking-[0.15em] uppercase hover:scale-105 transition-transform duration-300"
+                      disabled={isSubmitting}
+                      className="w-full py-4 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white text-[14px] font-light tracking-[0.15em] uppercase hover:scale-105 transition-transform duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                     >
-                      Получить точную смету
+                      {isSubmitting ? 'Отправка...' : 'Получить точную смету'}
                     </button>
                   </form>
                   <button

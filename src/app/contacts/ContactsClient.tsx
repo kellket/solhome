@@ -3,6 +3,8 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 
+const LEADS_API_URL = process.env.NEXT_PUBLIC_LEADS_API_URL || 'https://solhome-leads-worker.solhome.workers.dev/api/lead';
+
 function formatPhone(value: string): string {
   const digits = value.replace(/\D/g, '').slice(0, 11);
   if (!digits) return '';
@@ -16,12 +18,39 @@ function formatPhone(value: string): string {
 
 export default function ContactsClient() {
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "", agree: false });
   const [showDirectorContact, setShowDirectorContact] = useState(false);
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch(LEADS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form_type: 'contact',
+          name: form.name,
+          phone: form.phone,
+          email: form.email || undefined,
+          message: form.message || undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка отправки');
+      }
+
+      setSubmitted(true);
+    } catch {
+      setError('Не удалось отправить заявку. Попробуйте позже или позвоните нам.');
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   function updateField(field: string, value: string | boolean) {
@@ -306,11 +335,15 @@ export default function ContactsClient() {
                         Я согласен с политикой обработки персональных данных
                       </span>
                     </label>
+                    {error && (
+                      <p className="text-red-400 text-sm font-light text-center">{error}</p>
+                    )}
                     <button
                       type="submit"
-                      className="w-full py-4 rounded-full text-[14px] font-normal tracking-[0.2em] uppercase bg-dark text-white border border-dark hover:bg-dark/90 transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full py-4 rounded-full text-[14px] font-normal tracking-[0.2em] uppercase bg-dark text-white border border-dark hover:bg-dark/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Отправить заявку
+                      {isSubmitting ? 'Отправка...' : 'Отправить заявку'}
                     </button>
                   </form>
                 </>

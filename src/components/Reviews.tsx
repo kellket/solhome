@@ -8,6 +8,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+const LEADS_API_URL = process.env.NEXT_PUBLIC_LEADS_API_URL || 'https://solhome-leads-worker.solhome.workers.dev/api/lead';
+
 interface Review {
   name: string;
   rating: number;
@@ -184,15 +186,41 @@ export default function Reviews() {
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ name: "", text: "", rating: 5 });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setShowForm(false);
-      setSubmitted(false);
-      setFormData({ name: "", text: "", rating: 5 });
-    }, 2000);
+    setIsSubmitting(true);
+    setError(null);
+
+    try {
+      const response = await fetch(LEADS_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          form_type: 'review',
+          name: formData.name,
+          message: formData.text,
+          rating: formData.rating,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Ошибка отправки');
+      }
+
+      setSubmitted(true);
+      setTimeout(() => {
+        setShowForm(false);
+        setSubmitted(false);
+        setFormData({ name: "", text: "", rating: 5 });
+      }, 2000);
+    } catch {
+      setError('Не удалось отправить отзыв. Попробуйте позже.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -297,11 +325,15 @@ export default function Reviews() {
                       required
                       className="w-full px-5 py-3 bg-white/10 border border-white/30 rounded-2xl text-sm font-light text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors resize-none"
                     />
+                    {error && (
+                      <p className="text-red-400 text-sm font-light text-center">{error}</p>
+                    )}
                     <button
                       type="submit"
-                      className="w-full py-3 rounded-full text-sm font-light tracking-[0.15em] uppercase bg-white/10 border border-white/30 text-white hover:bg-white/20 transition-colors"
+                      disabled={isSubmitting}
+                      className="w-full py-3 rounded-full text-sm font-light tracking-[0.15em] uppercase bg-white/10 border border-white/30 text-white hover:bg-white/20 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Отправить
+                      {isSubmitting ? 'Отправка...' : 'Отправить'}
                     </button>
                   </form>
                 </>
